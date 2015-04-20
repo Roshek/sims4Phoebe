@@ -7,7 +7,7 @@ public class Robot {
 	private int slime_num;
 	private double road;
 	private Boolean alive;
-
+	private double radius = 20;
 	private Engine engine;
 	
 	private int ID=0;
@@ -44,22 +44,14 @@ public class Robot {
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KeSZ
-		
-		System.out.println("->[:Robot].calculateCoords()");
-		
+	public void calculateCoords() {					//KeSZ		
 		impulse=Coord.add(impulse, modifier);
 		position=Coord.add(position, impulse);
 		modifier.setX(0);
 		modifier.setY(0);
-		
-		System.out.println("<-[:Robot].CalculateCoords()");
 	}
 
-	public boolean isAlive() {							//KeSZ
-		
-		System.out.println("->[:Robot].isAlive()");
-		
+	public boolean isAlive() {							//KeSZ	
 		return alive;
 	}
 
@@ -69,10 +61,7 @@ public class Robot {
 	 * akkor letrehoz egyet a jelenlegi
 	 * helyen es berakja az engine-be.
 	 */
-	public void placeOil() {		//KeSZ
-		
-		System.out.println("->[:Robot].placeOil()");
-		
+	public void placeOil() {		//KeSZ	
 		if(oil_num>0){
 			oil_num--;
 			
@@ -90,10 +79,7 @@ public class Robot {
 	 * akkor letrehoz egyet a jelenlegi
 	 * helyen es berakja az engine-be.
 	 */
-	public void placeSlime() {			//KeSZ
-		
-		System.out.println("->[:Robot].placeSlime()");
-		
+	public void placeSlime() {			//KeSZ	
 		if(slime_num>0){
 			slime_num--;
 			
@@ -106,16 +92,46 @@ public class Robot {
 	}
 	
 	public boolean collide(Coord pos){
-		return false;
-		
+		double sx = (pos.getX()-position.getX()) * (pos.getX()-position.getX());
+		double sy= (pos.getY()-position.getY()) * (pos.getY()-position.getY());
+		if (sx + sy <= (radius*radius)) return true;
+		else return false;
 	}
 	
 	public void steppedOnByRobot(Robot r){
+		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY());
+		Coord ct = new Coord(impulse.getY(), impulse.getY());
 		
+		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY());
+		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY());
+		
+		if (lr < lt) {
+			r.setAlive(false);
+			
+			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+			cr.setY((int)(cr.getY()+ct.getY()*0.5));
+			
+			this.setImpulse(cr);
+		}
+		else {
+			this.setAlive(false);
+			
+			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+			cr.setY((int)(cr.getY()+ct.getY()*0.5));
+			
+			r.setImpulse(cr);
+		}	
 	}
 	
 	public void steppedOnByMiniRobot(MiniRobot x){
+		Coord mx = new Coord(x.getModifier().getX(),x.getModifier().getY());
 		
+		if (mx.getX() < 0) mx.setX(mx.getX()+40);
+		else mx.setX(mx.getX()-40);
+		if (mx.getY() < 0) mx.setY(mx.getY()+40);
+		else mx.setY(mx.getY()-40);
+		
+		x.setPosition(Coord.add(mx,x.getPosition()));
 	}
 	
 	
@@ -239,5 +255,17 @@ public class Robot {
 	
 	public int getID(){
 		return ID;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	
+	public Engine getEngine(){
+		return this.engine;
 	}
 }
