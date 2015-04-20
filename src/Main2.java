@@ -178,7 +178,7 @@ public class Main2 {
 			ki.append(engine.miniRobots.get(i).getID());																						//robot ID kiírása
 			ki.append(" " + engine.miniRobots.get(i).getPosition().getX() + "," + engine.miniRobots.get(i).getPosition().getY());			//robot pozíció kiírása
 			ki.append(" " + engine.miniRobots.get(i).getImpulse().getX() + "," + engine.miniRobots.get(i).getImpulse().getY());				//robot impulzus kiírása
-			ki.append(" " + engine.miniRobots.get(i).getRoad());																				//robot megtett útjának kiírása
+			ki.append(" " + engine.miniRobots.get(i).getRoad());																				//robot megtett útjának kiírása TODO
 			ki.append("\n");
 		}
 		ki.append("\n");
@@ -209,9 +209,9 @@ public class Main2 {
 		StringBuilder ki = new StringBuilder();
 		if(engine.traps.isEmpty()) return "-";
 		for(int i = 0; i<engine.traps.size();i++){
-			//ki.append(engine.traps.get(i).getID());																						//robot ID kiírása
+			//ki.append(engine.traps.get(i).getID());																						//robot ID kiírása (ha lesz) TODO
 			ki.append(" " + engine.traps.get(i).getPos().getX() + "," + engine.traps.get(i).getPos().getY());			//robot pozíció kiírása
-			
+			// TODO: Ide kell még, hogy kiírja, hogy slime/oil.
 			ki.append("\n");
 		}
 		ki.append("\n");
@@ -487,3 +487,14 @@ public class Main2 {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+/************************************************************************* ÖCCÁ *************************************************************************/
