@@ -81,12 +81,13 @@ public abstract class Trap {
 		this.untilExpiration = i;
 	}
 
-	public Boolean getExpired() {
+
+	public boolean getExpired() {
 		return expired;
 	}
 
-	public void setExpired(Boolean i) {
-		this.expired = i;
+	public void setExpired(boolean b) {
+		this.expired = b;
 	}
 
 }
