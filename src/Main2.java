@@ -179,7 +179,7 @@ public class Main2 {
 			ki.append(" " + engine.miniRobots.get(i).getRoad());																				//robot megtett útjának kiírása
 			ki.append("\n");
 		}
-		
+		ki.append("\n");
 		return ki.toString();
 	}
 
@@ -196,7 +196,7 @@ public class Main2 {
 			ki.append(" " + engine.alivePlayers.get(i).getRoad());																				//robot megtett útjának kiírása
 			ki.append("\n");
 		}
-		
+		ki.append("\n");
 		return ki.toString();
 	}
 
@@ -204,9 +204,16 @@ public class Main2 {
 	 * az engine trap listajat adja vissza
 	 */
 	private static String listTraps() {
-		String ki;
-		ki = engine.getTraps().toString();
-		return ki;
+		StringBuilder ki = new StringBuilder();
+		if(engine.traps.isEmpty()) return "-";
+		for(int i = 0; i<engine.traps.size();i++){
+			ki.append(engine.traps.get(i).getID());																						//robot ID kiírása
+			ki.append(" " + engine.traps.get(i).getPos().getX() + "," + engine.traps.get(i).getPos().getY());			//robot pozíció kiírása
+			
+			ki.append("\n");
+		}
+		ki.append("\n");
+		return ki.toString();
 	}
 
 	/* getSlimeNumber parancs megvalositasa
