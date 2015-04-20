@@ -6,7 +6,7 @@ public abstract class Trap {
 	private Robot owner;
 	private int untilCleaned=2;
 	private int untilExpiration=4;
-	private Boolean expired;
+	private boolean expired;
 
 	public abstract void spring(Robot r) ;
 	
@@ -14,7 +14,7 @@ public abstract class Trap {
 	public abstract void timePassed() ;
 	
 
-	public Boolean collide(Coord c) {			
+	public boolean collide(Coord c) {			
 		if( ( c.getX()-pos.getX()) * (c.getX()-pos.getX() ) +
 				( c.getY()-pos.getY()) * (c.getY()-pos.getY() ) <= r*r ){	//(x-x0)^2+(y-y0)^2<=R^2   
 			return true;
