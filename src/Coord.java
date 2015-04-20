@@ -87,5 +87,9 @@ public class Coord {
 	public static double distance(Coord pos1, Coord pos2){
 		return Math.sqrt((pos2.getX()-pos1.getX())*(pos2.getX()-pos1.getX()) + (pos2.getY()-pos1.getY())*(pos2.getY()-pos1.getY()));
 	}
+	
+	public static double length(Coord pos){
+		return Math.sqrt(pos.getX()*pos.getX()-pos.getY()*pos.getY());
+	}
 
 }
