@@ -72,13 +72,13 @@ public class Main2 {
 				System.out.println("Keves argumentum lett megadva!");
 			}
 			BufferedReader br = new BufferedReader(new FileReader(args[1]));	//a masodik argumentum, mint faljnev olvasasa
-			writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("args[2]"), "utf-8"));		//kimeneti file megnyitasa
+			writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream(args[2]), "utf-8"));		//kimeneti file megnyitasa
 		    try {
 		        
 		        String line = br.readLine();
 		        while(line!= null){										//ciklus, amig van sor a fajlban.
 		        	
-		        	String[] parancs = line.split(" ");
+		        	String[] parancs = line.split("_");
 		        	vegrehajt(parancs,args[0],writer);
 		        	line = br.readLine();
 		        }

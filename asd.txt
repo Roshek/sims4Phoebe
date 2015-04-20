@@ -1,3 +1,3 @@
-parancs1
-parancs2
-exitProto
+loadMap
+putRobot_15_15
+listAliveRobots
