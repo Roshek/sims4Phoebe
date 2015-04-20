@@ -100,7 +100,7 @@ public class Robot {
 	
 	public void steppedOnByRobot(Robot r){
 		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY());
-		Coord ct = new Coord(position.getY(), position.getY());
+		Coord ct = new Coord(impulse.getY(), impulse.getY());
 		
 		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY());
 		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY());
@@ -120,13 +120,18 @@ public class Robot {
 			cr.setY((int)(cr.getY()+ct.getY()*0.5));
 			
 			r.setImpulse(cr);
-		}
-
-		
+		}	
 	}
 	
 	public void steppedOnByMiniRobot(MiniRobot x){
+		Coord mx = new Coord(x.getModifier().getX(),x.getModifier().getY());
 		
+		if (mx.getX() < 0) mx.setX(mx.getX()+40);
+		else mx.setX(mx.getX()-40);
+		if (mx.getY() < 0) mx.setY(mx.getY()+40);
+		else mx.setY(mx.getY()-40);
+		
+		x.setPosition(Coord.add(mx,x.getPosition()));
 	}
 	
 	
