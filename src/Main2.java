@@ -59,7 +59,8 @@ public class Main2 {
 				if(parancsRead.hasNext())
 		            parancs_arg = parancsRead.next();						//Console olvasasa
 				else { parancs_arg = new String("exitProto");}
-				String[] parancs = parancs_arg.split(" ");				//A beolvasott parancs tordelese szokozok szerint.
+				String[] parancs = parancs_arg.split("_");				//A beolvasott parancs tordelese szokozok szerint.
+
 				vegrehajt(parancs,args[0],null);										//a parancs feldolgozasa
 					
 			}while (!stop);
@@ -178,9 +179,17 @@ public class Main2 {
 	 * az engine elo lobot listajat listajat adja vissza
 	 */
 	private static String listAliveRobots() {
-		String ki;
-		ki = engine.alivePlayers.toString();
-		return ki;
+		StringBuilder ki = null;
+		if(engine.alivePlayers.isEmpty()) return "-";
+		for(int i = 0; i<engine.alivePlayers.size();i++){
+			ki.append(engine.alivePlayers.get(i).getID());																						//robot ID kiírása
+			ki.append(" " + engine.alivePlayers.get(i).getPosition().getX() + "," + engine.alivePlayers.get(i).getPosition().getY());			//robot pozíció kiírása
+			ki.append(" " + engine.alivePlayers.get(i).getImpulse().getX() + "," + engine.alivePlayers.get(i).getImpulse().getY());				//robot impulzus kiírása
+			ki.append(" " + engine.alivePlayers.get(i).getRoad());																				//robot megtett útjának kiírása
+			ki.append("\n");
+		}
+		
+		return ki.toString();
 	}
 
 	/* a listTraps parancs megvalositasa
@@ -378,7 +387,7 @@ public class Main2 {
 	 * @param arg2
 	 */
 	private static void putMiniRobot(String arg1, String arg2) {
-		
+
 		switch (mini_robot_szam){
 		case 0: 
 			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
