@@ -7,7 +7,7 @@ public class Robot {
 	private int slime_num;
 	private double road;
 	private Boolean alive;
-
+	private double radius = 40;
 	private Engine engine;
 	
 	private int ID=0;
@@ -44,22 +44,14 @@ public class Robot {
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KeSZ
-		
-		System.out.println("->[:Robot].calculateCoords()");
-		
+	public void calculateCoords() {					//KeSZ		
 		impulse=Coord.add(impulse, modifier);
 		position=Coord.add(position, impulse);
 		modifier.setX(0);
 		modifier.setY(0);
-		
-		System.out.println("<-[:Robot].CalculateCoords()");
 	}
 
-	public boolean isAlive() {							//KeSZ
-		
-		System.out.println("->[:Robot].isAlive()");
-		
+	public boolean isAlive() {							//KeSZ	
 		return alive;
 	}
 
@@ -69,10 +61,7 @@ public class Robot {
 	 * akkor letrehoz egyet a jelenlegi
 	 * helyen es berakja az engine-be.
 	 */
-	public void placeOil() {		//KeSZ
-		
-		System.out.println("->[:Robot].placeOil()");
-		
+	public void placeOil() {		//KeSZ	
 		if(oil_num>0){
 			oil_num--;
 			
@@ -90,10 +79,7 @@ public class Robot {
 	 * akkor letrehoz egyet a jelenlegi
 	 * helyen es berakja az engine-be.
 	 */
-	public void placeSlime() {			//KeSZ
-		
-		System.out.println("->[:Robot].placeSlime()");
-		
+	public void placeSlime() {			//KeSZ	
 		if(slime_num>0){
 			slime_num--;
 			
@@ -106,8 +92,10 @@ public class Robot {
 	}
 	
 	public boolean collide(Coord pos){
-		return false;
-		
+		double sx = (pos.getX()-position.getX()) * (pos.getX()-position.getX());
+		double sy= (pos.getY()-position.getY()) * (pos.getY()-position.getY());
+		if (sx + sy <= (radius*radius)) return true;
+		else return false;
 	}
 	
 	public void steppedOnByRobot(Robot r){
@@ -239,5 +227,13 @@ public class Robot {
 	
 	public int getID(){
 		return ID;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
 	}
 }
