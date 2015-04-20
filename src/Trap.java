@@ -4,8 +4,8 @@ public abstract class Trap {
 	private Coord pos;
 	private int r;
 	private Robot owner;
-	private int untilCleaned;
-	private int untilExpiration;
+	private int untilCleaned=2;
+	private int untilExpiration=4;
 	private Boolean expired;
 
 	public abstract void spring(Robot r) ;
@@ -81,11 +81,11 @@ public abstract class Trap {
 		this.untilExpiration = i;
 	}
 
-	public int getExpired() {
+	public Boolean getExpired() {
 		return expired;
 	}
 
-	public void setExpired(int i) {
+	public void setExpired(Boolean i) {
 		this.expired = i;
 	}
 
