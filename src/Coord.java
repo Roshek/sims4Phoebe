@@ -4,14 +4,15 @@ public class Coord {
 	private int Y; //fuggoleges tengely
 	
 	public Coord(){									//KeSZ
-		System.out.println("teszt");
+		//System.out.println("teszt");
+		X=0; Y=0;
 	}
 	
 	
 	
 	public Coord(int x, int y){							//KeSZ
 		
-		System.out.println("branch");
+		//System.out.println("branch");
 		
 		X=x; Y=y;
 	}
@@ -21,7 +22,7 @@ public class Coord {
 	 * Visszaadja az X koordinatat.
 	 */
 	public int getX() {								//KeSZ
-		System.out.println("->[:Coord].getX");
+		//System.out.println("->[:Coord].getX");
 		
 		return X;
 	}
@@ -34,8 +35,7 @@ public class Coord {
 	 * @param a
 	 */
 	public void setX(int a) {						//KeSZ
-		System.out.println("->[:Coord].setX(a)");
-		
+		//System.out.println("->[:Coord].setX(a)");
 		X=a;
 	}
 	/**\brief Getter Y
@@ -43,8 +43,7 @@ public class Coord {
 	 * Visszaadja az Y koordinatat.
 	 */
 	public int getY() {								//KeSZ
-		System.out.println("->[:Coord].getY()");
-		
+		//System.out.println("->[:Coord].getY()");
 		return Y;
 	}
 
@@ -56,7 +55,7 @@ public class Coord {
 	 * @param b
 	 */
 	public void setY(int b) {						//KeSZ
-		System.out.println("->[:Coord].setY(b)");
+		//System.out.println("->[:Coord].setY(b)");
 		
 		Y=b;
 	}
@@ -70,7 +69,7 @@ public class Coord {
 	 * @param pos2
 	 */
 	public static Coord add(Coord pos1, Coord pos2) {		//KeSZ
-		System.out.println("->[:Coord].add(pos1, pos2)");
+		//System.out.println("->[:Coord].add(pos1, pos2)");
 		
 		Coord tmp=new Coord(pos1.getX()+pos2.getX(), pos1.getY()+pos2.getY());
 		
