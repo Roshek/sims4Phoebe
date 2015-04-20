@@ -99,6 +99,29 @@ public class Robot {
 	}
 	
 	public void steppedOnByRobot(Robot r){
+		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY());
+		Coord ct = new Coord(position.getY(), position.getY());
+		
+		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY());
+		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY());
+		
+		if (lr < lt) {
+			r.setAlive(false);
+			
+			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+			cr.setY((int)(cr.getY()+ct.getY()*0.5));
+			
+			this.setImpulse(cr);
+		}
+		else {
+			this.setAlive(false);
+			
+			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+			cr.setY((int)(cr.getY()+ct.getY()*0.5));
+			
+			r.setImpulse(cr);
+		}
+
 		
 	}
 	
