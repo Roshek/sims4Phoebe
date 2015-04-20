@@ -7,7 +7,7 @@ public class Robot {
 	private int slime_num;
 	private double road;
 	private Boolean alive;
-	private double radius = 40;
+	private double radius = 20;
 	private Engine engine;
 	
 	private int ID=0;
@@ -263,5 +263,9 @@ public class Robot {
 
 	public void setRadius(double radius) {
 		this.radius = radius;
+	}
+	
+	public Engine getEngine(){
+		return this.engine;
 	}
 }
