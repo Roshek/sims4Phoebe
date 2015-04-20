@@ -170,16 +170,24 @@ public class Main2 {
 	 * az engine elo minirobot listajat listajat adja vissza
 	 */
 	private static String listAliveMinirobots() {
-		String ki;
-		ki = engine.miniRobots.toString();
-		return ki;
+		StringBuilder ki = new StringBuilder();
+		if(engine.miniRobots.isEmpty()) return "-";
+		for(int i = 0; i<engine.miniRobots.size();i++){
+			ki.append(engine.miniRobots.get(i).getID());																						//robot ID kiírása
+			ki.append(" " + engine.miniRobots.get(i).getPosition().getX() + "," + engine.miniRobots.get(i).getPosition().getY());			//robot pozíció kiírása
+			ki.append(" " + engine.miniRobots.get(i).getImpulse().getX() + "," + engine.miniRobots.get(i).getImpulse().getY());				//robot impulzus kiírása
+			ki.append(" " + engine.miniRobots.get(i).getRoad());																				//robot megtett útjának kiírása
+			ki.append("\n");
+		}
+		
+		return ki.toString();
 	}
 
 	/* a listAliveRobots parancs megvalositasa
 	 * az engine elo lobot listajat listajat adja vissza
 	 */
 	private static String listAliveRobots() {
-		StringBuilder ki = null;
+		StringBuilder ki = new StringBuilder();
 		if(engine.alivePlayers.isEmpty()) return "-";
 		for(int i = 0; i<engine.alivePlayers.size();i++){
 			ki.append(engine.alivePlayers.get(i).getID());																						//robot ID kiírása
