@@ -68,7 +68,9 @@ public class Main2 {
 		}
 		else if(args[0].equals(new String("1"))){						//Filebol olvasasos teszteset
 			System.out.println("File teszt...");
-			
+			if(args.length!=3){
+				System.out.println("Keves argumentum lett megadva!");
+			}
 			BufferedReader br = new BufferedReader(new FileReader(args[1]));	//a masodik argumentum, mint faljnev olvasasa
 			writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("args[2]"), "utf-8"));		//kimeneti file megnyitasa
 		    try {
@@ -109,13 +111,13 @@ public class Main2 {
 			putMiniRobot(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putOil")){
-			if(parancs[1]!=null)
+			if(parancs.length!=1)
 				putOil(parancs[1],parancs[2]);
 			else
 				putOil();
 		}else
 		if(parancs[0].equals("putSlime")){
-			if(parancs[1]!=null)
+			if(parancs.length!=1)
 				putSlime(parancs[1],parancs[2]);
 			else
 				putSlime();
@@ -207,7 +209,7 @@ public class Main2 {
 		StringBuilder ki = new StringBuilder();
 		if(engine.traps.isEmpty()) return "-";
 		for(int i = 0; i<engine.traps.size();i++){
-			ki.append(engine.traps.get(i).getID());																						//robot ID kiírása
+			//ki.append(engine.traps.get(i).getID());																						//robot ID kiírása
 			ki.append(" " + engine.traps.get(i).getPos().getX() + "," + engine.traps.get(i).getPos().getY());			//robot pozíció kiírása
 			
 			ki.append("\n");
