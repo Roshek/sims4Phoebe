@@ -1,7 +1,7 @@
 public class Coord {
 
-	private int X;
-	private int Y;
+	private int X; //vizszintes tengely
+	private int Y; //fuggoleges tengely
 	
 	public Coord(){									//KeSZ
 		System.out.println("teszt");
@@ -16,13 +16,20 @@ public class Coord {
 		X=x; Y=y;
 	}
 	
+	/**\brief Getter X
+	 * 
+	 * Visszaadja az X koordinatat.
+	 */
 	public int getX() {								//KeSZ
 		System.out.println("->[:Coord].getX");
 		
 		return X;
 	}
 
-	/**
+	/**\brief Setter X
+	 * 
+	 * Beallitja a kapott ertek alapjan 
+	 * az X koordinatat.
 	 * 
 	 * @param a
 	 */
@@ -31,14 +38,20 @@ public class Coord {
 		
 		X=a;
 	}
-
+	/**\brief Getter Y
+	 * 
+	 * Visszaadja az Y koordinatat.
+	 */
 	public int getY() {								//KeSZ
 		System.out.println("->[:Coord].getY()");
 		
 		return Y;
 	}
 
-	/**
+	/**\brief Setter Y
+	 * 
+	 * Beallitja a kapott ertek alapjan 
+	 * az Y koordinatat.
 	 * 
 	 * @param b
 	 */
@@ -64,9 +77,16 @@ public class Coord {
 		return tmp;
 	}
 	
+	/**\brief Ket vektor tavolsaga
+	 * 
+	 * kiszamitja a ket megkapott vektor tavolsagat
+	 * es visszater azzal.
+	 * 
+	 * @param pos1
+	 * @param pos2
+	 */
 	public static double distance(Coord pos1, Coord pos2){
-		
-		return 1.0;
+		return Math.sqrt((pos2.getX()-pos1.getX())*(pos2.getX()-pos1.getX()) + (pos2.getY()-pos1.getY())*(pos2.getY()-pos1.getY()));
 	}
 
 }
