@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,8 +25,9 @@ public class Engine {
 			x.move();
 			Coord place=x.getPosition();
 			boolean dead=map.fall(place);
-			if(dead)
+			if(dead){
 				x.setAlive(false);
+			}
 		}
 	}
 	
@@ -167,15 +169,16 @@ public class Engine {
 		trapRobots();
 		moveRobots();
 		
-		testMiniRobotForTraps();
 		moveminiRobots();
+		testMiniRobotForTraps();
+		
 		
 		for(Trap i: traps){
 			
 		Iterator<Robot> it=alivePlayers.iterator();				//might work, not sure tho
 		while(it.hasNext()){
 			Robot x=it.next();
-			if(x.isAlive())
+			if(!x.isAlive())
 				it.remove();
 		}
 		
@@ -189,8 +192,10 @@ public class Engine {
 		Iterator<MiniRobot> it3=miniRobots.iterator();
 		while(it3.hasNext()){
 			MiniRobot x=it3.next();
-			if(x.isAlive())
+			if(!x.isAlive()){
 				it3.remove();
+				System.out.println("I BRUTALLY MURDERED A DEFENSELESS MINIBOT :(");
+			}
 		}
 				
 		}
@@ -215,6 +220,7 @@ public class Engine {
 		deadPlayers=new ArrayList<Robot>();
 		miniRobots=new ArrayList<MiniRobot>();
 		traps=new ArrayList<Trap>();
+		map=new Map();
 		
 		player_num=0;
 		round_num=30;
@@ -267,7 +273,6 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
-		map=new Map();
 		map.load("asd");
 		
 		for(int i=0;i<numberOfPlayers;i++){

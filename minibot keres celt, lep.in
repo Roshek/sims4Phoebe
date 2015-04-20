@@ -1,0 +1,9 @@
+loadMap
+putMiniRobot_105_105
+listAliveMinirobot
+roundOver
+listAliveMinirobot
+putOil_105_150
+listTraps
+roundOver
+listAliveMinirobot

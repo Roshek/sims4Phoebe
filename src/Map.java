@@ -39,23 +39,27 @@ public class Map {
 	 * @param c
 	 */
 	public Boolean fall(Coord c) {						//THIS IS SO BAD BUT I MIGHT WORK FOR TESTS
-		System.out.println("->[:Map].fall(c)");
+		/*System.out.println("->[:Map].fall(c)");
+		
+		/*if(field==null)									//TESZT
+			return false;	
+		*/
+		
 		////////////////////////////////////
 		/*if(field.getRGB(c.getX(), c.getY()) == Color.BLACK.getRGB()){
 			return true;
 		}else
 			return false;*/
-		////////////////////////////////////
+		////////////////////////////////////		
 		
-		
-		System.out.println("? 4.2 Leesett a robot? (I/N)");		//Teszthez ez kell!
+		/*System.out.println("? 4.2 Leesett a robot? (I/N)");		//Teszthez ez kell!
 		Scanner in = new Scanner(System.in);
 		String be = null;
 		do{
         	be=in.nextLine();		        		
         	}while(!be.equals("I") && !be.equals("N"));
 		if(be.equals("I"))
-			return true;
+			return true;*/
 		return false;
 	}
 
