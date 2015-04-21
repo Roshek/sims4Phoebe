@@ -16,8 +16,9 @@ public class MiniRobot extends Robot {
 		if (onTrap) 
 			return;
 		
-		Coord trap = getClosestTrap(getPosition());
-		
+		Coord trap = engine.getClosestTrap(position);//getClosestTrap(getPosition());
+		if(trap==null)
+			return;
 		if (Coord.distance(getPosition(), trap) <= 20) setPosition(trap);
 		else {
 			double d = Coord.distance(getPosition(), trap);

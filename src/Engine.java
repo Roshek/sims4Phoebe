@@ -41,7 +41,7 @@ public class Engine {
 			}
 			return tmp.getPos();
 		}
-		return new Coord(0,0);
+		return null;
 	}
 	
 	private void testMiniRobotForTraps(){

@@ -1,16 +1,16 @@
 public class Robot {
 
-	private Coord position;
-	private Coord impulse;
-	private Coord modifier;
-	private int oil_num;
-	private int slime_num;
-	private double road;
-	private Boolean alive;
-	private double radius = 20;
-	private Engine engine;
+	protected Coord position;
+	protected Coord impulse;
+	protected Coord modifier;
+	protected int oil_num;
+	protected int slime_num;
+	protected double road;
+	protected Boolean alive;
+	protected double radius = 20;
+	protected Engine engine;
 	
-	private int ID=0;
+	protected int ID=0;
 	/**\brief Robot konstruktor
 	 * 
 	 * Inicializalja a tarolt adatokat es 
