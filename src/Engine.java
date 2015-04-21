@@ -58,7 +58,7 @@ public class Engine {
 					i.steppedOnByMiniRobot(x);
 			}
 			for(MiniRobot i: miniRobots){
-				if(i.collide(place) && (i.getID()!=x.getID()))
+				if(i.collide(place) && (i.getID()!=x.getID()))  //vegigmegy egy minirobot az osszes miniroboton, ezert ki kell zarni, hogy magat is vizsgalja
 					i.steppedOnByMinirobot(x);
 			}
 		}
