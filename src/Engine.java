@@ -171,9 +171,6 @@ public class Engine {
 		
 		moveminiRobots();
 		testMiniRobotForTraps();
-		
-		
-		for(Trap i: traps){
 			
 		Iterator<Robot> it=alivePlayers.iterator();				//might work, not sure tho
 		while(it.hasNext()){
@@ -197,8 +194,6 @@ public class Engine {
 				System.out.println(x.getPosition().getX() + " " + x.getPosition().getY());
 				it3.remove();
 			}
-		}
-				
 		}
 		round_num--;
 		
