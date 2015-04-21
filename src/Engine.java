@@ -58,7 +58,7 @@ public class Engine {
 					i.steppedOnByMiniRobot(x);
 			}
 			for(MiniRobot i: miniRobots){
-				if(i.collide(place))
+				if(i.collide(place) && (i.getID()!=x.getID()))
 					i.steppedOnByMinirobot(x);
 			}
 		}
@@ -285,7 +285,7 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
-		map.load("asd");
+		map.load("tesztpalya.bmp");
 		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
