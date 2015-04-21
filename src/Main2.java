@@ -498,7 +498,7 @@ public class Main2 {
 	 */
 	private static void loadMap() {				//fixed
 		engine=new Engine();
-		engine.map.load("map.png");
+		engine.map.load("tesztpalya.bmp");
 	}
 
 }
