@@ -34,7 +34,7 @@ public class MiniRobot extends Robot {
 			x = x * ratio;
 			y = y * ratio;
 			
-			setPosition(new Coord ((int)x,(int)y));
+			setPosition(new Coord ((int)(x + position.getX()),(int)(y + position.getY())));
 		}
 		
 		
