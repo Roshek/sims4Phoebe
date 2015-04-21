@@ -39,7 +39,6 @@ public class MiniRobot extends Robot {
 			setPosition(new Coord ((int)(x + position.getX()),(int)(y + position.getY())));
 		}
 		
-		System.out.println(getPosition().getX() + " " + getPosition().getY());
 	}
 	
 	
@@ -49,7 +48,7 @@ public class MiniRobot extends Robot {
 	}
 	
 	public void steppedOnByMinirobot(MiniRobot x){
-		x.setPosition(new Coord(x.getPosition().getX()+15,x.getPosition().getY()+15));
+		this.setPosition(new Coord(this.getPosition().getX()+15,this.getPosition().getY()+15));
 	}
 	
 	public Coord getClosestTrap(Coord position) {
