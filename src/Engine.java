@@ -49,7 +49,7 @@ public class Engine {
 			Coord place=x.getPosition();
 			for(Trap i: traps){
 				if(i.collide(place)){
-					x.steppedOnByMiniRobot(x);
+					i.steppedOnByMiniRobot(x);
 				}
 			}
 		}
