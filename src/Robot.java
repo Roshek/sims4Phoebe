@@ -21,8 +21,7 @@ public class Robot {
 	
 	
 	public Robot(Engine engine){
-		
-		System.out.println("->[:Robot].Robot(engine)");
+
 		
 		position=new Coord();
 		modifier=new Coord();
@@ -138,7 +137,7 @@ public class Robot {
 	
 
 	public Coord getPosition() {				//KeSZ
-		System.out.println("Robot.getPosition()");
+		
 		
 		return this.position;
 	}
@@ -148,13 +147,13 @@ public class Robot {
 	 * @param position
 	 */
 	public void setPosition(Coord position) {			//KeSZ
-		System.out.println("->[:Robot].setPosition(position)");
+		
 		
 		this.position = position;
 	}
 
 	public Coord getImpulse() {							//KeSZ
-		System.out.println("->[:Robot].getImpluse()");
+		
 		
 		return this.impulse;
 	}
@@ -164,13 +163,13 @@ public class Robot {
 	 * @param impulse
 	 */
 	public void setImpulse(Coord impulse) {				//KeSZ
-		System.out.println("->[:Robot].setImpluse(impulse)");
+		
 		
 		this.impulse = impulse;
 	}
 
 	public Coord getModifier() {						//KeSZ
-		System.out.println("->[:Robot].getModifier()");
+		
 		
 		return this.modifier;
 	}
@@ -180,13 +179,13 @@ public class Robot {
 	 * @param modifier
 	 */
 	public void setModifier(Coord modifier) {			//KeSZ
-		System.out.println("->[:Robot].setModifier(modifier)");
+		
 		
 		this.modifier = modifier;
 	}
 
 	public int getOil_num() {							//KeSZ
-		System.out.println("->[:Robot].getOil_num()");
+		
 		
 		return this.oil_num;
 	}
@@ -196,13 +195,13 @@ public class Robot {
 	 * @param oil_num
 	 */
 	public void setOil_num(int oil_num) {				//KeSZ
-		System.out.println("->[:Robot].setOil_num(oil_num)");
+		
 		
 		this.oil_num = oil_num;
 	}
 
 	public int getSlime_num() {							//KeSZ
-		System.out.println("->[:Robot].getSlime_num()");
+		
 		
 		return this.slime_num;
 	}
@@ -212,13 +211,12 @@ public class Robot {
 	 * @param slime_num
 	 */
 	public void setSlime_num(int slime_num) {			//KeSZ
-		System.out.println("->[:Robot].setSlime_num(slime_num)");
 		
 		this.slime_num = slime_num;
 	}
 
 	public double getRoad() {							//KeSZ
-		System.out.println("->[:Robot].getRoad()");
+		
 				
 		return this.road;
 	}
@@ -228,13 +226,13 @@ public class Robot {
 	 * @param road
 	 */
 	public void setRoad(double road) {					//KeSZ
-		System.out.println("->[:Robot].setRoad(road)");
+		
 		
 		this.road = road;
 	}
 
 	public Boolean getAlive() {							//KeSZ
-		System.out.println("->[:Robot].getAlive()");
+		
 		
 		return this.alive;
 	}
@@ -244,7 +242,7 @@ public class Robot {
 	 * @param alive
 	 */
 	public void setAlive(Boolean alive) {				//KeSZ
-		System.out.println("->[:Robot].setAlive(alive)");
+		
 		
 		this.alive = alive;
 	}
