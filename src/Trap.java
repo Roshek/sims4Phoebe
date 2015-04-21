@@ -11,7 +11,7 @@ public abstract class Trap {
 	public abstract void spring(Robot r) ;
 	
 
-	public abstract void timePassed() ;
+	public void timePassed() {};
 	
 
 	public boolean collide(Coord c) {			

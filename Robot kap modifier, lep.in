@@ -1,0 +1,7 @@
+loadMap
+putRobot_105_105
+changeengine.activePlayer_1
+setDirection_1_1
+listAliveRobots
+roundOver
+listAliveRobots

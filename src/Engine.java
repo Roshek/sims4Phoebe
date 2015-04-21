@@ -180,7 +180,7 @@ public class Engine {
 		moveminiRobots();
 		testMiniRobotForTraps();
 			
-		Iterator<Robot> it=alivePlayers.iterator();				//might work, not sure tho
+		Iterator<Robot> it=alivePlayers.iterator();				//TAKARITAS
 		while(it.hasNext()){
 			Robot x=it.next();
 			if(!x.isAlive()){
@@ -206,6 +206,10 @@ public class Engine {
 				System.out.println(x.getPosition().getX() + " " + x.getPosition().getY());
 				it3.remove();
 			}
+		}
+		
+		for(Trap i:traps){
+			i.timePassed();
 		}
 		round_num--;
 		

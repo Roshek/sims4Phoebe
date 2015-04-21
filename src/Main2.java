@@ -296,6 +296,7 @@ public class Main2 {
 	 */
 	private static void setDirection(String arg1, String arg2) {
 		engine.activePlayer.setModifier(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+		System.out.println(arg1 + arg2 + " :megadott értékek");
 	}
 
 	/* A putSlime parancs megvalositasa
@@ -415,24 +416,28 @@ public class Main2 {
 		switch (mini_robot_szam){
 		case 0: 
 			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
+			miniRobot1.setID(mini_robot_szam);
 			mini_robot_szam++;						//minirobotszam novelese
 			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
 			engine.miniRobots.add(miniRobot1);		// Az engine listajahoz hozza kell adni az uj minirobotot
 			break;
 		case 1:
 			miniRobot2=new MiniRobot(engine);
+			miniRobot2.setID(mini_robot_szam);
 			mini_robot_szam++;
 			miniRobot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.miniRobots.add(miniRobot2);
 			break;
 		case 2:
 			miniRobot3=new MiniRobot(engine);
+			miniRobot3.setID(mini_robot_szam);
 			mini_robot_szam++;
 			miniRobot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.miniRobots.add(miniRobot3);
 			break;
 		case 3:
 			miniRobot4=new MiniRobot(engine);
+			miniRobot4.setID(mini_robot_szam);
 			mini_robot_szam++;
 			miniRobot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.miniRobots.add(miniRobot4);
@@ -453,6 +458,7 @@ public class Main2 {
 		switch (robot_szam){
 		case 0: 
 			robot1=new Robot(engine);			//a robot letrehozasa
+			robot1.setID(robot_szam);
 			robot_szam++;						//robotszam novelese
 			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
 			engine.alivePlayers.add(robot1);	// Az engine listajahoz hozza kell adni az uj robotot
@@ -460,6 +466,7 @@ public class Main2 {
 			break;
 		case 1:
 			robot2=new Robot(engine);
+			robot2.setID(robot_szam);
 			robot_szam++;
 			robot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot2);
@@ -467,6 +474,7 @@ public class Main2 {
 			break;
 		case 2:
 			robot3=new Robot(engine);
+			robot3.setID(robot_szam);
 			robot_szam++;
 			robot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot3);
@@ -474,6 +482,7 @@ public class Main2 {
 			break;
 		case 3:
 			robot4=new Robot(engine);
+			robot4.setID(robot_szam);
 			robot_szam++;
 			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot4);

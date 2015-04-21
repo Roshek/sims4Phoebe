@@ -27,8 +27,8 @@ public class Robot {
 		modifier=new Coord();
 		impulse=new Coord();
 		
-		oil_num=0;
-		oil_num=0;
+		oil_num=5;
+		oil_num=5;
 		road=0;
 		alive=true;
 		
@@ -102,14 +102,17 @@ public class Robot {
 	
 	public void steppedOnByRobot(Robot r){
 		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY());
-		Coord ct = new Coord(impulse.getY(), impulse.getY());
+		Coord ct = new Coord(impulse.getX(), impulse.getY());
 		
 		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY());
 		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY());
 		
+		if(lr==lt && lr==0)		//ha mindketten állnak akkor hadd ácsorogjanak tovább
+			return;
+		
 		if (lr < lt) {
 			r.setAlive(false);
-			
+			r.setImpulse(new Coord(0,0));
 			cr.setX((int)(cr.getX()+ct.getX()*0.5));
 			cr.setY((int)(cr.getY()+ct.getY()*0.5));
 			
@@ -118,7 +121,7 @@ public class Robot {
 		else {
 			System.out.println("SOMEBODY STEPPED ON MY DICK");
 			this.setAlive(false);
-			
+			this.setImpulse(new Coord(0,0));
 			cr.setX((int)(cr.getX()+ct.getX()*0.5));
 			cr.setY((int)(cr.getY()+ct.getY()*0.5));
 			

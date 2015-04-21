@@ -1,0 +1,12 @@
+loadMap
+putRobot_105_105
+putMiniRobot_130_130
+listAliveMiniRobot
+listAliveRobots
+listTraps
+changeengine.activePlayer_1
+setDirection_25_25
+roundOver
+listAliveMiniRobot
+listAliveRobots
+listTraps
