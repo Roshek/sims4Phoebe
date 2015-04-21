@@ -193,8 +193,9 @@ public class Engine {
 		while(it3.hasNext()){
 			MiniRobot x=it3.next();
 			if(!x.isAlive()){
-				it3.remove();
 				System.out.println("I BRUTALLY MURDERED A DEFENSELESS MINIBOT :(");
+				System.out.println(x.getPosition().getX() + " " + x.getPosition().getY());
+				it3.remove();
 			}
 		}
 				
