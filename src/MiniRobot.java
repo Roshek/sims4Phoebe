@@ -16,7 +16,12 @@ public class MiniRobot extends Robot {
 		if (onTrap) 
 			return;
 		
-		Coord trap = getClosestTrap(getPosition());
+		Coord trap = engine.getClosestTrap(position);//getClosestTrap(getPosition());
+
+		if(trap==null)
+			return;
+		
+		
 		
 		if (Coord.distance(getPosition(), trap) <= 20) setPosition(trap);
 		else {
@@ -31,10 +36,10 @@ public class MiniRobot extends Robot {
 			x = x * ratio;
 			y = y * ratio;
 			
-			setPosition(new Coord ((int)x,(int)y));
+			setPosition(new Coord ((int)(x + position.getX()),(int)(y + position.getY())));
 		}
 		
-		
+		System.out.println(getPosition().getX() + " " + getPosition().getY());
 	}
 	
 	
