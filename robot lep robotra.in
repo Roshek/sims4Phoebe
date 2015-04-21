@@ -1,0 +1,11 @@
+loadMap
+putRobot_105_105
+putRobot_110_110
+changeengine.activePlayer_1
+setDirection_5_5
+listAliveRobots
+roundOver
+listAliveRobots
+roundOver
+listAliveRobots
+exitGame

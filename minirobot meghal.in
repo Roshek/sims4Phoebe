@@ -1,0 +1,8 @@
+loadMap
+putMiniRobot_120_120
+listAliveMiniRobot
+listTraps
+putRobot_120_120
+roundOver
+listAliveMiniRobot
+listTraps

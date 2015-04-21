@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,8 +25,9 @@ public class Engine {
 			x.move();
 			Coord place=x.getPosition();
 			boolean dead=map.fall(place);
-			if(dead)
+			if(dead){
 				x.setAlive(false);
+			}
 		}
 	}
 	
@@ -39,16 +41,25 @@ public class Engine {
 			}
 			return tmp.getPos();
 		}
-		return new Coord(0,0);
+		return null;
 	}
 	
 	private void testMiniRobotForTraps(){
 		for(MiniRobot x: miniRobots){
 			Coord place=x.getPosition();
+			
 			for(Trap i: traps){
 				if(i.collide(place)){
-					x.steppedOnByMiniRobot(x);
+					i.steppedOnByMiniRobot(x);
 				}
+			}
+			for(Robot i: alivePlayers){
+				if(i.collide(place))
+					i.steppedOnByMiniRobot(x);
+			}
+			for(MiniRobot i: miniRobots){
+				if(i.collide(place))
+					i.steppedOnByMinirobot(x);
 			}
 		}
 	}
@@ -85,29 +96,25 @@ public class Engine {
 	
 	/**\brief Robotok mozgatasa
 	 * 
-	 * Minden meg elo robotra meghívja a
+	 * Minden meg elo robotra meghï¿½vja a
 	 * calCulateCoords() fuggvenyt, es 
 	 * ellenorzi, hogy leesett-e valamelyik.
 	 * Ha igen, akkor azt atteszi a halott 
 	 * robotok koze.
 	 */
 	
-	private void moveRobots(){					//KeSZ				///VALoSZÍNÛLEG HIBaS
+	private void moveRobots(){					//KeSZ				///VALoSZï¿½Nï¿½LEG HIBaS
 		
 		//System.out.println("->[:Engine].moveRobots()");
 		
 		int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
-		//for(Robot tmp: alivePlayers){
-		for(int i=0;i<numberOfRobotsAtStartOfCycle;i++){
-			Robot tmp=alivePlayers.get(i);
+		for(Robot tmp: alivePlayers){
 			tmp.calculateCoords();
-			
-			Coord newPos=tmp.getPosition();			
-			if(map.fall(newPos)){
-				i--;
-				numberOfRobotsAtStartOfCycle--;
-				dieRobot(tmp);
+			Coord newpos=tmp.getPosition();
+			if(map.fall(newpos)){
+				System.out.println("I fell off fuck me!");
+				tmp.setAlive(false);
 			}
 		}
 	}
@@ -118,8 +125,8 @@ public class Engine {
 	 * a helyuket, es ellenorizteti az
 	 * osszes csapdaval, hogy belelepett-e.
 	 * Ha igen, akkor atadja a csapdanak
-	 * a robotot, hogy az beallítsa a 
-	 * neki megfelelo modosítasokat.
+	 * a robotot, hogy az beallï¿½tsa a 
+	 * neki megfelelo modosï¿½tasokat.
 	 * 
 	 */
 	
@@ -143,8 +150,11 @@ public class Engine {
 			}
 			
 			for(Robot x:alivePlayers){
-				if(x.collide(pos)){
-					x.steppedOnByRobot(robot);
+				if(x!=robot){
+					if(x.collide(pos)){
+						System.out.println("I STEPPED ON YOUR DICK");
+						x.steppedOnByRobot(robot);
+					}
 				}
 			}
 		}
@@ -154,7 +164,7 @@ public class Engine {
 	/**\brief Kor vege
 	 * 
 	 * Amikor az utolso jatekos is elpasszolta
-	 * a koret, akkor hívodik meg. Meghívja a
+	 * a koret, akkor hï¿½vodik meg. Meghï¿½vja a
 	 * az engine trapRobots() es moveRobots()
 	 * fuggvenyeit ilyen sorrendben.
 	 * 
@@ -167,16 +177,18 @@ public class Engine {
 		trapRobots();
 		moveRobots();
 		
-		testMiniRobotForTraps();
 		moveminiRobots();
-		
-		for(Trap i: traps){
+		testMiniRobotForTraps();
 			
-		Iterator<Robot> it=alivePlayers.iterator();				//might work, not sure tho
+		Iterator<Robot> it=alivePlayers.iterator();				//TAKARITAS
 		while(it.hasNext()){
 			Robot x=it.next();
-			if(x.isAlive())
+			if(!x.isAlive()){
+				System.out.println("I SHAMELESSLY RAPED A FELLOW ROBOT :(" + x.getPosition().getX() + " " + x.getPosition().getY());
+				System.out.println(x.isAlive());
+				deadPlayers.add(x);
 				it.remove();
+			}
 		}
 		
 		Iterator<Trap> it2=traps.iterator();
@@ -189,10 +201,15 @@ public class Engine {
 		Iterator<MiniRobot> it3=miniRobots.iterator();
 		while(it3.hasNext()){
 			MiniRobot x=it3.next();
-			if(x.isAlive())
+			if(!x.isAlive()){
+				System.out.println("I BRUTALLY MURDERED A DEFENSELESS MINIBOT :(");
+				System.out.println(x.getPosition().getX() + " " + x.getPosition().getY());
 				it3.remove();
+			}
 		}
-				
+		
+		for(Trap i:traps){
+			i.timePassed();
 		}
 		round_num--;
 		
@@ -204,7 +221,7 @@ public class Engine {
 	/**\brief Engine konstruktor
 	 * 
 	 * Inicializalja az ArrayList-eket es
-	 * beallítja a max korok szamat. 
+	 * beallï¿½tja a max korok szamat. 
 	 */
 	
 	public Engine(){							//KeSZ
@@ -215,6 +232,7 @@ public class Engine {
 		deadPlayers=new ArrayList<Robot>();
 		miniRobots=new ArrayList<MiniRobot>();
 		traps=new ArrayList<Trap>();
+		map=new Map();
 		
 		player_num=0;
 		round_num=30;
@@ -222,12 +240,12 @@ public class Engine {
 	
 	/**\brief A fo playfuggveny, itt fut a jatek nagy resze
 	 * 
-	 * Amíg a korszamlalo el nem eri a nullat
+	 * Amï¿½g a korszamlalo el nem eri a nullat
 	 * egyesevel vegigmegy az elo robotokon,
-	 * majd var, amíg a kezelofelulet felebreszti
+	 * majd var, amï¿½g a kezelofelulet felebreszti
 	 * a kor atpasszolasaval. Amikor vegig ert a 
-	 * a robotokon meghívja a roundOver() fuggvenyt.
-	 * Amikor elfogytak a korok meghívja a whoWins()
+	 * a robotokon meghï¿½vja a roundOver() fuggvenyt.
+	 * Amikor elfogytak a korok meghï¿½vja a whoWins()
 	 * fuggvenyt.
 	 */
 	
@@ -267,7 +285,6 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
-		map=new Map();
 		map.load("asd");
 		
 		for(int i=0;i<numberOfPlayers;i++){
@@ -280,14 +297,14 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amíg nincs putPlayers
+			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
 		}
 	}
 
 	/**\brief Kor passzolasa
 	 * 
 	 * A kezelofelulettol kapott vektort
-	 * atadja az epp aktív robotnak az
+	 * atadja az epp aktï¿½v robotnak az
 	 * uj modifierekent, es felebreszti az
 	 * Engine.play()-ben varakozo foszalat,
 	 * hogy tovabblepjen a jatek a kovetkezo
@@ -329,16 +346,13 @@ public class Engine {
 	 * 
 	 * A parameterben kapott robotot kiveszi az
 	 * elok kozul es atteszi a halottak koze.
-	 * A robot alive flagjat is atallítja.
+	 * A robot alive flagjat is atallï¿½tja.
 	 * 
 	 * @param r
 	 */
 	public void dieRobot(Robot r) {					//KeSZ					//csak a szkeletonban public
 		
 		//System.out.println("->[:Engine].dieRobot(r)");
-		
-		alivePlayers.remove(r);
-		deadPlayers.add(r);
 		r.setAlive(false);
 	}
 

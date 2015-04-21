@@ -128,7 +128,7 @@ public class Main2 {
 		if(parancs[0].equals("roundOver")){
 			roundOver();
 		}else
-		if(parancs[0].equals("listAliveMinirobot")){
+		if(parancs[0].equals("listAliveMiniRobot")){
 			String kimenet;
 			kimenet = listAliveMinirobots();
 			kiiras(kimenet,arg);
@@ -164,8 +164,9 @@ public class Main2 {
 		}else
 		if(parancs[0].equals("exitProto")){
 			stop=true;
-		}else
-		System.out.println("Hibas bevitel");
+		}else{
+			System.out.println("HIBAS BEVITEL, bemenet: " + parancs[0]);
+		}
 	}
 	
 	/* a listAliveMiniRobots parancs megvalositasa
@@ -173,12 +174,13 @@ public class Main2 {
 	 */
 	private static String listAliveMinirobots() {
 		StringBuilder ki = new StringBuilder();
-		if(engine.miniRobots.isEmpty()) return "-";
+		if(engine.miniRobots.isEmpty()) 
+			return "-";
 		for(int i = 0; i<engine.miniRobots.size();i++){
-			ki.append(engine.miniRobots.get(i).getID());																						//robot ID kiírása
-			ki.append(" " + engine.miniRobots.get(i).getPosition().getX() + "," + engine.miniRobots.get(i).getPosition().getY());			//robot pozíció kiírása
-			ki.append(" " + engine.miniRobots.get(i).getImpulse().getX() + "," + engine.miniRobots.get(i).getImpulse().getY());				//robot impulzus kiírása
-			ki.append(" " + engine.miniRobots.get(i).getRoad());																				//robot megtett útjának kiírása TODO
+			ki.append(engine.miniRobots.get(i).getID());																						//robot ID kiï¿½rï¿½sa
+			ki.append(" " + engine.miniRobots.get(i).getPosition().getX() + "," + engine.miniRobots.get(i).getPosition().getY());			//robot pozï¿½ciï¿½ kiï¿½rï¿½sa
+			//ki.append(" " + engine.miniRobots.get(i).getImpulse().getX() + "," + engine.miniRobots.get(i).getImpulse().getY());				//robot impulzus kiï¿½rï¿½sa			//Modositva, minbotoknak nem kell
+			ki.append(" " + engine.miniRobots.get(i).getRoad());																				//robot megtett ï¿½tjï¿½nak kiï¿½rï¿½sa TODO
 			ki.append("\n");
 		}
 		ki.append("\n");
@@ -192,10 +194,10 @@ public class Main2 {
 		StringBuilder ki = new StringBuilder();
 		if(engine.alivePlayers.isEmpty()) return "-";
 		for(int i = 0; i<engine.alivePlayers.size();i++){
-			ki.append(engine.alivePlayers.get(i).getID());																						//robot ID kiírása
-			ki.append(" " + engine.alivePlayers.get(i).getPosition().getX() + "," + engine.alivePlayers.get(i).getPosition().getY());			//robot pozíció kiírása
-			ki.append(" " + engine.alivePlayers.get(i).getImpulse().getX() + "," + engine.alivePlayers.get(i).getImpulse().getY());				//robot impulzus kiírása
-			ki.append(" " + engine.alivePlayers.get(i).getRoad());																				//robot megtett útjának kiírása
+			ki.append(engine.alivePlayers.get(i).getID());																						//robot ID kiï¿½rï¿½sa
+			ki.append(" " + engine.alivePlayers.get(i).getPosition().getX() + "," + engine.alivePlayers.get(i).getPosition().getY());			//robot pozï¿½ciï¿½ kiï¿½rï¿½sa
+			ki.append(" " + engine.alivePlayers.get(i).getImpulse().getX() + "," + engine.alivePlayers.get(i).getImpulse().getY());				//robot impulzus kiï¿½rï¿½sa
+			ki.append(" " + engine.alivePlayers.get(i).getRoad());																				//robot megtett ï¿½tjï¿½nak kiï¿½rï¿½sa
 			ki.append("\n");
 		}
 		ki.append("\n");
@@ -209,9 +211,14 @@ public class Main2 {
 		StringBuilder ki = new StringBuilder();
 		if(engine.traps.isEmpty()) return "-";
 		for(int i = 0; i<engine.traps.size();i++){
-			//ki.append(engine.traps.get(i).getID());																						//robot ID kiírása (ha lesz) TODO
-			ki.append(" " + engine.traps.get(i).getPos().getX() + "," + engine.traps.get(i).getPos().getY());			//robot pozíció kiírása
-			// TODO: Ide kell még, hogy kiírja, hogy slime/oil.
+			//ki.append(engine.traps.get(i).getID());																						//robot ID kiï¿½rï¿½sa (ha lesz) TODO
+			ki.append(/*" " + */engine.traps.get(i).getPos().getX() + "," + engine.traps.get(i).getPos().getY());			//robot pozï¿½ciï¿½ kiï¿½rï¿½sa
+			// TODO: Ide kell mï¿½g, hogy kiï¿½rja, hogy slime/oil.
+			if (engine.traps.get(i) instanceof Oil) {
+				ki.append(" Oil");
+			}
+			else
+				ki.append(" Slime");
 			ki.append("\n");
 		}
 		ki.append("\n");
@@ -289,6 +296,7 @@ public class Main2 {
 	 */
 	private static void setDirection(String arg1, String arg2) {
 		engine.activePlayer.setModifier(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+		System.out.println(arg1 + arg2 + " :megadott értékek");
 	}
 
 	/* A putSlime parancs megvalositasa
@@ -302,7 +310,7 @@ public class Main2 {
 	 * az eppen aktiv robot Oilrakasat hivja meg.
 	 */
 	private static void putOil() {
-		engine.activePlayer.placeSlime();
+		engine.activePlayer.placeOil();
 	}
 	
 	/* A changeActiceRobot parancs megvalositasa
@@ -408,24 +416,28 @@ public class Main2 {
 		switch (mini_robot_szam){
 		case 0: 
 			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
+			miniRobot1.setID(mini_robot_szam);
 			mini_robot_szam++;						//minirobotszam novelese
 			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
 			engine.miniRobots.add(miniRobot1);		// Az engine listajahoz hozza kell adni az uj minirobotot
 			break;
 		case 1:
 			miniRobot2=new MiniRobot(engine);
+			miniRobot2.setID(mini_robot_szam);
 			mini_robot_szam++;
 			miniRobot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.miniRobots.add(miniRobot2);
 			break;
 		case 2:
 			miniRobot3=new MiniRobot(engine);
+			miniRobot3.setID(mini_robot_szam);
 			mini_robot_szam++;
 			miniRobot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.miniRobots.add(miniRobot3);
 			break;
 		case 3:
 			miniRobot4=new MiniRobot(engine);
+			miniRobot4.setID(mini_robot_szam);
 			mini_robot_szam++;
 			miniRobot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.miniRobots.add(miniRobot4);
@@ -446,6 +458,7 @@ public class Main2 {
 		switch (robot_szam){
 		case 0: 
 			robot1=new Robot(engine);			//a robot letrehozasa
+			robot1.setID(robot_szam);
 			robot_szam++;						//robotszam novelese
 			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
 			engine.alivePlayers.add(robot1);	// Az engine listajahoz hozza kell adni az uj robotot
@@ -453,6 +466,7 @@ public class Main2 {
 			break;
 		case 1:
 			robot2=new Robot(engine);
+			robot2.setID(robot_szam);
 			robot_szam++;
 			robot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot2);
@@ -460,6 +474,7 @@ public class Main2 {
 			break;
 		case 2:
 			robot3=new Robot(engine);
+			robot3.setID(robot_szam);
 			robot_szam++;
 			robot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot3);
@@ -467,6 +482,7 @@ public class Main2 {
 			break;
 		case 3:
 			robot4=new Robot(engine);
+			robot4.setID(robot_szam);
 			robot_szam++;
 			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot4);
@@ -480,10 +496,9 @@ public class Main2 {
 	 * 
 	 * letrehoz egy Mapet, egy Enginet, valamint betolti a map.png filet palyanak.
 	 */
-	private static void loadMap() {
-		map=new Map();
+	private static void loadMap() {				//fixed
 		engine=new Engine();
-		map.load("map.png");
+		engine.map.load("map.png");
 	}
 
 }
@@ -497,4 +512,4 @@ public class Main2 {
 
 
 
-/************************************************************************* ÖCCÁ *************************************************************************/
+/************************************************************************* ï¿½CCï¿½ *******************************************************************XDD******/

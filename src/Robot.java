@@ -1,16 +1,16 @@
 public class Robot {
 
-	private Coord position;
-	private Coord impulse;
-	private Coord modifier;
-	private int oil_num;
-	private int slime_num;
-	private double road;
-	private Boolean alive;
-
-	private Engine engine;
+	protected Coord position;
+	protected Coord impulse;
+	protected Coord modifier;
+	protected int oil_num;
+	protected int slime_num;
+	protected double road;
+	protected Boolean alive=true;
+	protected double radius = 20;
+	protected Engine engine;
 	
-	private int ID=0;
+	protected int ID=0;
 	/**\brief Robot konstruktor
 	 * 
 	 * Inicializalja a tarolt adatokat es 
@@ -21,15 +21,14 @@ public class Robot {
 	
 	
 	public Robot(Engine engine){
-		
-		System.out.println("->[:Robot].Robot(engine)");
+
 		
 		position=new Coord();
 		modifier=new Coord();
 		impulse=new Coord();
 		
-		oil_num=0;
-		oil_num=0;
+		oil_num=5;
+		oil_num=5;
 		road=0;
 		alive=true;
 		
@@ -44,22 +43,17 @@ public class Robot {
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KeSZ
-		
-		System.out.println("->[:Robot].calculateCoords()");
-		
+	public void calculateCoords() {					//KeSZ		
 		impulse=Coord.add(impulse, modifier);
+		Coord oldpos= position;
+		
 		position=Coord.add(position, impulse);
+		road+=Coord.distance(oldpos, position);
 		modifier.setX(0);
 		modifier.setY(0);
-		
-		System.out.println("<-[:Robot].CalculateCoords()");
 	}
 
-	public boolean isAlive() {							//KeSZ
-		
-		System.out.println("->[:Robot].isAlive()");
-		
+	public boolean isAlive() {							//KeSZ	
 		return alive;
 	}
 
@@ -69,10 +63,7 @@ public class Robot {
 	 * akkor letrehoz egyet a jelenlegi
 	 * helyen es berakja az engine-be.
 	 */
-	public void placeOil() {		//KeSZ
-		
-		System.out.println("->[:Robot].placeOil()");
-		
+	public void placeOil() {		//KeSZ	
 		if(oil_num>0){
 			oil_num--;
 			
@@ -90,10 +81,7 @@ public class Robot {
 	 * akkor letrehoz egyet a jelenlegi
 	 * helyen es berakja az engine-be.
 	 */
-	public void placeSlime() {			//KeSZ
-		
-		System.out.println("->[:Robot].placeSlime()");
-		
+	public void placeSlime() {			//KeSZ	
 		if(slime_num>0){
 			slime_num--;
 			
@@ -106,23 +94,56 @@ public class Robot {
 	}
 	
 	public boolean collide(Coord pos){
-		return false;
-		
+		double sx = (pos.getX()-position.getX()) * (pos.getX()-position.getX());
+		double sy= (pos.getY()-position.getY()) * (pos.getY()-position.getY());
+		if (sx + sy <= (radius*radius)) return true;
+		else return false;
 	}
 	
 	public void steppedOnByRobot(Robot r){
+		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY());
+		Coord ct = new Coord(impulse.getX(), impulse.getY());
 		
+		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY());
+		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY());
+		
+		if(lr==lt && lr==0)		//ha mindketten állnak akkor hadd ácsorogjanak tovább
+			return;
+		
+		if (lr < lt) {
+			r.setAlive(false);
+			r.setImpulse(new Coord(0,0));
+			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+			cr.setY((int)(cr.getY()+ct.getY()*0.5));
+			
+			this.setImpulse(cr);
+		}
+		else {
+			System.out.println("SOMEBODY STEPPED ON MY DICK");
+			this.setAlive(false);
+			this.setImpulse(new Coord(0,0));
+			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+			cr.setY((int)(cr.getY()+ct.getY()*0.5));
+			
+			r.setImpulse(cr);
+		}	
 	}
 	
 	public void steppedOnByMiniRobot(MiniRobot x){
+		Coord mx = new Coord(x.getModifier().getX(),x.getModifier().getY());
+		if (mx.getX() < 0) mx.setX(mx.getX()+40);
+		else mx.setX(mx.getX()-40);
+		if (mx.getY() < 0) mx.setY(mx.getY()+40);
+		else mx.setY(mx.getY()-40);
 		
+		x.setPosition(Coord.add(mx,x.getPosition()));
 	}
 	
 	
 	
 
 	public Coord getPosition() {				//KeSZ
-		System.out.println("Robot.getPosition()");
+		
 		
 		return this.position;
 	}
@@ -132,13 +153,13 @@ public class Robot {
 	 * @param position
 	 */
 	public void setPosition(Coord position) {			//KeSZ
-		System.out.println("->[:Robot].setPosition(position)");
+		
 		
 		this.position = position;
 	}
 
 	public Coord getImpulse() {							//KeSZ
-		System.out.println("->[:Robot].getImpluse()");
+		
 		
 		return this.impulse;
 	}
@@ -148,13 +169,13 @@ public class Robot {
 	 * @param impulse
 	 */
 	public void setImpulse(Coord impulse) {				//KeSZ
-		System.out.println("->[:Robot].setImpluse(impulse)");
+		
 		
 		this.impulse = impulse;
 	}
 
 	public Coord getModifier() {						//KeSZ
-		System.out.println("->[:Robot].getModifier()");
+		
 		
 		return this.modifier;
 	}
@@ -164,13 +185,13 @@ public class Robot {
 	 * @param modifier
 	 */
 	public void setModifier(Coord modifier) {			//KeSZ
-		System.out.println("->[:Robot].setModifier(modifier)");
+		
 		
 		this.modifier = modifier;
 	}
 
 	public int getOil_num() {							//KeSZ
-		System.out.println("->[:Robot].getOil_num()");
+		
 		
 		return this.oil_num;
 	}
@@ -180,13 +201,13 @@ public class Robot {
 	 * @param oil_num
 	 */
 	public void setOil_num(int oil_num) {				//KeSZ
-		System.out.println("->[:Robot].setOil_num(oil_num)");
+		
 		
 		this.oil_num = oil_num;
 	}
 
 	public int getSlime_num() {							//KeSZ
-		System.out.println("->[:Robot].getSlime_num()");
+		
 		
 		return this.slime_num;
 	}
@@ -196,13 +217,12 @@ public class Robot {
 	 * @param slime_num
 	 */
 	public void setSlime_num(int slime_num) {			//KeSZ
-		System.out.println("->[:Robot].setSlime_num(slime_num)");
 		
 		this.slime_num = slime_num;
 	}
 
 	public double getRoad() {							//KeSZ
-		System.out.println("->[:Robot].getRoad()");
+		
 				
 		return this.road;
 	}
@@ -212,13 +232,13 @@ public class Robot {
 	 * @param road
 	 */
 	public void setRoad(double road) {					//KeSZ
-		System.out.println("->[:Robot].setRoad(road)");
+		
 		
 		this.road = road;
 	}
 
 	public Boolean getAlive() {							//KeSZ
-		System.out.println("->[:Robot].getAlive()");
+		
 		
 		return this.alive;
 	}
@@ -228,7 +248,7 @@ public class Robot {
 	 * @param alive
 	 */
 	public void setAlive(Boolean alive) {				//KeSZ
-		System.out.println("->[:Robot].setAlive(alive)");
+		
 		
 		this.alive = alive;
 	}
@@ -239,5 +259,17 @@ public class Robot {
 	
 	public int getID(){
 		return ID;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	
+	public Engine getEngine(){
+		return this.engine;
 	}
 }
