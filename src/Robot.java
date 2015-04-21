@@ -45,7 +45,10 @@ public class Robot {
 	
 	public void calculateCoords() {					//KeSZ		
 		impulse=Coord.add(impulse, modifier);
+		Coord oldpos= position;
+		
 		position=Coord.add(position, impulse);
+		road+=Coord.distance(oldpos, position);
 		modifier.setX(0);
 		modifier.setY(0);
 	}
