@@ -93,6 +93,15 @@ public class Robot {
 		}
 	}
 	
+	/**\brief Valami utkozik-e a robottal 
+	 * 
+	 * Megnezi, hogy a kapott pozicio belul van e a roboton
+	 * 
+	 * @param pos a kapott pozicio
+	 * 
+	 * @return igaz ha utkozott
+	 * */
+	
 	public boolean collide(Coord pos){
 		double sx = (pos.getX()-position.getX()) * (pos.getX()-position.getX());
 		double sy= (pos.getY()-position.getY()) * (pos.getY()-position.getY());
@@ -100,26 +109,34 @@ public class Robot {
 		else return false;
 	}
 	
+	
+	/**\brief Robot utkozik Robottal
+	 * 
+	 * Ha ket robot utkozik, akkor a lassabb meghal,
+	 * a masik pedig ketejuk atlagsebessegevel halad tova
+	 *  
+	 *  @param r A masik Robot
+	 *  */
 	public void steppedOnByRobot(Robot r){
-		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY());
+		Coord cr = new Coord(r.getImpulse().getX(), r.getImpulse().getY()); //a ket robot impulzusa
 		Coord ct = new Coord(impulse.getX(), impulse.getY());
 		
-		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY());
-		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY());
+		double lr = Math.sqrt(cr.getX() * cr.getX() + cr.getY() * cr.getY()); //a ket impulzus hossza
+		double lt  = Math.sqrt(ct.getX() * ct.getX() + ct.getY() * ct.getY()); //(erre lehetne hasznalni a lengthet is mar)
 		
-		if(lr==lt && lr==0)		//ha mindketten állnak akkor hadd ácsorogjanak tovább
+		if(lr==lt && lr==0)		//ha mindketten ï¿½llnak akkor hadd acsorogjanak tovabb
 			return;
 		
-		if (lr < lt) {
-			r.setAlive(false);
-			r.setImpulse(new Coord(0,0));
-			cr.setX((int)(cr.getX()+ct.getX()*0.5));
+		if (lr < lt) { //ha a masik volt a lasabb
+			r.setAlive(false); //meghal
+			r.setImpulse(new Coord(0,0)); //nagyon
+			cr.setX((int)(cr.getX()+ct.getX()*0.5)); //this pedig megkapja az atlagsebesseget
 			cr.setY((int)(cr.getY()+ct.getY()*0.5));
 			
 			this.setImpulse(cr);
 		}
 		else {
-			System.out.println("SOMEBODY STEPPED ON MY DICK");
+			//ha this volt a lasabb akkor pont forditva tortenik minden
 			this.setAlive(false);
 			this.setImpulse(new Coord(0,0));
 			cr.setX((int)(cr.getX()+ct.getX()*0.5));
@@ -129,7 +146,16 @@ public class Robot {
 		}	
 	}
 	
+	/**\brief MiniRobot ralep egy Robotra
+	 * 
+	 * Ha egy minirobot ralep egy robotra
+	 * akkor a minirobot arrebb ugrik
+	 * 
+	 * @param x A MiniRobot
+	 * */
+	
 	public void steppedOnByMiniRobot(MiniRobot x){
+		//egyszeruen csak haladasi iranytoil fuggoen arrebb ugrik 40et
 		Coord mx = new Coord(x.getModifier().getX(),x.getModifier().getY());
 		if (mx.getX() < 0) mx.setX(mx.getX()+40);
 		else mx.setX(mx.getX()-40);
