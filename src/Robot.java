@@ -6,7 +6,7 @@ public class Robot {
 	protected int oil_num;
 	protected int slime_num;
 	protected double road;
-	protected Boolean alive;
+	protected Boolean alive=true;
 	protected double radius = 20;
 	protected Engine engine;
 	
@@ -116,6 +116,7 @@ public class Robot {
 			this.setImpulse(cr);
 		}
 		else {
+			System.out.println("SOMEBODY STEPPED ON MY DICK");
 			this.setAlive(false);
 			
 			cr.setX((int)(cr.getX()+ct.getX()*0.5));
@@ -127,7 +128,6 @@ public class Robot {
 	
 	public void steppedOnByMiniRobot(MiniRobot x){
 		Coord mx = new Coord(x.getModifier().getX(),x.getModifier().getY());
-		
 		if (mx.getX() < 0) mx.setX(mx.getX()+40);
 		else mx.setX(mx.getX()-40);
 		if (mx.getY() < 0) mx.setY(mx.getY()+40);

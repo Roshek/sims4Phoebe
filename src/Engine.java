@@ -47,10 +47,19 @@ public class Engine {
 	private void testMiniRobotForTraps(){
 		for(MiniRobot x: miniRobots){
 			Coord place=x.getPosition();
+			
 			for(Trap i: traps){
 				if(i.collide(place)){
 					i.steppedOnByMiniRobot(x);
 				}
+			}
+			for(Robot i: alivePlayers){
+				if(i.collide(place))
+					i.steppedOnByMiniRobot(x);
+			}
+			for(MiniRobot i: miniRobots){
+				if(i.collide(place))
+					i.steppedOnByMinirobot(x);
 			}
 		}
 	}
@@ -100,16 +109,12 @@ public class Engine {
 		
 		int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
-		//for(Robot tmp: alivePlayers){
-		for(int i=0;i<numberOfRobotsAtStartOfCycle;i++){
-			Robot tmp=alivePlayers.get(i);
+		for(Robot tmp: alivePlayers){
 			tmp.calculateCoords();
-			
-			Coord newPos=tmp.getPosition();			
-			if(map.fall(newPos)){
-				i--;
-				numberOfRobotsAtStartOfCycle--;
-				dieRobot(tmp);
+			Coord newpos=tmp.getPosition();
+			if(map.fall(newpos)){
+				System.out.println("I fell off fuck me!");
+				tmp.setAlive(false);
 			}
 		}
 	}
@@ -145,8 +150,11 @@ public class Engine {
 			}
 			
 			for(Robot x:alivePlayers){
-				if(x.collide(pos)){
-					x.steppedOnByRobot(robot);
+				if(x!=robot){
+					if(x.collide(pos)){
+						System.out.println("I STEPPED ON YOUR DICK");
+						x.steppedOnByRobot(robot);
+					}
 				}
 			}
 		}
@@ -175,8 +183,12 @@ public class Engine {
 		Iterator<Robot> it=alivePlayers.iterator();				//might work, not sure tho
 		while(it.hasNext()){
 			Robot x=it.next();
-			if(!x.isAlive())
+			if(!x.isAlive()){
+				System.out.println("I SHAMELESSLY RAPED A FELLOW ROBOT :(" + x.getPosition().getX() + " " + x.getPosition().getY());
+				System.out.println(x.isAlive());
+				deadPlayers.add(x);
 				it.remove();
+			}
 		}
 		
 		Iterator<Trap> it2=traps.iterator();
@@ -337,9 +349,6 @@ public class Engine {
 	public void dieRobot(Robot r) {					//KeSZ					//csak a szkeletonban public
 		
 		//System.out.println("->[:Engine].dieRobot(r)");
-		
-		alivePlayers.remove(r);
-		deadPlayers.add(r);
 		r.setAlive(false);
 	}
 
