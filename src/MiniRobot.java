@@ -69,7 +69,7 @@ public class MiniRobot extends Robot {
 	 * */
 	
 	public void steppedOnByMinirobot(MiniRobot x){
-		x.setPosition(new Coord(x.getPosition().getX()+15,x.getPosition().getY()+15));
+		this.setPosition(new Coord(this.getPosition().getX()+15,this.getPosition().getY()+15));
 	}
 	
 	/*Ez elvileg nem kell*/
