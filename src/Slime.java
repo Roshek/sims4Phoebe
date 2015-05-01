@@ -1,7 +1,8 @@
+
 public class Slime extends Trap {
 
 	public Slime(){
-		System.out.println("->[:Slime].Slime()");
+		
 	}
 	
 	/**\brief Megfelezi a robot modifier-et.
@@ -11,17 +12,23 @@ public class Slime extends Trap {
 	 * 
 	 * @param r
 	 */
-	public void spring(Robot r) {				//KeSZ
-		System.out.println("->[:Slime].springSlime(r)");
+	
+	//kesz
+	public void spring(Robot r) {
 		
 		int x=r.getModifier().getX()/2;
 		int y=r.getModifier().getY()/2;
 		
 		r.setModifier(new Coord(x, y));
+		
+		this.setUntilExpiration(this.getUntilExpiration()-1);
+		
+		if (this.getUntilExpiration() == 0)
+			this.setExpired(true);
 	}
 	
 	public void timePassed(){
-		
+	
 	}
 
 }

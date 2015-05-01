@@ -19,8 +19,8 @@ public class Map {
 	 * 
 	 * @param s
 	 */
-	public void load(String s) {						//KeSZ sort of (nemtudom jo-e lol)
-		System.out.println("->[:Map].load()");
+	public void load(String s) {					
+		//System.out.println("->[:Map].load()");
 	
 		try {
 			field=ImageIO.read(new File(s));
@@ -39,24 +39,23 @@ public class Map {
 	 * @param c
 	 */
 	public Boolean fall(Coord c) {						//THIS IS SO BAD BUT I MIGHT WORK FOR TESTS
-		System.out.println("->[:Map].fall(c)");
+		
+		if(c.getX()<=100 || c.getY()<=100)
+			return true;
+		return false;
+		
+		/*System.out.println("->[:Map].fall(c)");
+		
+		/*if(field==null)									//TESZT
+			return false;	
+		*/
+		
 		////////////////////////////////////
 		/*if(field.getRGB(c.getX(), c.getY()) == Color.BLACK.getRGB()){
 			return true;
 		}else
 			return false;*/
-		////////////////////////////////////
-		
-		
-		System.out.println("? 4.2 Leesett a robot? (I/N)");		//Teszthez ez kell!
-		Scanner in = new Scanner(System.in);
-		String be = null;
-		do{
-        	be=in.nextLine();		        		
-        	}while(!be.equals("I") && !be.equals("N"));
-		if(be.equals("I"))
-			return true;
-		return false;
+		////////////////////////////////////		
 	}
 
 	/**\brief Megadja a jatekosok kezdohelyeit
@@ -67,27 +66,28 @@ public class Map {
 	 * 
 	 * @param numberOfPlayers
 	 */
-	public ArrayList<Coord> putPlayers(int numberOfPlayers) {			//TO BE FILLED LATER
-		System.out.println("->[:Map].putPlayers(numberOfPlayers)");
+	public ArrayList<Coord> putPlayers(int numberOfPlayers) {		
+		//System.out.println("->[:Map].putPlayers(numberOfPlayers)");
 		ArrayList<Coord> tmp=new ArrayList<Coord>();
-		for(int i=0;i<numberOfPlayers;i++){						//igy mar nem dob hibat az engine, nem ures listabol keri majd a jatekosok helyeit
-			tmp.add(new Coord(0,0));
+		for(int i=0;i<numberOfPlayers;i++){
+			tmp.add(new Coord());
 		}
 		return tmp;
 	}
 
-	public BufferedImage getField() {					//KeSZ
-		System.out.println("->[:Map].getField()");
+	public BufferedImage getField() {					
+		//System.out.println("->[:Map].getField()");
 		
 		return field;
 	}
 
 	/**
+	 * Beallitja a fieldet.
 	 * 
 	 * @param field
 	 */
-	public void setField(BufferedImage field) {			//KeSZ
-		System.out.println("->[:Map].setField()");
+	public void setField(BufferedImage field) {			
+		//System.out.println("->[:Map].setField()");
 		
 		this.field=field;
 	}

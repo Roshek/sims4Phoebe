@@ -1,0 +1,13 @@
+loadMap
+putRobot_105_105
+changeengine.activePlayer_1
+setDirection_5_5
+getOilNumber
+listTraps
+putOil
+listAliveRobots
+roundOver
+listAliveRobots
+getOilNumber
+listTraps
+exitGame
