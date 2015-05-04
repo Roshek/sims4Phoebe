@@ -22,32 +22,53 @@ public class View {
 	public View(Engine engine){
 		this.engine=engine;
 		this.controller = new Controller();
-		//JPanel??
+		//JPanel?? TODO
 	}
 	
+	/** Minden kirajzolasert felelos metodus
+	 *  Vegigmegy a grafikus listakon es 
+	 *  kirajzolja az elemeiket.
+	 */
 	public void drawAll(){
 		
 		
 		
 	}
 	
-	
+	/** Robot hozzaadasa
+	 * Grafikus robot peldany hozzadasa a megfelelo listahoz
+	 * @param gRobot
+	 */
 	public void robotAdded(GraphicRobot gRobot){
 		
 	}
 	
+	/** MiniRobot hozzaadasa
+	 * Grafikus minirobot peldany hozzadasa a megfelelo listahoz
+	 * @param gMiniRobot
+	 */
 	public void miniRobotAdded(GraphicMiniRobot gMiniRobot){
 		
 	}
 	
+	/** Olaj hozzaadasa
+	 * Grafikus olaj peldany hozzadasa a megfelelo listahoz
+	 * @param gOil
+	 */
 	public void oilAdded(GraphicOil gOil){
 		
 	}
 	
+	/** Ragacs hozzaadasa
+	 * Grafikus ragacs peldany hozzadasa a megfelelo listahoz
+	 */
 	public void slimeAdded(GraphicSlime gSlime){
 		
 	}
 	
+	/** Nyil beallitasa
+	 * ??? TODO
+	 */
 	public void setArrow(){
 		
 	}
