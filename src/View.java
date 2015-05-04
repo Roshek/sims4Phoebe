@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,8 +18,10 @@ public class View {
 	private BufferedImage field;
 	
 	/** A View osztaly konstruktora
-	 * A parameterkent kapott enginet elraka,
-	 * peldanyositja a controller osztalyt.
+	 * A parameterkent kapott enginet elrakja,
+	 * peldanyositja a controller osztalyt,
+	 * atveszi a maptol a palyat,
+	 * peldanyositja a listakat.
 	 * @param engine
 	 */
 	public View(Engine engine){
@@ -26,6 +29,13 @@ public class View {
 		this.field=engine.map.getField();
 		this.controller = new Controller();
 		//JPanel?? TODO
+		
+		gMiniRobotList = new ArrayList<GraphicMiniRobot>();
+		gRobotList = new ArrayList<GraphicRobot>();
+		gArrowList = new ArrayList<GraphicArrow>();
+		gOilList = new ArrayList<GraphicOil>();
+		gSlimeList = new ArrayList<GraphicSlime>();
+		
 	}
 	
 	/** Minden kirajzolasert felelos metodus
