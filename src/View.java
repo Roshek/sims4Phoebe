@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 
@@ -13,6 +14,7 @@ public class View {
 	private List<GraphicOil> gOilList;
 	private List<GraphicSlime> gSlimeList;
 	private GraphicArrow gArrow;
+	private BufferedImage field;
 	
 	/** A View osztaly konstruktora
 	 * A parameterkent kapott enginet elraka,
@@ -21,6 +23,7 @@ public class View {
 	 */
 	public View(Engine engine){
 		this.engine=engine;
+		this.field=engine.map.getField();
 		this.controller = new Controller();
 		//JPanel?? TODO
 	}
@@ -32,6 +35,14 @@ public class View {
 	public void drawAll(){
 		
 		
+		
+	}
+	
+	/** A palya kirajzolasa
+	 * Kirajzolja a palyat
+	 * TODO: lehet mashova kene
+	 */
+	private void drawField(){
 		
 	}
 	
