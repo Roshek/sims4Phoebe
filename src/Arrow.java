@@ -36,8 +36,9 @@ public class Arrow {
 		
 	};
 	
-	public void calculateModifier(int x, int y){
-		
+	public void calculateModifier(){
+		modifier.setX(endPoint.getX()-startPoint.getX());
+		modifier.setY(endPoint.getY()-startPoint.getY());
 	};
 
 	public Coord getModifier() {
