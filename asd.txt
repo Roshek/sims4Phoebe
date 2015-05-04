@@ -1,3 +1,0 @@
-loadMap
-putRobot_15_15
-listAliveRobots
