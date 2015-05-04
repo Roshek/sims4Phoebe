@@ -34,8 +34,7 @@ public class MiniRobot extends Robot {
 			
 			double d = Coord.distance(getPosition(), trap); //a MiniRobot es a csapda pozicioja kozotti tavolsag
 			
-			double ratio = d / 20.0; //a tavolsag leosztva az ugras hosszaval, igy meg van az arany a haromszogek kozott
-			ratio = 1 / ratio; //ennek a reciproka kell nekunk
+			double ratio = 20.0 / d; //az ugras hossza leosztva a tavolsaggal, igy meg van az arany a haromszogek kozott
 			
 			double x = trap.getX()-getPosition().getX(); //helyvektort csinalunk
 			double y = trap.getY()-getPosition().getY();
