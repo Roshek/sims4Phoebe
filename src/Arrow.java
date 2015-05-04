@@ -7,17 +7,16 @@ public class Arrow {
 	public Arrow(){
 		setModifier(new Coord(0,0));	
 		setStartPoint(new Coord(0,0));
-		setEndPoint(new Coord(0,0));
+		setEndPoint(new Coord(len,0));
 	}
 	
 	public Arrow(int x, int y){
 		setModifier(new Coord(0,0));	
 		setStartPoint(new Coord(x,y));
-		setEndPoint(new Coord(0,0));
+		setEndPoint(new Coord(x+len,y));
 	}
 	
 	public void calculateEndPoint(int x, int y){
-		
 		double d = Coord.distance(startPoint, endPoint); 
 		
 		double ratio = len / d; 
@@ -30,9 +29,6 @@ public class Arrow {
 		
 		endPoint.setX((int)xx);
 		endPoint.setY((int)yy);
-		
-		//setPosition(new Coord ((int)(x + position.getX()),(int)(y + position.getY()))); //megadjuk az uj poziciot, ami a regi eltolva xy-al
-
 		
 	};
 	
@@ -54,6 +50,7 @@ public class Arrow {
 	}
 
 	public void setStartPoint(Coord startPoint) {
+		this.endPoint = new Coord(startPoint.getX()+len,startPoint.getY());
 		this.startPoint = startPoint;
 	}
 

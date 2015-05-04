@@ -71,29 +71,6 @@ public class MiniRobot extends Robot {
 		this.setPosition(new Coord(this.getPosition().getX()+15,this.getPosition().getY()+15));
 	}
 	
-	/*Ez elvileg nem kell*/
-	
-	/*
-	public Coord getClosestTrap(Coord position) {
-		ArrayList<Trap> lt = getEngine().getTraps();
-		Trap clsst = null;
-		try
-		{
-			for (Trap it: lt) {
-				if (Coord.distance(getPosition(), it.getPos()) < Coord.distance(getPosition(), clsst.getPos())) {
-					clsst = it;
-				}
-			}
-		
-			return clsst.getPos();
-		}
-		catch (NullPointerException ex)
-		{
-			return null;
-		}
-	}
-	*/
-	
 	public void setOnTrap(boolean onTrap) {
 		this.onTrap = onTrap;
 	}
