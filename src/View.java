@@ -14,7 +14,20 @@ public class View {
 	private List<GraphicSlime> gSlimeList;
 	private GraphicArrow gArrow;
 	
+	/** A View osztaly konstruktora
+	 * A parameterkent kapott enginet elraka,
+	 * peldanyositja a controller osztalyt.
+	 * @param engine
+	 */
+	public View(Engine engine){
+		this.engine=engine;
+		this.controller = new Controller();
+		//JPanel??
+	}
+	
 	public void drawAll(){
+		
+		
 		
 	}
 	
