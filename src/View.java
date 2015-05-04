@@ -8,11 +8,11 @@ public class View {
 	private Controller controller;
 	protected Jpanel panel;
 	
-	private List<GraphicMiniRobot> gMiniRobotList;
-	private List<GraphicRobot> gRobotList;
-	private List<GraphicArrow> gArrowList;
-	private List<GraphicOil> gOilList;
-	private List<GraphicSlime> gSlimeList;
+	private ArrayList<GraphicMiniRobot> gMiniRobotList;
+	private ArrayList<GraphicRobot> gRobotList;
+	private ArrayList<GraphicArrow> gArrowList;
+	private ArrayList<GraphicOil> gOilList;
+	private ArrayList<GraphicSlime> gSlimeList;
 	private GraphicArrow gArrow;
 	private BufferedImage field;
 	
@@ -51,7 +51,7 @@ public class View {
 	 * @param gRobot
 	 */
 	public void robotAdded(GraphicRobot gRobot){
-		
+		gRobotList.Add(gRobot);
 	}
 	
 	/** MiniRobot hozzaadasa
