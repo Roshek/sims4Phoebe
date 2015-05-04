@@ -44,8 +44,19 @@ public class View {
 	 */
 	public void drawAll(){
 		
-		
-		
+		for(GraphicOil gOil: gOilList){
+			gOil.draw();
+		}
+		for(GraphicSlime gSlime: gSlimeList){
+			gSlime.draw();
+		}
+		for(GraphicRobot gRobot: gRobotList){
+			gRobot.draw();
+		}
+		for(GraphicMiniRobot gMiniRobot: gMiniRobotList){
+			gMiniRobot.draw();
+		}
+		gArrow.draw();
 	}
 	
 	/** A palya kirajzolasa
@@ -69,7 +80,7 @@ public class View {
 	 * @param gMiniRobot
 	 */
 	public void miniRobotAdded(GraphicMiniRobot gMiniRobot){
-		
+		gMiniRobotList.Add(gMiniRobot);
 	}
 	
 	/** Olaj hozzaadasa
@@ -77,14 +88,14 @@ public class View {
 	 * @param gOil
 	 */
 	public void oilAdded(GraphicOil gOil){
-		
+		gOilList.Add(gOil);
 	}
 	
 	/** Ragacs hozzaadasa
 	 * Grafikus ragacs peldany hozzadasa a megfelelo listahoz
 	 */
 	public void slimeAdded(GraphicSlime gSlime){
-		
+		gSlimeList.Add(gSlime);
 	}
 	
 	/** Nyil beallitasa
