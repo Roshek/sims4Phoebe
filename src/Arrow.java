@@ -7,7 +7,7 @@ public class Arrow {
 	public Arrow(){
 		setModifier(new Coord(0,0));	
 		setStartPoint(new Coord(0,0));
-		setEndPoint(new Coord(0,0));
+		setEndPoint(new Coord(len,0));
 	}
 	
 	public Arrow(int x, int y){
