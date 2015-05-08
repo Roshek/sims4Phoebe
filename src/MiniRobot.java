@@ -34,8 +34,7 @@ public class MiniRobot extends Robot {
 			
 			double d = Coord.distance(getPosition(), trap); //a MiniRobot es a csapda pozicioja kozotti tavolsag
 			
-			double ratio = d / 20.0; //a tavolsag leosztva az ugras hosszaval, igy meg van az arany a haromszogek kozott
-			ratio = 1 / ratio; //ennek a reciproka kell nekunk
+			double ratio = 20.0 / d; //az ugras hossza leosztva a tavolsaggal, igy meg van az arany a haromszogek kozott
 			
 			double x = trap.getX()-getPosition().getX(); //helyvektort csinalunk
 			double y = trap.getY()-getPosition().getY();
@@ -71,29 +70,6 @@ public class MiniRobot extends Robot {
 	public void steppedOnByMinirobot(MiniRobot x){
 		this.setPosition(new Coord(this.getPosition().getX()+15,this.getPosition().getY()+15));
 	}
-	
-	/*Ez elvileg nem kell*/
-	
-	/*
-	public Coord getClosestTrap(Coord position) {
-		ArrayList<Trap> lt = getEngine().getTraps();
-		Trap clsst = null;
-		try
-		{
-			for (Trap it: lt) {
-				if (Coord.distance(getPosition(), it.getPos()) < Coord.distance(getPosition(), clsst.getPos())) {
-					clsst = it;
-				}
-			}
-		
-			return clsst.getPos();
-		}
-		catch (NullPointerException ex)
-		{
-			return null;
-		}
-	}
-	*/
 	
 	public void setOnTrap(boolean onTrap) {
 		this.onTrap = onTrap;
