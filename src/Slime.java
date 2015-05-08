@@ -1,7 +1,11 @@
 
 public class Slime extends Trap {
-
+	
+	private GraphicSlime gSlime;
+	
 	public Slime(){
+		
+		gSlime = new GraphicSlime(this);
 		
 	}
 	
@@ -29,6 +33,11 @@ public class Slime extends Trap {
 	
 	public void timePassed(){
 	
+	}
+
+	public GraphicSlime getGSlime() {
+		
+		return gSlime;
 	}
 
 }

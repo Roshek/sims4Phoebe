@@ -1,12 +1,26 @@
 public class MiniRobot extends Robot {
 
 	private boolean onTrap=false;
+	private GraphicMiniRobot gMiniRobot;
 	
 	public MiniRobot(Engine engine) {
 		super(engine);
 		setRadius(10);
 		setImpulse(new Coord (0,0));
 		
+
+		
+		
+	}
+	
+	/** Grafikus p·r lÈtrehoz·sa
+	 * Az ososztalyban levo metodus felulirasa
+	 * letrehozza a grafikus part, majd hozzadja a view megfelelo listajahoz
+	 */
+	@Override
+	public void createGraphicPair(){
+		gMiniRobot = new GraphicMiniRobot(this);
+		engine.view.miniRobotAdded(gMiniRobot);
 	}
 
 	/**\brief MiniRobot mesters√©ges intelligenci√°ja 

@@ -37,6 +37,19 @@ public class View {
 		gSlimeList = new ArrayList<GraphicSlime>();
 		
 	}
+	/** Setter a gArrowhoz
+	 * @param gArrow
+	 */
+	public void setGArrow(GraphicArrow gArrow){
+		this.gArrow = gArrow;
+	}
+	
+	/** Setter a fieldhez
+	 * @param field
+	 */
+	public void setField(BufferedImage field){
+		this.field = field;
+	}
 	
 	/** Minden kirajzolasert felelos metodus
 	 *  Vegigmegy a grafikus listakon es 
