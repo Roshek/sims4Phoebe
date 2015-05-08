@@ -8,7 +8,7 @@ public class GraphicOil implements Drawable{
 	
 	public GraphicOil(Oil oil){
 		this.oil = oil;
-		image = Resources.getOil();
+		image = Resources.getOil();						// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
 	public void draw() {

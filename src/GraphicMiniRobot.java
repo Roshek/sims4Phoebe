@@ -9,7 +9,7 @@ public class GraphicMiniRobot implements Drawable{
 	
 	public GraphicMiniRobot(MiniRobot miniRobot){
 		this.miniRobot = miniRobot;
-		image = Resources.getMiniRobot();
+		image = Resources.getMiniRobot();				// Resources osztalybol a megfelelo kep kinyerese
 		
 	}
 	

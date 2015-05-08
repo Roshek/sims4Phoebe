@@ -8,7 +8,7 @@ public class GraphicSlime implements Drawable{
 	
 	public GraphicSlime(Slime slime){
 		this.slime=slime;
-		image = Resources.getSlime();
+		image = Resources.getSlime();						// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
 	public void draw() {

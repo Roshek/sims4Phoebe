@@ -8,7 +8,7 @@ public class GraphicRobot implements Drawable{
 	
 	public GraphicRobot(Robot robot){
 		this.robot=robot;
-		image = Resources.getRobot();
+		image = Resources.getRobot();				// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
 	public void draw() {
