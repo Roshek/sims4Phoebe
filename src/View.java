@@ -123,6 +123,7 @@ public class View {
 	public Controller getController() {
 		return controller;
 	}
+
 	
 	
 }

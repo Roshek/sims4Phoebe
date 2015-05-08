@@ -19,6 +19,7 @@ public class Map {
 	 * 
 	 * @param s
 	 */
+
 //	public void load(String s) {					
 //		//System.out.println("->[:Map].load()");
 //	
@@ -32,6 +33,7 @@ public class Map {
 	public void load(){
 		field=Resources.getMap();
 	}
+
 
 	/**\brief Megnezi leesett-e a robot
 	 * 
