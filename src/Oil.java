@@ -1,9 +1,17 @@
 
 public class Oil extends Trap {
 	
+	private GraphicOil gOil;
+	
 	public Oil(){								//KeSZ
+		
+		gOil = new GraphicOil(this);
+		
 	}	
-
+	
+	public GraphicOil getGOil(){
+		return gOil;
+	}
 
 	public void spring(Robot r) {
 		

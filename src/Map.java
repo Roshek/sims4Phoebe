@@ -19,15 +19,17 @@ public class Map {
 	 * 
 	 * @param s
 	 */
-	public void load(String s) {					
-		//System.out.println("->[:Map].load()");
-	
-		try {
-			field=ImageIO.read(new File(s));
-		} catch (IOException e) {
-			System.out.println("No file with that name exists");
-		}
-	}
+
+//	public void load(String s) {					
+//		//System.out.println("->[:Map].load()");
+//	
+//		try {
+//			field=ImageIO.read(new File(s));
+//		} catch (IOException e) {
+//			System.out.println("No file with that name exists");
+//		}
+//	}
+
 
 	/**\brief Megnezi leesett-e a robot
 	 * 
@@ -38,24 +40,22 @@ public class Map {
 	 *
 	 * @param c
 	 */
-	public Boolean fall(Coord c) {						//THIS IS SO BAD BUT I MIGHT WORK FOR TESTS
+	public Boolean fall(Coord c) {						//FIXED
 		
-		if(c.getX()<=100 || c.getY()<=100)
+		/*if(c.getX()<=100 || c.getY()<=100)
 			return true;
-		return false;
+		return false;*/
 		
 		/*System.out.println("->[:Map].fall(c)");
 		
 		/*if(field==null)									//TESZT
 			return false;	
 		*/
-		
-		////////////////////////////////////
-		/*if(field.getRGB(c.getX(), c.getY()) == Color.BLACK.getRGB()){
+
+		if(field.getRGB(c.getX(), c.getY()) == field.getRGB(0, 0)){
 			return true;
 		}else
-			return false;*/
-		////////////////////////////////////		
+			return false;		
 	}
 
 	/**\brief Megadja a jatekosok kezdohelyeit

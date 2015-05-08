@@ -7,7 +7,7 @@ public class View {
 
 	private Engine engine;
 	private Controller controller;
-	protected Jpanel panel;
+	//protected Jpanel panel;
 	
 	private ArrayList<GraphicMiniRobot> gMiniRobotList;
 	private ArrayList<GraphicRobot> gRobotList;
@@ -27,7 +27,7 @@ public class View {
 	public View(Engine engine){
 		this.engine=engine;
 		this.field=engine.map.getField();
-		this.controller = new Controller();
+		this.controller = new Controller(engine, this);
 		//JPanel?? TODO
 		
 		gMiniRobotList = new ArrayList<GraphicMiniRobot>();
@@ -36,6 +36,19 @@ public class View {
 		gOilList = new ArrayList<GraphicOil>();
 		gSlimeList = new ArrayList<GraphicSlime>();
 		
+	}
+	/** Setter a gArrowhoz
+	 * @param gArrow
+	 */
+	public void setGArrow(GraphicArrow gArrow){
+		this.gArrow = gArrow;
+	}
+	
+	/** Setter a fieldhez
+	 * @param field
+	 */
+	public void setField(BufferedImage field){
+		this.field = field;
 	}
 	
 	/** Minden kirajzolasert felelos metodus
@@ -72,7 +85,7 @@ public class View {
 	 * @param gRobot
 	 */
 	public void robotAdded(GraphicRobot gRobot){
-		gRobotList.Add(gRobot);
+		gRobotList.add(gRobot);
 	}
 	
 	/** MiniRobot hozzaadasa
@@ -80,7 +93,7 @@ public class View {
 	 * @param gMiniRobot
 	 */
 	public void miniRobotAdded(GraphicMiniRobot gMiniRobot){
-		gMiniRobotList.Add(gMiniRobot);
+		gMiniRobotList.add(gMiniRobot);
 	}
 	
 	/** Olaj hozzaadasa
@@ -88,22 +101,16 @@ public class View {
 	 * @param gOil
 	 */
 	public void oilAdded(GraphicOil gOil){
-		gOilList.Add(gOil);
+		gOilList.add(gOil);
 	}
 	
 	/** Ragacs hozzaadasa
 	 * Grafikus ragacs peldany hozzadasa a megfelelo listahoz
 	 */
 	public void slimeAdded(GraphicSlime gSlime){
-		gSlimeList.Add(gSlime);
+		gSlimeList.add(gSlime);
 	}
-	
-	/** Nyil beallitasa
-	 * ??? TODO
-	 */
-	public void setArrow(){
-		
-	}
+
 	
 	
 }
