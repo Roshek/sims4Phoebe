@@ -1,5 +1,5 @@
 
-public class GraphicMiniRobot {
+public class GraphicMiniRobot implements Drawable{
 
 	private MiniRobot miniRobot;
 	

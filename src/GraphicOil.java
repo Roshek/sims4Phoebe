@@ -1,5 +1,5 @@
 
-public class GraphicOil {
+public class GraphicOil implements Drawable{
 
 	private Oil oil;
 	

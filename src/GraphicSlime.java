@@ -1,5 +1,5 @@
 
-public class GraphicSlime {
+public class GraphicSlime implements Drawable{
 
 	private Slime slime;
 	

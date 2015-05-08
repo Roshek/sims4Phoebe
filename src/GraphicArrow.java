@@ -1,5 +1,5 @@
 
-public class GraphicArrow {
+public class GraphicArrow implements Drawable{
 
 	private Arrow arrow;
 	
