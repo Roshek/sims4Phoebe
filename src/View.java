@@ -27,7 +27,7 @@ public class View {
 	public View(Engine engine){
 		this.engine=engine;
 		this.field=engine.map.getField();
-		//this.controller = new Controller();
+		this.controller = new Controller(engine, this);
 		//JPanel?? TODO
 		
 		gMiniRobotList = new ArrayList<GraphicMiniRobot>();
@@ -110,13 +110,7 @@ public class View {
 	public void slimeAdded(GraphicSlime gSlime){
 		gSlimeList.add(gSlime);
 	}
-	
-	/** Nyil beallitasa
-	 * ??? TODO
-	 */
-	public void setArrow(){
-		
-	}
+
 	
 	
 }

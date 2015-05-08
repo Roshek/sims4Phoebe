@@ -16,7 +16,7 @@ public class Engine {
 	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
-	//PETI MÓDOSíTÁSAI 2015.05.08.
+	//PETI Mï¿½DOSï¿½Tï¿½SAI 2015.05.08.
 	
 	private Arrow arrow;
 	
@@ -28,7 +28,7 @@ public class Engine {
 		return activePlayer;
 	}
 	
-	//PETI VÉGE
+	//PETI Vï¿½GE
 	
 	//2015.04.20.
 	
@@ -254,7 +254,11 @@ public class Engine {
 		player_num=0;
 		round_num=30;
 		
+		//nyil es annak grafikus parjanak peldanyositasa
 		arrow=new Arrow();
+		GraphicArrow gArrow = new GraphicArrow(arrow);
+		view.setGArrow(gArrow);
+		
 	}
 	
 	/**\brief A fo playfuggveny, itt fut a jatek nagy resze

@@ -1,5 +1,5 @@
 
-public class GraphicMiniRobot {
+public class GraphicMiniRobot implements Drawable{
 
 	private MiniRobot miniRobot;
 	
@@ -8,8 +8,13 @@ public class GraphicMiniRobot {
 	}
 	
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		if(miniRobot.isAlive() && miniRobot != null){	// Ellenorzes, ki kell-e meg rajzolni
+			//TODO
+		}
+		else{
+			miniRobot=null;								//ref torlese, GC dolgozhat
+			return;
+		}
 	}
 
 
