@@ -29,6 +29,10 @@ public class Map {
 //			System.out.println("No file with that name exists");
 //		}
 //	}
+	
+	public void load(){
+		field=Resources.getMap();
+	}
 
 
 	/**\brief Megnezi leesett-e a robot

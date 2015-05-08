@@ -28,7 +28,13 @@ public class Engine {
 		return activePlayer;
 	}
 	
-	//PETI Vï¿½GE
+
+	public Controller getController(){
+		return view.getController();
+	}
+	
+	//PETI VÉGE
+
 	
 	//2015.04.20.
 	
@@ -309,6 +315,7 @@ public class Engine {
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
 		Resources.load();
+		arrow=new Arrow();
 		
 		map.load();
 		view = new View(this);
@@ -322,8 +329,9 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
+			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
 		}
+		activePlayer=alivePlayers.get(0);
 	}
 
 	/**\brief Kor passzolasa
@@ -343,7 +351,7 @@ public class Engine {
 		
 		activePlayer.setModifier(arrow.getModifier());
 		
-		notifyAll();			//Szkeletonhoz nem kell
+		//notifyAll();			//Szkeletonhoz nem kell
 		
 //		int index=alivePlayers.indexOf(activePlayer);
 //		Robot newActivePlayer=alivePlayers.get((index+1)%alivePlayers.size());		//O.o

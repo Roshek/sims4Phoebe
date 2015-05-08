@@ -36,6 +36,9 @@ public class View {
 		gOilList = new ArrayList<GraphicOil>();
 		gSlimeList = new ArrayList<GraphicSlime>();
 		
+		
+		gArrow=new GraphicArrow(engine.getArrow());
+		
 	}
 	/** Setter a gArrowhoz
 	 * @param gArrow
@@ -109,6 +112,16 @@ public class View {
 	 */
 	public void slimeAdded(GraphicSlime gSlime){
 		gSlimeList.add(gSlime);
+	}
+	
+	/** Nyil beallitasa
+	 * ??? TODO
+	 */
+	public void setArrow(){
+		
+	}
+	public Controller getController() {
+		return controller;
 	}
 
 	
