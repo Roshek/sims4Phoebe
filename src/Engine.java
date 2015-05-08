@@ -20,6 +20,9 @@ public class Engine {
 	
 	private int RobotID=1;
 	
+	public View view;
+	
+	
 	private void moveminiRobots(){				//DONE
 		for(MiniRobot x : miniRobots){
 			x.move();
@@ -286,7 +289,7 @@ public class Engine {
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
 		map.load("tesztpalya.bmp");
-		
+		view = new View(this);
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
 			alivePlayers.add(tmp);
