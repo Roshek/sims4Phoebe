@@ -8,8 +8,13 @@ public class GraphicOil implements Drawable{
 	}
 	
 	public void draw() {
-		// TODO Auto-generated method stub
-		
+		if(!oil.getExpired() && oil != null){			//vizsgalat, hogy az olaj a palyan kell, hogy legyen-e.
+			//TODO
+		}
+		else{
+			oil=null;									//ha mar nincs a palyan toroljuk a hivatkozast, GC dolgozhat
+			return;
+		}
 	}
 
 }
