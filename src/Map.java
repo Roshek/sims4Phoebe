@@ -19,6 +19,7 @@ public class Map {
 	 * 
 	 * @param s
 	 */
+<<<<<<< HEAD
 //	public void load(String s) {					
 //		//System.out.println("->[:Map].load()");
 //	
@@ -28,6 +29,21 @@ public class Map {
 //			System.out.println("No file with that name exists");
 //		}
 //	}
+=======
+	public void load(String s) {					
+		//System.out.println("->[:Map].load()");
+	
+		try {
+			field=ImageIO.read(new File(s));
+		} catch (IOException e) {
+			System.out.println("No file with that name exists");
+		}
+	}
+	
+	public void load(){
+		field=Resources.getMap();
+	}
+>>>>>>> origin/Developer
 
 	/**\brief Megnezi leesett-e a robot
 	 * 
