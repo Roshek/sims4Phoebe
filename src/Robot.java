@@ -77,6 +77,7 @@ public class Robot {
 			tmp.setOwner(this);
 			
 			engine.addTrap(tmp);
+			engine.view.oilAdded(tmp.getGOil());
 		}
 	}
 
@@ -95,6 +96,7 @@ public class Robot {
 			tmp.setOwner(this);
 			
 			engine.addTrap(tmp);
+			engine.view.slimeAdded(tmp.getGSlime());
 		}
 	}
 	
