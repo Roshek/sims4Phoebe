@@ -1,10 +1,14 @@
+import java.awt.image.BufferedImage;
+
 
 public class GraphicOil implements Drawable{
 
 	private Oil oil;
+	private BufferedImage image;
 	
 	public GraphicOil(Oil oil){
 		this.oil = oil;
+		image = Resources.getOil();
 	}
 	
 	public void draw() {
