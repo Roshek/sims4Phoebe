@@ -5,7 +5,7 @@ public class Oil extends Trap {
 	
 	public Oil(){								//KeSZ
 		
-		gOil = new GraphicOil();
+		gOil = new GraphicOil(this);
 		
 	}	
 	

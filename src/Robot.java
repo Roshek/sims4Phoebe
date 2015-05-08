@@ -36,9 +36,17 @@ public class Robot {
 		this.engine=engine;
 		
 		//Grafikus par letrehozasa
-		gRobot = new GraphicRobot();
+		createGraphicPair();
+	}
+	
+	/** Grafikus pár létrehozása
+	 * letrehozza a grafikus part, majd hozzadja a view megfelelo listajahoz
+	 */
+	public void createGraphicPair(){
+		gRobot = new GraphicRobot(this);
 		engine.view.robotAdded(gRobot);		//ez itt így elég szornyu
 	}
+	
 	
 	/** \brief Kiszamolja a robot uj helyet es vektorait
 	 * 

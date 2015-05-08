@@ -5,7 +5,7 @@ public class Slime extends Trap {
 	
 	public Slime(){
 		
-		gSlime = new GraphicSlime();
+		gSlime = new GraphicSlime(this);
 		
 	}
 	
