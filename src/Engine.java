@@ -16,11 +16,17 @@ public class Engine {
 	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
-	//PETI M”DOSÌT¡SAI
+	//PETI M”DOSÌT¡SAI 2015.05.08.
 	
 	private Arrow arrow;
 	
+	public Arrow getArrow(){
+		return arrow;
+	}
 	
+	public Robot getActivePlayer(){
+		return activePlayer;
+	}
 	
 	//PETI V…GE
 	
