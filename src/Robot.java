@@ -9,6 +9,7 @@ public class Robot {
 	protected Boolean alive=true;
 	protected double radius = 20;
 	protected Engine engine;
+	private GraphicRobot gRobot;
 	
 	protected int ID=0;
 	/**\brief Robot konstruktor
@@ -33,6 +34,10 @@ public class Robot {
 		alive=true;
 		
 		this.engine=engine;
+		
+		//Grafikus par letrehozasa
+		gRobot = new GraphicRobot();
+		engine.view.robotAdded(gRobot);		//ez itt így elég szornyu
 	}
 	
 	/** \brief Kiszamolja a robot uj helyet es vektorait
