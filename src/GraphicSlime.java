@@ -1,10 +1,14 @@
+import java.awt.image.BufferedImage;
+
 
 public class GraphicSlime implements Drawable{
 
 	private Slime slime;
+	private BufferedImage image;
 	
 	public GraphicSlime(Slime slime){
 		this.slime=slime;
+		image = Resources.getSlime();						// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
 	public void draw() {
