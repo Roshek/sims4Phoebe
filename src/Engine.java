@@ -16,6 +16,20 @@ public class Engine {
 	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
+	//PETI MÓDOSíTÁSAI 2015.05.08.
+	
+	private Arrow arrow;
+	
+	public Arrow getArrow(){
+		return arrow;
+	}
+	
+	public Robot getActivePlayer(){
+		return activePlayer;
+	}
+	
+	//PETI VÉGE
+	
 	//2015.04.20.
 	
 	private int RobotID=1;
@@ -239,6 +253,8 @@ public class Engine {
 		
 		player_num=0;
 		round_num=30;
+		
+		arrow=new Arrow();
 	}
 	
 	/**\brief A fo playfuggveny, itt fut a jatek nagy resze
@@ -315,11 +331,11 @@ public class Engine {
 	 * 
 	 * @param modifier
 	 */
-	public void turnPassed(Coord modifier) {		//TO BE REVIEWED				//MODIFIED
+	public void turnPassed() {		//TO BE REVIEWED				//MODIFIED
 		
 		//System.out.println("->[:Engine].turnPassed(modifier)");
 		
-		activePlayer.setModifier(modifier);
+		activePlayer.setModifier(arrow.getModifier());
 		
 		notifyAll();			//Szkeletonhoz nem kell
 		
