@@ -110,13 +110,7 @@ public class View {
 	public void slimeAdded(GraphicSlime gSlime){
 		gSlimeList.add(gSlime);
 	}
-	
-	/** Nyil beallitasa
-	 * ??? TODO
-	 */
-	public void setArrow(){
-		
-	}
+
 	
 	
 }
