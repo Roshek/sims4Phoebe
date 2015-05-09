@@ -6,7 +6,6 @@ public class GraphicRobot implements Drawable{
 
 	private Robot robot;
 	private BufferedImage image;
-	private Graphics g;
 
 	
 	public GraphicRobot(Robot robot){
