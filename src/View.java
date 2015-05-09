@@ -42,12 +42,18 @@ public class View {
 		gArrow=new GraphicArrow(engine.getArrow());
 		
 	}
+	
+	public void updateGamePanel(){
+		window.getGamePanel().repaint();
+	}
+	
 	public MainWindow getWindow() {
 		return window;
 	}
 	public void setWindow(MainWindow window) {
 		this.window = window;
 	}
+	
 	/** Setter a gArrowhoz
 	 * @param gArrow
 	 */
