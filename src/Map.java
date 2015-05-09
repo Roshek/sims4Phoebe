@@ -19,15 +19,21 @@ public class Map {
 	 * 
 	 * @param s
 	 */
-	public void load(String s) {					
-		//System.out.println("->[:Map].load()");
+
+//	public void load(String s) {					
+//		//System.out.println("->[:Map].load()");
+//	
+//		try {
+//			field=ImageIO.read(new File(s));
+//		} catch (IOException e) {
+//			System.out.println("No file with that name exists");
+//		}
+//	}
 	
-		try {
-			field=ImageIO.read(new File(s));
-		} catch (IOException e) {
-			System.out.println("No file with that name exists");
-		}
+	public void load(){
+		field=Resources.getMap();
 	}
+
 
 	/**\brief Megnezi leesett-e a robot
 	 * 

@@ -16,6 +16,26 @@ public class Engine {
 	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
+	//PETI Mï¿½DOSï¿½Tï¿½SAI 2015.05.08.
+	
+	private Arrow arrow;
+	
+	public Arrow getArrow(){
+		return arrow;
+	}
+	
+	public Robot getActivePlayer(){
+		return activePlayer;
+	}
+	
+
+	public Controller getController(){
+		return view.getController();
+	}
+	
+	//PETI VÉGE
+
+	
 	//2015.04.20.
 	
 	private int RobotID=1;
@@ -239,6 +259,9 @@ public class Engine {
 		
 		player_num=0;
 		round_num=30;
+		
+
+		
 	}
 	
 	/**\brief A fo playfuggveny, itt fut a jatek nagy resze
@@ -288,8 +311,18 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
-		map.load("tesztpalya.bmp");
+		Resources.load();
+		arrow=new Arrow();
+		
+		map.load();
+		
 		view = new View(this);
+		
+		//nyil es annak grafikus parjanak peldanyositasa
+		arrow=new Arrow();
+		GraphicArrow gArrow = new GraphicArrow(arrow);
+		view.setGArrow(gArrow);
+		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
 			alivePlayers.add(tmp);
@@ -300,8 +333,9 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
+			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
 		}
+		activePlayer=alivePlayers.get(0);
 	}
 
 	/**\brief Kor passzolasa
@@ -315,13 +349,13 @@ public class Engine {
 	 * 
 	 * @param modifier
 	 */
-	public void turnPassed(Coord modifier) {		//TO BE REVIEWED				//MODIFIED
+	public void turnPassed() {		//TO BE REVIEWED				//MODIFIED
 		
 		//System.out.println("->[:Engine].turnPassed(modifier)");
 		
-		activePlayer.setModifier(modifier);
+		activePlayer.setModifier(arrow.getModifier());
 		
-		notifyAll();			//Szkeletonhoz nem kell
+		//notifyAll();			//Szkeletonhoz nem kell
 		
 //		int index=alivePlayers.indexOf(activePlayer);
 //		Robot newActivePlayer=alivePlayers.get((index+1)%alivePlayers.size());		//O.o
