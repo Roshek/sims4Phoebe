@@ -11,11 +11,11 @@ public class GraphicRobot implements Drawable{
 	
 	public GraphicRobot(Robot robot){
 		this.robot=robot;
-		image = Resources.getRobot();				// Resources osztalybol a megfelelo kep kinyerese
+		image = Resources.getRobot();	// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
 	public void draw() {
-		if(robot.isAlive()){		// Ellenorzes, hogy ki kell e meg rajzolni
+		if(robot.isAlive()){	// Ellenorzes, hogy ki kell e meg rajzolni
 				//pozicio kinyerese
 				int x = robot.getPosition().getX();
 				int y = robot.getPosition().getY();
@@ -26,7 +26,7 @@ public class GraphicRobot implements Drawable{
 				g.drawImage(image, x, y,null);
 		}
 		else{
-			//robot=null;								// Itt nem toroljuk a referenciat, tovabbfejleszthetosegi lehetosegek miatt.
+			//robot=null;	// Itt nem toroljuk a referenciat, tovabbfejleszthetosegi lehetosegek miatt.
 			return;
 		}
 		
