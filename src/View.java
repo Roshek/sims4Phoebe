@@ -44,7 +44,7 @@ public class View {
 	}
 	
 	public void updateGamePanel(){
-		window.getGamePanel().repaint();
+		window.repaint();
 	}
 	
 	public MainWindow getWindow() {
