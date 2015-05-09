@@ -18,8 +18,18 @@ public class Engine {
 	
 	//PETI Mï¿½DOSï¿½Tï¿½SAI 2015.05.08.
 	
+	private MainWindow window;
 	private Arrow arrow;
 	
+	
+	public MainWindow getWindow() {
+		return window;
+	}
+
+	public void setWindow(MainWindow window) {
+		this.window = window;
+	}
+
 	public Arrow getArrow(){
 		return arrow;
 	}
@@ -32,6 +42,7 @@ public class Engine {
 	public Controller getController(){
 		return view.getController();
 	}
+	
 	
 	//PETI VÉGE
 
