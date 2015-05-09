@@ -104,7 +104,7 @@ public class Main {
 		        	 * az engine turnPassed() metodusanak futtatasa
 		        	 */
 		        	System.out.println("\n Teszteles:");
-		        	engine_tmp_3.turnPassed(coord_tmp_3);
+		        	engine_tmp_3.turnPassed();
 		        	
 		            break;
 		        /** Menu 4: Kor vege
