@@ -6,7 +6,6 @@ public class GraphicOil implements Drawable{
 
 	private Oil oil;
 	private BufferedImage image;
-	private Graphics g;
 	
 	public GraphicOil(Oil oil){
 		this.oil = oil;
