@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 
 public class GraphicArrow implements Drawable{
 
@@ -7,7 +9,7 @@ public class GraphicArrow implements Drawable{
 		this.arrow=arrow;
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,21 +59,21 @@ public class View {
 	 *  Vegigmegy a grafikus listakon es 
 	 *  kirajzolja az elemeiket.
 	 */
-	public void drawAll(){
+	public void drawAll(Graphics g){
 		
 		for(GraphicOil gOil: gOilList){
-			gOil.draw();
+			gOil.draw(g);
 		}
 		for(GraphicSlime gSlime: gSlimeList){
-			gSlime.draw();
+			gSlime.draw(g);
 		}
 		for(GraphicRobot gRobot: gRobotList){
-			gRobot.draw();
+			gRobot.draw(g);
 		}
 		for(GraphicMiniRobot gMiniRobot: gMiniRobotList){
-			gMiniRobot.draw();
+			gMiniRobot.draw(g);
 		}
-		gArrow.draw();
+		gArrow.draw(g);
 	}
 	
 	/** A palya kirajzolasa

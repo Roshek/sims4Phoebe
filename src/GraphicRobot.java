@@ -14,7 +14,7 @@ public class GraphicRobot implements Drawable{
 		image = Resources.getRobot();	// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		if(robot.isAlive()){	// Ellenorzes, hogy ki kell e meg rajzolni
 				//pozicio kinyerese
 				int x = robot.getPosition().getX();

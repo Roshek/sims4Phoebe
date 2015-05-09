@@ -13,7 +13,7 @@ public class GraphicOil implements Drawable{
 		image = Resources.getOil();						// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		if(!oil.getExpired() && oil != null){			//vizsgalat, hogy az olaj a palyan kell, hogy legyen-e.
 			//pozicio kinyerese
 			int x = oil.getPos().getX();
