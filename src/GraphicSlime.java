@@ -6,7 +6,6 @@ public class GraphicSlime implements Drawable{
 
 	private Slime slime;
 	private BufferedImage image;
-	private Graphics g;
 
 	
 	public GraphicSlime(Slime slime){
