@@ -43,6 +43,10 @@ public class Engine {
 		return view.getController();
 	}
 	
+	public void setviewWindow(MainWindow window){
+		view.setWindow(window);
+	}
+	
 	
 	//PETI VÉGE
 
