@@ -28,6 +28,7 @@ public class Engine {
 
 	public void setWindow(MainWindow window) {
 		this.window = window;
+		view.setWindow(window);
 	}
 
 	public Arrow getArrow(){
@@ -41,10 +42,6 @@ public class Engine {
 
 	public Controller getController(){
 		return view.getController();
-	}
-	
-	public void setviewWindow(MainWindow window){
-		view.setWindow(window);
 	}
 	
 	
