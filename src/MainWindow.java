@@ -13,6 +13,7 @@ public class MainWindow extends JFrame {
 	
 	private Engine engine=null;
 	private Controller controller=null;
+	private GamePanel gamePanel;
 	
 	public MainWindow(Engine engine) {
 		
@@ -23,7 +24,7 @@ public class MainWindow extends JFrame {
 		
 		getContentPane().setLayout(null);
 		
-		GamePanel gamePanel = new GamePanel(engine.view);
+		gamePanel = new GamePanel(engine.view);
 		gamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -83,6 +84,10 @@ public class MainWindow extends JFrame {
 	
 	public Engine getEngine(){
 		return engine;
+	}
+	
+	public GamePanel getGamePanel(){
+		return gamePanel;
 	}
 	
 }
