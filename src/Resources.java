@@ -14,7 +14,7 @@ public abstract class Resources {
 	
 	public static void load(){
 		try {
-			robot=ImageIO.read(new File("robot.png"));
+			robot=ImageIO.read(new File("robot0.png"));
 			miniRobot=ImageIO.read(new File("miniRobot.png"));
 			oil=ImageIO.read(new File("oil.png"));
 			slime=ImageIO.read(new File("slime.png"));
@@ -26,6 +26,8 @@ public abstract class Resources {
 	}
 
 	public static BufferedImage getRobot() {
+		//a kulonbozo jatekosok robotjai kulonbozo szinuek
+		robot=ImageIO.read(new File("robot"+(r.getID()-1)+".png"));
 		return robot;
 	}
 
