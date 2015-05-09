@@ -260,10 +260,7 @@ public class Engine {
 		player_num=0;
 		round_num=30;
 		
-		//nyil es annak grafikus parjanak peldanyositasa
-		arrow=new Arrow();
-		GraphicArrow gArrow = new GraphicArrow(arrow);
-		view.setGArrow(gArrow);
+
 		
 	}
 	
@@ -318,7 +315,14 @@ public class Engine {
 		arrow=new Arrow();
 		
 		map.load();
+		
 		view = new View(this);
+		
+		//nyil es annak grafikus parjanak peldanyositasa
+		arrow=new Arrow();
+		GraphicArrow gArrow = new GraphicArrow(arrow);
+		view.setGArrow(gArrow);
+		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
 			alivePlayers.add(tmp);
