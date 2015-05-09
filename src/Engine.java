@@ -328,6 +328,7 @@ public class Engine {
 		map.load();
 		
 		view = new View(this);
+		view.setWindow(window);
 		
 		//nyil es annak grafikus parjanak peldanyositasa
 		arrow=new Arrow();
