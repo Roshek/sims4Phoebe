@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     	
     	g.drawImage(background, 0, 0, null);
     	
-		view.drawAll();
+		view.drawAll(g);
 	}
 
 }
