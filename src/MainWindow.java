@@ -90,4 +90,8 @@ public class MainWindow extends JFrame {
 		return gamePanel;
 	}
 	
+	public void init(Engine engine){
+		this.engine=engine;
+		this.controller=engine.getController();
+	}
 }
