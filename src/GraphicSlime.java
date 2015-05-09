@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 
@@ -10,11 +11,11 @@ public class GraphicSlime implements Drawable{
 	
 	public GraphicSlime(Slime slime){
 		this.slime=slime;
-		image = Resources.getSlime();						// Resources osztalybol a megfelelo kep kinyerese
+		image = Resources.getSlime();	// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
 	public void draw() {
-		if(!slime.getExpired() && slime != null){			//vizsgalat, hogy a ragacs a palyan kell, hogy legyen-e.
+		if(!slime.getExpired() && slime != null){ //vizsgalat, hogy a ragacs a palyan kell, hogy legyen-e.
 			//pozicio kinyerese
 			int x = slime.getPos().getX();
 			int y = slime.getPos().getY();
@@ -25,7 +26,7 @@ public class GraphicSlime implements Drawable{
 			g.drawImage(image, x, y,null);
 		}
 		else{
-			slime=null;									//ha mar nincs a palyan toroljuk a hivatkozast, GC dolgozhat
+			slime=null;	//ha mar nincs a palyan toroljuk a hivatkozast, GC dolgozhat
 			return;
 		}
 		
