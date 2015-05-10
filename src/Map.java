@@ -66,7 +66,7 @@ public class Map {
 			return false;	
 		*/
 		
-		if(c.getX()>field.getWidth() || c.getY()>field.getHeight())
+		if(c.getX()>field.getWidth() || c.getY()>field.getHeight() || c.getX() < 0 || c.getY() < 0)
 			return true;
 		
 		System.out.println("(3,3) pont színe: " + field.getRGB(3, 3) + " robot helyének színe: " + field.getRGB(c.getX(), c.getY()));
