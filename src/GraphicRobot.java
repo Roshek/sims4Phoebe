@@ -22,6 +22,7 @@ public class GraphicRobot implements Drawable{
 				if ((x-30)>0) x=x-30; 
 				if ((y-30)>0) y=y-30;
 				//kirajzolas
+				image = Resources.getRobot(robot);
 				g.drawImage(image, x, y,null);
 		}
 		else{

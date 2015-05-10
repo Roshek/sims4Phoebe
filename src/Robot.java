@@ -29,7 +29,7 @@ public class Robot {
 		impulse=new Coord();
 		
 		oil_num=5;
-		oil_num=5;
+		slime_num=5;
 		road=0;
 		alive=true;
 		
@@ -56,7 +56,8 @@ public class Robot {
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KeSZ		
+	public void calculateCoords() {					//KeSZ
+
 		impulse=Coord.add(impulse, modifier);
 		Coord oldpos= position;
 		
