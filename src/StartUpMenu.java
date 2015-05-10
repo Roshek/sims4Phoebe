@@ -87,6 +87,10 @@ public class StartUpMenu extends JFrame {
 
 	
 	private void newgame() {
+		
+		String tmp=(String)jatekosszam.getSelectedItem();
+		jszam=Integer.parseInt(tmp);
+		
 		mw = new MainWindow(jszam);
 		dispose();
 		

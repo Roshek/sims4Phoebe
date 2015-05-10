@@ -21,6 +21,7 @@ public class MainWindow extends JFrame {
 		this.engine=engine;
 		engine.init(jszam);
 		engine.setWindow(this);
+		
 		this.controller=engine.getController();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
