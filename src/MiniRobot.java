@@ -8,10 +8,7 @@ public class MiniRobot extends Robot {
 		super(engine);
 		setRadius(10);
 		setImpulse(new Coord (0,0));
-		
 
-		
-		
 	}
 	
 	/** Grafikus p·r lÈtrehoz·sa
@@ -24,7 +21,7 @@ public class MiniRobot extends Robot {
 		engine.view.miniRobotAdded(gMiniRobot);
 	}
 
-	/**\brief MiniRobot mesters√©ges intelligenci√°ja 
+	/**\brief MiniRobot mesterseges intelligenciaja 
 	 * 
 	 * 20 hosszu lepesekkel el kezd ugralni a legkozelebbi
 	 * Traphez a palya kozepvonalat kovetve
