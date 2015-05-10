@@ -24,9 +24,7 @@ public class GraphicArrow implements Drawable{
 	      * x2 x-pozicioja az endpoint-nak
 	      * y2 y-pozicioja az endpoint-nak
 	      */
-	     	
-		
-			int x1=arrow.getStartPoint().getX();
+	     	int x1=arrow.getStartPoint().getX();
 	     	int y1=arrow.getStartPoint().getY();
 	     	int x2=arrow.getEndPoint().getX();
 	     	int y2=arrow.getEndPoint().getY();
