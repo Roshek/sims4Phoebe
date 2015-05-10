@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 public class Map {
 
 	private BufferedImage field;
+	
+	private ArrayList<Coord> midline = new ArrayList<Coord>();
 
 	/**\brief Betolti a kapott palyat
 	 * 
@@ -29,6 +31,11 @@ public class Map {
 //			System.out.println("No file with that name exists");
 //		}
 //	}
+	
+	public Map(){
+		calculateMidline();
+	}
+	
 	
 	public void load(){
 		field=Resources.getMap();
@@ -94,6 +101,24 @@ public class Map {
 		//System.out.println("->[:Map].setField()");
 		
 		this.field=field;
+	}
+
+
+	private void calculateMidline(){
+		int lineColor = field.getRGB(field.getMinX(), field.getMinY());
+		int voidColor = field.getRGB(field.getMinX()+1, field.getMinY());
+		
+		
+	}
+	
+	
+	public ArrayList<Coord> getMidline() {
+		return midline;
+	}
+
+
+	public void setMidline(ArrayList<Coord> midline) {
+		this.midline = midline;
 	}
 
 }
