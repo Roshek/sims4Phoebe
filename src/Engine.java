@@ -148,8 +148,10 @@ public class Engine {
 		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
 		for(Robot tmp: alivePlayers){
+			System.out.print(tmp.getPosition().getX() + " " + tmp.getPosition().getY() + " ugrás elõtti koord, ugrás utáni: ");
 			tmp.calculateCoords();
 			Coord newpos=tmp.getPosition();
+			System.out.println(newpos.getX() + " " + newpos.getY() + " x, y koordja a mozgatott robotnak, id: " + tmp.getID());
 			if(map.fall(newpos)){
 				System.out.println("I fell off fuck me!");
 				tmp.setAlive(false);

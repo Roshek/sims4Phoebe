@@ -66,10 +66,15 @@ public class Map {
 			return false;	
 		*/
 
+		System.out.println("(3,3) pont színe: " + field.getRGB(3, 3) + " robot helyének színe: " + field.getRGB(c.getX(), c.getY()));
+		
 		if(field.getRGB(c.getX(), c.getY()) == field.getRGB(0, 0)){
+			System.out.println("Leesett");
 			return true;
-		}else
-			return false;		
+		}else{
+			System.out.println("Fentmaradt");
+			return false;
+		}
 	}
 
 	/**\brief Megadja a jatekosok kezdohelyeit
