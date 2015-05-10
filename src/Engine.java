@@ -115,6 +115,7 @@ public class Engine {
 		//System.out.println("->[:Engine].allPlayersDead()");
 		
 		System.out.println("\nMinenki leesett, nincs gyoztes.\n");
+		quit();
 		}
 	
 	
@@ -250,6 +251,9 @@ public class Engine {
 		}
 		round_num--;
 		
+		if(alivePlayers.size()==0)
+			allPlayersDead();
+		
 		//System.out.println("<-[:Engine].roundOver()");
 	}
 	
@@ -379,6 +383,17 @@ public class Engine {
 //		activePlayer=newActivePlayer;
 //		
 //		//activePlayer=alivePlayers.get((alivePlayers.indexOf(activePlayer)+1)%alivePlayers.size());
+		
+		int index=alivePlayers.indexOf(activePlayer);
+		if(index==alivePlayers.size()-1){
+			roundOver();
+			activePlayer=alivePlayers.get(0);
+			arrow.setStartPoint(activePlayer.getPosition());
+			return;
+		}
+		index++;
+		activePlayer=alivePlayers.get(index);
+		arrow.setStartPoint(activePlayer.getPosition());
 	}
 
 	/**\brief uj csapda hozzaadasa
