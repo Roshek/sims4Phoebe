@@ -13,6 +13,9 @@ public class Engine {
 	public ArrayList<MiniRobot> miniRobots;
 	
 	public Map map;
+	
+
+
 	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
@@ -504,6 +507,9 @@ public class Engine {
 		this.map=map;
 	}
 	
+	public Map getMap() {
+		return map;
+	}
 	
 	
 
