@@ -1,4 +1,3 @@
-import java.security.AllPermission;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -66,7 +65,7 @@ public class Main {
 			        if(be.equals("O")){
 			        	System.out.println("Szukseges objektumok letrehozasa:");
 			        	Engine engine_tmp = new Engine();
-			        	Coord pos= new Coord(0,0);
+			        	//Coord pos= new Coord(0,0);
 			        	Robot robot_tmp = new Robot(engine_tmp);
 			        	
 			        	System.out.println("\n Teszteles:");
@@ -76,7 +75,7 @@ public class Main {
 			        }else if(be.equals("R")){
 			        	System.out.println("Szukseges objektumok letrehozasa:");
 			        	Engine engine_tmp = new Engine();
-			        	Coord pos= new Coord(0,0);
+			        	//Coord pos= new Coord(0,0);
 			        	Robot robot_tmp = new Robot(engine_tmp);
 			        	
 			        	System.out.println("\n Teszteles:");
@@ -97,14 +96,14 @@ public class Main {
 		        	
 		        	Engine engine_tmp_3 = new Engine();
 		        	Robot robot_tmp_3 = new Robot(engine_tmp_3);
-		        	Coord coord_tmp_3 = new Coord(0,0);
+		        	//Coord coord_tmp_3 = new Coord(0,0);
 		        	engine_tmp_3.setActivePlayer(robot_tmp_3);
 		        	
 		        	/**Teszteles
 		        	 * az engine turnPassed() metodusanak futtatasa
 		        	 */
 		        	System.out.println("\n Teszteles:");
-		        	engine_tmp_3.turnPassed(coord_tmp_3);
+		        	engine_tmp_3.turnPassed();
 		        	
 		            break;
 		        /** Menu 4: Kor vege
@@ -208,6 +207,7 @@ public class Main {
 		            System.out.println("ervenytelen bevitel.");
 		    }   
 		} while (chosenMenu != 6);
+		scanchoice.close();
 	}
 
 }

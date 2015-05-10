@@ -1,4 +1,3 @@
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,12 +12,50 @@ public class Engine {
 	public ArrayList<MiniRobot> miniRobots;
 	
 	public Map map;
+	
+
+
 	public Robot activePlayer;						//eddig
 	private Robot winner;
+	
+	//PETI Mï¿½DOSï¿½Tï¿½SAI 2015.05.08.
+	
+	private MainWindow window;
+	private Arrow arrow;
+	
+	
+	public MainWindow getWindow() {
+		return window;
+	}
+
+	public void setWindow(MainWindow window) {
+		this.window = window;
+		view.setWindow(window);
+	}
+
+	public Arrow getArrow(){
+		return arrow;
+	}
+	
+	public Robot getActivePlayer(){
+		return activePlayer;
+	}
+	
+
+	public Controller getController(){
+		return view.getController();
+	}
+	
+	
+	//PETI VÉGE
+
 	
 	//2015.04.20.
 	
 	private int RobotID=1;
+	
+	public View view;
+	
 	
 	private void moveminiRobots(){				//DONE
 		for(MiniRobot x : miniRobots){
@@ -107,7 +144,7 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].moveRobots()");
 		
-		int numberOfRobotsAtStartOfCycle=alivePlayers.size();
+		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
 		for(Robot tmp: alivePlayers){
 			tmp.calculateCoords();
@@ -236,6 +273,9 @@ public class Engine {
 		
 		player_num=0;
 		round_num=30;
+		
+
+		
 	}
 	
 	/**\brief A fo playfuggveny, itt fut a jatek nagy resze
@@ -285,7 +325,18 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
-		map.load("tesztpalya.bmp");
+		Resources.load();
+		arrow=new Arrow();
+		
+		map.load();
+		
+		view = new View(this);
+		view.setWindow(window);
+		
+		//nyil es annak grafikus parjanak peldanyositasa
+		arrow=new Arrow();
+		GraphicArrow gArrow = new GraphicArrow(arrow);
+		view.setGArrow(gArrow);
 		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
@@ -297,8 +348,9 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
+			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
 		}
+		activePlayer=alivePlayers.get(0);
 	}
 
 	/**\brief Kor passzolasa
@@ -312,13 +364,13 @@ public class Engine {
 	 * 
 	 * @param modifier
 	 */
-	public void turnPassed(Coord modifier) {		//TO BE REVIEWED				//MODIFIED
+	public void turnPassed() {		//TO BE REVIEWED				//MODIFIED
 		
 		//System.out.println("->[:Engine].turnPassed(modifier)");
 		
-		activePlayer.setModifier(modifier);
+		activePlayer.setModifier(arrow.getModifier());
 		
-		notifyAll();			//Szkeletonhoz nem kell
+		//notifyAll();			//Szkeletonhoz nem kell
 		
 //		int index=alivePlayers.indexOf(activePlayer);
 //		Robot newActivePlayer=alivePlayers.get((index+1)%alivePlayers.size());		//O.o
@@ -373,7 +425,7 @@ public class Engine {
 			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
 		}
 		
-		winner=winningPlayer;
+		setWinner(winningPlayer);
 	}
 
 	public int getPlayer_num() {					//KeSZ
@@ -454,6 +506,17 @@ public class Engine {
 		this.map=map;
 	}
 	
+	public Map getMap() {
+		return map;
+	}
+
+	public Robot getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Robot winner) {
+		this.winner = winner;
+	}
 	
 	
 

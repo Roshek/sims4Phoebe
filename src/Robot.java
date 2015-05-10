@@ -9,6 +9,7 @@ public class Robot {
 	protected Boolean alive=true;
 	protected double radius = 20;
 	protected Engine engine;
+	private GraphicRobot gRobot;
 	
 	protected int ID=0;
 	/**\brief Robot konstruktor
@@ -28,12 +29,24 @@ public class Robot {
 		impulse=new Coord();
 		
 		oil_num=5;
-		oil_num=5;
+		slime_num=5;
 		road=0;
 		alive=true;
 		
 		this.engine=engine;
+		
+		//Grafikus par letrehozasa
+		createGraphicPair();
 	}
+	
+	/** Grafikus pár létrehozása
+	 * letrehozza a grafikus part, majd hozzadja a view megfelelo listajahoz
+	 */
+	public void createGraphicPair(){
+		gRobot = new GraphicRobot(this);
+		engine.view.robotAdded(gRobot);		//ez itt így elég szornyu
+	}
+	
 	
 	/** \brief Kiszamolja a robot uj helyet es vektorait
 	 * 
@@ -43,7 +56,8 @@ public class Robot {
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KeSZ		
+	public void calculateCoords() {					//KeSZ
+
 		impulse=Coord.add(impulse, modifier);
 		Coord oldpos= position;
 		
@@ -72,6 +86,7 @@ public class Robot {
 			tmp.setOwner(this);
 			
 			engine.addTrap(tmp);
+			engine.view.oilAdded(tmp.getGOil());
 		}
 	}
 
@@ -90,6 +105,7 @@ public class Robot {
 			tmp.setOwner(this);
 			
 			engine.addTrap(tmp);
+			engine.view.slimeAdded(tmp.getGSlime());
 		}
 	}
 	

@@ -64,6 +64,7 @@ public class Main2 {
 				vegrehajt(parancs,args[0],null);										//a parancs feldolgozasa
 					
 			}while (!stop);
+			parancsRead.close();
 			
 		}
 		else if(args[0].equals(new String("1"))){						//Filebol olvasasos teszteset
@@ -498,7 +499,7 @@ public class Main2 {
 	 */
 	private static void loadMap() {				//fixed
 		engine=new Engine();
-		engine.map.load("tesztpalya.bmp");
+		engine.map.load();
 	}
 
 }

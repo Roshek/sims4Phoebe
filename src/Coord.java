@@ -8,7 +8,10 @@ public class Coord {
 		X=0; Y=0;
 	}
 	
-	
+	public Coord(Coord c){
+		X = c.getX();
+		Y = c.getY();
+	}
 	
 	public Coord(int x, int y){							//KeSZ
 		
