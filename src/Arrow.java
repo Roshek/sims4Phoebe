@@ -1,11 +1,15 @@
 public class Arrow {
-	private Coord modifier;				// 
+	private Coord modifier;				// Modifier vektorhoz
 	private Coord startPoint;			// A nyil kezdeti pontja
 	private Coord endPoint;				// A nyil végpontja (len tavolsagagra az aktiv robottol
 	private int len = 40;				// A nyil hossza
 
+	/** Konstruktor parameter nelkul
+	 * Parameter nelkul a nyil vegpontja a kezdoponttol jobbra lesz
+	 * A modifier is ugyan igy
+	 */
 	public Arrow(){
-		setModifier(new Coord(0,0));	
+		setModifier(new Coord(len,0));	
 		setStartPoint(new Coord(0,0));
 		setEndPoint(new Coord(len,0));
 	}
@@ -16,6 +20,12 @@ public class Arrow {
 		setEndPoint(new Coord(x+len,y));
 	}
 	
+	/** Nyil vegpontjanak szamitasa es beallitasa
+	 * A kapott koordinatak alapjan, ezek fele fog mutatni a nyil
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void calculateEndPoint(int x, int y){
 		double d = Coord.distance(startPoint, new Coord(x,y)); 		// A d tarolja a robot es a kattintas helye kozotti tavolsagot
 		
