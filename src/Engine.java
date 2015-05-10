@@ -351,6 +351,7 @@ public class Engine {
 			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid am�g nincs putPlayers
 		}
 		activePlayer=alivePlayers.get(0);
+		arrow.setStartPoint(activePlayer.getPosition());
 	}
 
 	/**\brief Kor passzolasa
