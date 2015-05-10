@@ -1,7 +1,6 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class View {
@@ -27,13 +26,13 @@ public class View {
 	 * @param engine
 	 */
 	public View(Engine engine){
-		this.engine=engine;
+		this.setEngine(engine);
 		this.controller = new Controller(engine, this);
 		//JPanel?? TODO
 		
 		gMiniRobotList = new ArrayList<GraphicMiniRobot>();
 		gRobotList = new ArrayList<GraphicRobot>();
-		gArrowList = new ArrayList<GraphicArrow>();
+		setgArrowList(new ArrayList<GraphicArrow>());
 		gOilList = new ArrayList<GraphicOil>();
 		gSlimeList = new ArrayList<GraphicSlime>();
 		field = Resources.getMap();
@@ -135,6 +134,22 @@ public class View {
 	}
 	public Controller getController() {
 		return controller;
+	}
+
+	public Engine getEngine() {
+		return engine;
+	}
+
+	public void setEngine(Engine engine) {
+		this.engine = engine;
+	}
+
+	public ArrayList<GraphicArrow> getgArrowList() {
+		return gArrowList;
+	}
+
+	public void setgArrowList(ArrayList<GraphicArrow> gArrowList) {
+		this.gArrowList = gArrowList;
 	}
 
 	
