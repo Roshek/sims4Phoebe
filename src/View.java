@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ public class View {
 
 	private Engine engine;
 	private Controller controller;
+	private MainWindow window;
 	//protected Jpanel panel;
 	
 	private ArrayList<GraphicMiniRobot> gMiniRobotList;
@@ -36,7 +38,22 @@ public class View {
 		gOilList = new ArrayList<GraphicOil>();
 		gSlimeList = new ArrayList<GraphicSlime>();
 		
+		
+		gArrow=new GraphicArrow(engine.getArrow());
+		
 	}
+	
+	public void updateGamePanel(){
+		window.repaint();
+	}
+	
+	public MainWindow getWindow() {
+		return window;
+	}
+	public void setWindow(MainWindow window) {
+		this.window = window;
+	}
+	
 	/** Setter a gArrowhoz
 	 * @param gArrow
 	 */
@@ -55,21 +72,21 @@ public class View {
 	 *  Vegigmegy a grafikus listakon es 
 	 *  kirajzolja az elemeiket.
 	 */
-	public void drawAll(){
+	public void drawAll(Graphics g){
 		
 		for(GraphicOil gOil: gOilList){
-			gOil.draw();
+			gOil.draw(g);
 		}
 		for(GraphicSlime gSlime: gSlimeList){
-			gSlime.draw();
+			gSlime.draw(g);
 		}
 		for(GraphicRobot gRobot: gRobotList){
-			gRobot.draw();
+			gRobot.draw(g);
 		}
 		for(GraphicMiniRobot gMiniRobot: gMiniRobotList){
-			gMiniRobot.draw();
+			gMiniRobot.draw(g);
 		}
-		gArrow.draw();
+		gArrow.draw(g);
 	}
 	
 	/** A palya kirajzolasa
@@ -109,6 +126,16 @@ public class View {
 	 */
 	public void slimeAdded(GraphicSlime gSlime){
 		gSlimeList.add(gSlime);
+	}
+	
+	/** Nyil beallitasa
+	 * ??? TODO
+	 */
+	public void setArrow(){
+		
+	}
+	public Controller getController() {
+		return controller;
 	}
 
 	

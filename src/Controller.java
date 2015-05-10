@@ -10,21 +10,21 @@ public class Controller {
 	
 	public void turnPassed(){
 		engine.turnPassed();
-		view.drawAll();
+		view.updateGamePanel();
 	}
 	
 	public void putOil(){
 		engine.getActivePlayer().placeOil();
-		view.drawAll();
+		view.updateGamePanel();
 	}
 	
 	public void putSlime(){
 		engine.getActivePlayer().placeSlime();
-		view.drawAll();
+		view.updateGamePanel();
 	}
 	
 	public void setArrow(int x, int y){
 		engine.getArrow().calculateEndPoint(x, y);
-		view.drawAll();
+		view.updateGamePanel();
 	}
 }
