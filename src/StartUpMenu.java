@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,10 +16,12 @@ public class StartUpMenu extends JFrame {
 	
 
 	private static final long serialVersionUID = 1L;
-	JPanel panel;
-	JButton indit;
-	JButton kilep;
-	JComboBox jatekosszam;
+	MainWindow mw=null;
+	JPanel panel=null;
+	JButton indit=null;
+	JButton kilep=null;
+	JComboBox jatekosszam=null;
+	int jszam=0;
 	
 		
 		
@@ -45,11 +48,17 @@ public class StartUpMenu extends JFrame {
 		jatekosszam.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//TODO
+						if ( str.equals("2") )
+							jszam = 2;
+						else if ( str.equals("3") )
+							jszam = 3;
+						else if ( str.equals("4") )
+							jszam = 4;
 					}});
 		panel.add(jatekosszam);
 		
 		indit = new JButton("Start");
+		indit.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		indit.setPreferredSize(new Dimension(200, 150));
 		indit.setBorderPainted(false);
 		indit.setBackground(Color.RED);
@@ -62,6 +71,7 @@ public class StartUpMenu extends JFrame {
 		
 		
 		kilep = new JButton("Exit");
+		kilep.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		kilep.setPreferredSize(new Dimension(200, 150));
 		kilep.setBorderPainted(false);
 		kilep.setBackground(Color.RED);
@@ -77,8 +87,11 @@ public class StartUpMenu extends JFrame {
 
 	
 	private void newgame() {
+		mw = new MainWindow(jszam);
+		dispose();
 		
 		
 	}
+
 	
 }

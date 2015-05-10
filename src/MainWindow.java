@@ -15,9 +15,12 @@ public class MainWindow extends JFrame {
 	private Controller controller=null;
 	private GamePanel gamePanel;
 	
-	public MainWindow(Engine engine) {
+	public MainWindow(int jszam) {
 		
+		engine = new Engine();
 		this.engine=engine;
+		engine.init(jszam);
+		engine.setWindow(this);
 		this.controller=engine.getController();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
