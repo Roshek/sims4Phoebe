@@ -29,7 +29,7 @@ public class Robot {
 		impulse=new Coord();
 		
 		oil_num=5;
-		oil_num=5;
+		slime_num=5;
 		road=0;
 		alive=true;
 		
