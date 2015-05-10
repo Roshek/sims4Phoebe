@@ -119,6 +119,7 @@ public class MainWindow extends JFrame {
 		putoil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.putOil();
+				updateLabels();
 			}
 		});
 		center.add(putoil);
@@ -128,6 +129,7 @@ public class MainWindow extends JFrame {
 		putslime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.putSlime();
+				updateLabels();
 			}
 		});
 		center.add(putslime);
@@ -141,6 +143,7 @@ public class MainWindow extends JFrame {
 		end.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.turnPassed();
+				updateLabels();
 			}
 		});
 		center.add(end);
@@ -174,6 +177,11 @@ public class MainWindow extends JFrame {
 	public void init(Engine engine){
 		this.engine=engine;
 		this.controller=engine.getController();
+	}
+	
+	public void updateLabels(){
+		activeplayer.setText(engine.activePlayer.ID + ". Jatekos");
+		inthebag.setText("Meg " + engine.activePlayer.getOil_num() +" olajod es " + engine.activePlayer.getSlime_num() + " ragacsod van.");
 	}
 	 
 	
