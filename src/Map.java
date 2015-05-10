@@ -209,7 +209,7 @@ private void calculateMidline(){
 			if (k%2==0)a += invertA;
 			else a -= invertA;
 			
-			System.out.println("aaaaaaa: " + a);	
+			//System.out.println("aaaaaaa: " + a);	
 		}
 		
 		Coord ls = allmidline.get(0);
