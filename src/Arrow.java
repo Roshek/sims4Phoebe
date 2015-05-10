@@ -88,10 +88,11 @@ public class Arrow {
 	 */
 	public void setStartPoint(Coord startPoint) {
 		//this.endPoint = new Coord(startPoint.getX()+len,startPoint.getY());
-		this.endPoint=new Coord(startPoint.getX(), startPoint.getY());				//DEBUGOLÁSHOZ
+		this.endPoint=new Coord(startPoint.getX(), startPoint.getY());				//Debugoláshoz
 		
 		
-		this.startPoint = new Coord(startPoint.getX(), startPoint.getY());;
+		//this.startPoint = startPoint;
+		new Coord(startPoint.getX(), startPoint.getY());			//Debugoláshoz
 		//setModifier(new Coord(startPoint.getX()+len,0));	
 		calculateModifier();
 	}
