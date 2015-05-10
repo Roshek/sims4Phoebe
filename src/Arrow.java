@@ -21,7 +21,7 @@ public class Arrow {
 	 * @param y
 	 */
 	public Arrow(int x, int y){
-		setModifier(new Coord(0,0));	
+		setModifier(new Coord(x+len,0));	
 		setStartPoint(new Coord(x,y));
 		setEndPoint(new Coord(x+len,y));
 	}
@@ -89,6 +89,7 @@ public class Arrow {
 	public void setStartPoint(Coord startPoint) {
 		this.endPoint = new Coord(startPoint.getX()+len,startPoint.getY());
 		this.startPoint = startPoint;
+		setModifier(new Coord(startPoint.getX()+len,0));	
 	}
 
 	public Coord getEndPoint() {
