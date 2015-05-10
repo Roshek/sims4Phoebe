@@ -14,6 +14,12 @@ public class Arrow {
 		setEndPoint(new Coord(len,0));
 	}
 	
+	/** Konstruktor parameterrel
+	 * A megadott parameter fele fog mutatni a nyil
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Arrow(int x, int y){
 		setModifier(new Coord(0,0));	
 		setStartPoint(new Coord(x,y));
@@ -47,15 +53,26 @@ public class Arrow {
 		
 	};
 	
+	/** A nodifier szamitasa
+	 * 
+	 */
 	public void calculateModifier(){
 		modifier.setX(endPoint.getX()-startPoint.getX());
 		modifier.setY(endPoint.getY()-startPoint.getY());
 	};
 
+	/** Modifier getter
+	 * 
+	 * @return
+	 */
 	public Coord getModifier() {
 		return modifier;
 	}
 
+	/** Modifier setter
+	 * 
+	 * @param modifier
+	 */
 	public void setModifier(Coord modifier) {
 		this.modifier = modifier;
 	}
@@ -64,6 +81,11 @@ public class Arrow {
 		return startPoint;
 	}
 
+	/** Kezdopont beallitasa
+	 * Beallitja a parameterkent kapott kezdeti pontot,
+	 * Vegpontnak pedig az alapertelmezettet
+	 * @param startPoint
+	 */
 	public void setStartPoint(Coord startPoint) {
 		this.endPoint = new Coord(startPoint.getX()+len,startPoint.getY());
 		this.startPoint = startPoint;
