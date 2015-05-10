@@ -56,7 +56,8 @@ public class Robot {
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KeSZ		
+	public void calculateCoords() {					//KeSZ
+
 		impulse=Coord.add(impulse, modifier);
 		Coord oldpos= position;
 		

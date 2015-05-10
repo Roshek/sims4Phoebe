@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +40,7 @@ public class MainWindow extends JFrame {
 	public MainWindow(int jszam) {
 		
 		engine = new Engine();
-		this.engine=engine;
+
 		engine.init(jszam);
 		engine.setWindow(this);
 		this.controller=engine.getController();
