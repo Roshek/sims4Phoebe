@@ -47,7 +47,7 @@ public class Engine {
 	}
 	
 	
-	//PETI VÉGE
+	//PETI Vï¿½GE
 
 	
 	//2015.04.20.
@@ -148,7 +148,7 @@ public class Engine {
 		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
 		for(Robot tmp: alivePlayers){
-			System.out.print(tmp.getPosition().getX() + " " + tmp.getPosition().getY() + " ugrás elõtti koord, ugrás utáni: ");
+			System.out.print(tmp.getPosition().getX() + " " + tmp.getPosition().getY() + " ugras elotti koord, ugras utani: ");
 			tmp.calculateCoords();
 			Coord newpos=tmp.getPosition();
 			System.out.println(newpos.getX() + " " + newpos.getY() + " x, y koordja a mozgatott robotnak, id: " + tmp.getID());
@@ -264,7 +264,7 @@ public class Engine {
 	/**\brief Engine konstruktor
 	 * 
 	 * Inicializalja az ArrayList-eket es
-	 * beallï¿½tja a max korok szamat. 
+	 * beallitja a max korok szamat. 
 	 */
 	
 	public Engine(){							//KeSZ
@@ -363,7 +363,7 @@ public class Engine {
 	/**\brief Kor passzolasa
 	 * 
 	 * A kezelofelulettol kapott vektort
-	 * atadja az epp aktï¿½v robotnak az
+	 * atadja az epp aktiv robotnak az
 	 * uj modifierekent, es felebreszti az
 	 * Engine.play()-ben varakozo foszalat,
 	 * hogy tovabblepjen a jatek a kovetkezo
@@ -374,10 +374,12 @@ public class Engine {
 	public void turnPassed() {		//TO BE REVIEWED				//MODIFIED
 		
 		//System.out.println("->[:Engine].turnPassed(modifier)");
-		
-		activePlayer.setModifier(arrow.getModifier());
-		
-		//notifyAll();			//Szkeletonhoz nem kell
+		for(Robot r : alivePlayers)
+			System.out.println("valtas elott"+r.getModifier().getX()+","+r.getModifier().getY());
+		activePlayer.setModifier(arrow.getModifier());		//A kort atado jatekos megkapja a beallitott nyil modifieret
+		for(Robot r : alivePlayers)
+			System.out.println(r.getModifier().getX()+","+r.getModifier().getY());
+
 		
 //		int index=alivePlayers.indexOf(activePlayer);
 //		Robot newActivePlayer=alivePlayers.get((index+1)%alivePlayers.size());		//O.o
@@ -387,15 +389,20 @@ public class Engine {
 //		//activePlayer=alivePlayers.get((alivePlayers.indexOf(activePlayer)+1)%alivePlayers.size());
 		
 		int index=alivePlayers.indexOf(activePlayer);
+		//System.out.println("Aki atadta a kort: "+ index);
 		if(index==alivePlayers.size()-1){
 			roundOver();
 			activePlayer=alivePlayers.get(0);
 			arrow.setStartPoint(activePlayer.getPosition());
+			for(Robot r : alivePlayers)
+				System.out.println(r.getModifier().getX()+","+r.getModifier().getY());
 			return;
 		}
 		index++;
 		activePlayer=alivePlayers.get(index);
 		arrow.setStartPoint(activePlayer.getPosition());
+		for(Robot r : alivePlayers)
+			System.out.println(r.getModifier().getX()+","+r.getModifier().getY());
 	}
 
 	/**\brief uj csapda hozzaadasa

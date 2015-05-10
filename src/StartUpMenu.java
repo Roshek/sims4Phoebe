@@ -42,7 +42,7 @@ public class StartUpMenu extends JFrame {
 		panel.setLayout(new FlowLayout());
 		this.add(panel);
 		
-		String[] str = {"2", "3", "4"};
+		final String[] str = {"2", "3", "4"};
 		jatekosszam = new JComboBox<String>(str);
 		jatekosszam.addActionListener(
 				new ActionListener() {
