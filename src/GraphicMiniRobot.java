@@ -6,7 +6,6 @@ public class GraphicMiniRobot implements Drawable{
 
 	private MiniRobot miniRobot;
 	private BufferedImage image;
-	private Graphics g;
 	
 	
 	public GraphicMiniRobot(MiniRobot miniRobot){
@@ -15,7 +14,7 @@ public class GraphicMiniRobot implements Drawable{
 		
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		if(miniRobot.isAlive() && miniRobot != null){	// Ellenorzes, ki kell-e meg rajzolni
 			//pozicio kinyerese
 			int x = miniRobot.getPosition().getX();

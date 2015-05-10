@@ -6,7 +6,6 @@ public class GraphicSlime implements Drawable{
 
 	private Slime slime;
 	private BufferedImage image;
-	private Graphics g;
 
 	
 	public GraphicSlime(Slime slime){
@@ -14,7 +13,7 @@ public class GraphicSlime implements Drawable{
 		image = Resources.getSlime();	// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		if(!slime.getExpired() && slime != null){ //vizsgalat, hogy a ragacs a palyan kell, hogy legyen-e.
 			//pozicio kinyerese
 			int x = slime.getPos().getX();

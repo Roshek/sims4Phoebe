@@ -13,17 +13,22 @@ public class MainWindow extends JFrame {
 	
 	private Engine engine=null;
 	private Controller controller=null;
+	private GamePanel gamePanel;
 	
-	public MainWindow(Engine engine) {
+	public MainWindow(int jszam) {
 		
+		engine = new Engine();
 		this.engine=engine;
+		engine.init(jszam);
+		engine.setWindow(this);
+		
 		this.controller=engine.getController();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		
 		getContentPane().setLayout(null);
 		
-		GamePanel gamePanel = new GamePanel(engine.view);
+		gamePanel = new GamePanel(engine.view);
 		gamePanel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -85,4 +90,12 @@ public class MainWindow extends JFrame {
 		return engine;
 	}
 	
+	public GamePanel getGamePanel(){
+		return gamePanel;
+	}
+	
+	public void init(Engine engine){
+		this.engine=engine;
+		this.controller=engine.getController();
+	}
 }

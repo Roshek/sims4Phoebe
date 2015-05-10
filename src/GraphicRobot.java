@@ -6,15 +6,14 @@ public class GraphicRobot implements Drawable{
 
 	private Robot robot;
 	private BufferedImage image;
-	private Graphics g;
 
 	
 	public GraphicRobot(Robot robot){
 		this.robot=robot;
-		image = Resources.getRobot();	// Resources osztalybol a megfelelo kep kinyerese
+		image = Resources.getRobot(robot);	// Resources osztalybol a megfelelo kep kinyerese
 	}
 	
-	public void draw() {
+	public void draw(Graphics g) {
 		if(robot.isAlive()){	// Ellenorzes, hogy ki kell e meg rajzolni
 				//pozicio kinyerese
 				int x = robot.getPosition().getX();
