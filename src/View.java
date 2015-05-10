@@ -28,7 +28,6 @@ public class View {
 	 */
 	public View(Engine engine){
 		this.engine=engine;
-		this.field=engine.map.getField();
 		this.controller = new Controller(engine, this);
 		//JPanel?? TODO
 		
@@ -37,7 +36,7 @@ public class View {
 		gArrowList = new ArrayList<GraphicArrow>();
 		gOilList = new ArrayList<GraphicOil>();
 		gSlimeList = new ArrayList<GraphicSlime>();
-		
+		field = Resources.getMap();
 		
 		gArrow=new GraphicArrow(engine.getArrow());
 		
@@ -73,7 +72,7 @@ public class View {
 	 *  kirajzolja az elemeiket.
 	 */
 	public void drawAll(Graphics g){
-		
+		drawField(g);
 		for(GraphicOil gOil: gOilList){
 			gOil.draw(g);
 		}
@@ -93,8 +92,8 @@ public class View {
 	 * Kirajzolja a palyat
 	 * TODO: lehet mashova kene
 	 */
-	private void drawField(){
-		
+	private void drawField(Graphics g){
+		 g.drawImage(field, 0, 0, null);
 	}
 	
 	/** Robot hozzaadasa
