@@ -48,7 +48,7 @@ public class MainWindow extends JFrame {
 		
 		
 		setTitle("Phoebe");
-		setSize(1324, 768);
+		setSize(1324, 807);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -64,11 +64,11 @@ public class MainWindow extends JFrame {
 		gameplace = new GamePanel(engine.view);
 		//gameplace = new JPanel();
 		gameplace.setBackground(Color.BLACK);
-		gameplace.setPreferredSize(new Dimension(1024, 768));
+		gameplace.setPreferredSize(new Dimension(1024, 807));
 
 		others = new JPanel();
-		others.setBackground(Color.RED);
-		others.setPreferredSize(new Dimension(300, 768));
+		others.setBackground(new Color(189, 15, 23));
+		others.setPreferredSize(new Dimension(300, 807));
 		others.setLayout(new BorderLayout());
 		
 		this.setLayout(new BorderLayout());
@@ -77,15 +77,15 @@ public class MainWindow extends JFrame {
 		
 		//MELLEK PANELEK		
 		up = new JPanel();
-		up.setBackground(Color.RED);
+		up.setBackground(new Color(189, 15, 23));
 		others.add(up, BorderLayout.NORTH);
 		
 		center= new JPanel();
-		center.setBackground(Color.RED);
+		center.setBackground(new Color(189, 15, 23));
 		others.add(center, BorderLayout.CENTER);
 		
 		down= new JPanel();
-		down.setBackground(Color.RED);
+		down.setBackground(new Color(189, 15, 23));
 		others.add(down, BorderLayout.SOUTH);
 		
 		
@@ -101,7 +101,7 @@ public class MainWindow extends JFrame {
 		
 		
 		//FELSO PANEL
-		title = new JLabel("Kezelõfelület");
+		title = new JLabel("Kezelofelulet");
 		title.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		up.add(title);
 		
@@ -110,11 +110,11 @@ public class MainWindow extends JFrame {
 		activeplayer.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		center.add(activeplayer);
 		
-		putatrap = new JLabel("  Csapda elhelyezése:   ");
+		putatrap = new JLabel("  Csapda elhelyezese:   ");
 		putatrap.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		center.add(putatrap);
 		
-		putoil = new JButton("Olaj lerakása");
+		putoil = new JButton("Olaj lerakasa");
 		putoil.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		putoil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -123,7 +123,7 @@ public class MainWindow extends JFrame {
 		});
 		center.add(putoil);
 		
-		putslime = new JButton("Ragacs lerakása");
+		putslime = new JButton("Ragacs lerakasa");
 		putslime.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		putslime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,11 +132,11 @@ public class MainWindow extends JFrame {
 		});
 		center.add(putslime);
 		
-		nextplayer = new JLabel("Következõ játékos:");
+		nextplayer = new JLabel("Kovetkezo jatekos:");
 		nextplayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		center.add(nextplayer);
 		
-		end = new JButton("Kör vége");
+		end = new JButton("Kor vege");
 		end.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		end.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,12 +145,12 @@ public class MainWindow extends JFrame {
 		});
 		center.add(end);
 		
-		inthebag = new JLabel("Még " + engine.activePlayer.getOil_num() +" olajod és " + engine.activePlayer.getSlime_num() + " ragacsod van.");
+		inthebag = new JLabel("Meg " + engine.activePlayer.getOil_num() +" olajod es " + engine.activePlayer.getSlime_num() + " ragacsod van.");
 		inthebag.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		center.add(inthebag);
 		
 		//ALSO PANEL
-		roundsleft = new JLabel("Hátralévõ körök száma: " + engine.getRound_num());
+		roundsleft = new JLabel("Hatralevo korok szama: " + engine.getRound_num());
 		roundsleft.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		down.add(roundsleft);
 		
