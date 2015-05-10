@@ -21,7 +21,7 @@ public class GraphicOil implements Drawable{
 			if ((x-22)>0) x=x-22; 
 			if ((y-22)>0) y=y-22;
 			//kirajzolas
-			g.drawImage(Resources.getOil(), x, y,null);
+			g.drawImage(image, x, y,null);
 		}
 		else{
 			oil=null;									//ha mar nincs a palyan toroljuk a hivatkozast, GC dolgozhat
