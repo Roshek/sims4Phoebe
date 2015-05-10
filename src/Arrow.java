@@ -30,6 +30,9 @@ public class Arrow {
 		endPoint.setX((int)xx);
 		endPoint.setY((int)yy);
 		
+		modifier.setX(endPoint.getX()-startPoint.getX());
+		modifier.setY(endPoint.getY()-startPoint.getY());
+		
 	};
 	
 	public void calculateModifier(){

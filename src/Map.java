@@ -65,11 +65,19 @@ public class Map {
 		/*if(field==null)									//TESZT
 			return false;	
 		*/
-
-		if(field.getRGB(c.getX(), c.getY()) == field.getRGB(0, 0)){
+		
+		if(c.getX()>field.getWidth() || c.getY()>field.getHeight())
 			return true;
-		}else
-			return false;		
+		
+		System.out.println("(3,3) pont színe: " + field.getRGB(3, 3) + " robot helyének színe: " + field.getRGB(c.getX(), c.getY()));
+		
+		if(field.getRGB(c.getX(), c.getY()) == field.getRGB(0, 0)){
+			System.out.println("Fentmaradt");
+			return false;
+		}else{
+			System.out.println("Leesett");
+			return true;
+		}
 	}
 
 	/**\brief Megadja a jatekosok kezdohelyeit

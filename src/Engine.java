@@ -115,6 +115,7 @@ public class Engine {
 		//System.out.println("->[:Engine].allPlayersDead()");
 		
 		System.out.println("\nMinenki leesett, nincs gyoztes.\n");
+		quit();
 		}
 	
 	
@@ -147,8 +148,10 @@ public class Engine {
 		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
 		for(Robot tmp: alivePlayers){
+			System.out.print(tmp.getPosition().getX() + " " + tmp.getPosition().getY() + " ugrás elõtti koord, ugrás utáni: ");
 			tmp.calculateCoords();
 			Coord newpos=tmp.getPosition();
+			System.out.println(newpos.getX() + " " + newpos.getY() + " x, y koordja a mozgatott robotnak, id: " + tmp.getID());
 			if(map.fall(newpos)){
 				System.out.println("I fell off fuck me!");
 				tmp.setAlive(false);
@@ -249,6 +252,9 @@ public class Engine {
 			i.timePassed();
 		}
 		round_num--;
+		
+		if(alivePlayers.size()==0)
+			allPlayersDead();
 		
 		//System.out.println("<-[:Engine].roundOver()");
 	}
@@ -351,6 +357,7 @@ public class Engine {
 			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
 		}
 		activePlayer=alivePlayers.get(0);
+		arrow.setStartPoint(activePlayer.getPosition());
 	}
 
 	/**\brief Kor passzolasa
@@ -378,6 +385,17 @@ public class Engine {
 //		activePlayer=newActivePlayer;
 //		
 //		//activePlayer=alivePlayers.get((alivePlayers.indexOf(activePlayer)+1)%alivePlayers.size());
+		
+		int index=alivePlayers.indexOf(activePlayer);
+		if(index==alivePlayers.size()-1){
+			roundOver();
+			activePlayer=alivePlayers.get(0);
+			arrow.setStartPoint(activePlayer.getPosition());
+			return;
+		}
+		index++;
+		activePlayer=alivePlayers.get(index);
+		arrow.setStartPoint(activePlayer.getPosition());
 	}
 
 	/**\brief uj csapda hozzaadasa
