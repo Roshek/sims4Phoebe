@@ -44,8 +44,6 @@ public class Arrow {
 		yy = (yy * ratio) + startPoint.getY();					// Annyira nem magic, a tavolsagokat aranyositjuk es hozzavesszuk a nyil kezdopontjahoz
 
 		
-		endPoint=new Coord();						//DEBUGOLÁSHOZ
-		
 		
 		endPoint.setX((int)xx);									// Vegpontok beallitasa
 		endPoint.setY((int)yy);
@@ -95,8 +93,8 @@ public class Arrow {
 		
 		//this.startPoint = startPoint;
 		new Coord(startPoint.getX(), startPoint.getY());			//Debugoláshoz
-		setModifier(new Coord(startPoint.getX()+len,0));	
-		//calculateModifier();
+		//setModifier(new Coord(startPoint.getX()+len,0));	
+		calculateModifier();
 	}
 
 	public Coord getEndPoint() {

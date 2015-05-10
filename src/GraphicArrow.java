@@ -9,8 +9,6 @@ public class GraphicArrow implements Drawable{
 	
 	public GraphicArrow(Arrow arrow){
 		this.arrow=arrow;
-		if(arrow==null)
-			System.out.println("arrow==null graphicarrow létrehozásánál");
 	}
 	
 	public void draw(Graphics g) {
