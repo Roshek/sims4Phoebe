@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -20,7 +19,7 @@ public class StartUpMenu extends JFrame {
 	JPanel panel=null;
 	JButton indit=null;
 	JButton kilep=null;
-	JComboBox jatekosszam=null;
+	JComboBox<String> jatekosszam=null;
 	int jszam=0;
 	
 		
@@ -44,7 +43,7 @@ public class StartUpMenu extends JFrame {
 		this.add(panel);
 		
 		String[] str = {"2", "3", "4"};
-		jatekosszam = new JComboBox(str);
+		jatekosszam = new JComboBox<String>(str);
 		jatekosszam.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

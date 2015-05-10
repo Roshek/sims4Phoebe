@@ -64,7 +64,7 @@ public class Main2 {
 				vegrehajt(parancs,args[0],null);										//a parancs feldolgozasa
 					
 			}while (!stop);
-			
+			parancsRead.close();
 		}
 		else if(args[0].equals(new String("1"))){						//Filebol olvasasos teszteset
 			System.out.println("File teszt...");

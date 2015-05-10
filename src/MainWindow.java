@@ -11,6 +11,10 @@ import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Engine engine=null;
 	private Controller controller=null;
 	private GamePanel gamePanel;
@@ -18,7 +22,7 @@ public class MainWindow extends JFrame {
 	public MainWindow(int jszam) {
 		
 		engine = new Engine();
-		this.engine=engine;
+
 		engine.init(jszam);
 		engine.setWindow(this);
 		
