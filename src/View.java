@@ -1,7 +1,6 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class View {
@@ -27,17 +26,16 @@ public class View {
 	 * @param engine
 	 */
 	public View(Engine engine){
-		this.engine=engine;
-		this.field=engine.map.getField();
+		this.setEngine(engine);
 		this.controller = new Controller(engine, this);
 		//JPanel?? TODO
 		
 		gMiniRobotList = new ArrayList<GraphicMiniRobot>();
 		gRobotList = new ArrayList<GraphicRobot>();
-		gArrowList = new ArrayList<GraphicArrow>();
+		setgArrowList(new ArrayList<GraphicArrow>());
 		gOilList = new ArrayList<GraphicOil>();
 		gSlimeList = new ArrayList<GraphicSlime>();
-		
+		field = Resources.getMap();
 		
 		gArrow=new GraphicArrow(engine.getArrow());
 		
@@ -73,7 +71,7 @@ public class View {
 	 *  kirajzolja az elemeiket.
 	 */
 	public void drawAll(Graphics g){
-		
+		drawField(g);
 		for(GraphicOil gOil: gOilList){
 			gOil.draw(g);
 		}
@@ -93,8 +91,8 @@ public class View {
 	 * Kirajzolja a palyat
 	 * TODO: lehet mashova kene
 	 */
-	private void drawField(){
-		
+	private void drawField(Graphics g){
+		 g.drawImage(field, 0, 0, null);
 	}
 	
 	/** Robot hozzaadasa
@@ -136,6 +134,22 @@ public class View {
 	}
 	public Controller getController() {
 		return controller;
+	}
+
+	public Engine getEngine() {
+		return engine;
+	}
+
+	public void setEngine(Engine engine) {
+		this.engine = engine;
+	}
+
+	public ArrayList<GraphicArrow> getgArrowList() {
+		return gArrowList;
+	}
+
+	public void setgArrowList(ArrayList<GraphicArrow> gArrowList) {
+		this.gArrowList = gArrowList;
 	}
 
 	

@@ -3,14 +3,12 @@ public class MiniRobot extends Robot {
 	private boolean onTrap=false;
 	private GraphicMiniRobot gMiniRobot;
 	
+	
 	public MiniRobot(Engine engine) {
 		super(engine);
 		setRadius(10);
 		setImpulse(new Coord (0,0));
-		
 
-		
-		
 	}
 	
 	/** Grafikus p�r l�trehoz�sa
@@ -23,10 +21,10 @@ public class MiniRobot extends Robot {
 		engine.view.miniRobotAdded(gMiniRobot);
 	}
 
-	/**\brief MiniRobot mesterséges intelligenciája 
+	/**\brief MiniRobot mesterseges intelligenciaja 
 	 * 
 	 * 20 hosszu lepesekkel el kezd ugralni a legkozelebbi
-	 * Traphez a palyan nyilegyenesen
+	 * Traphez a palya kozepvonalat kovetve
 	 * 
 	 * */
 	
@@ -34,29 +32,25 @@ public class MiniRobot extends Robot {
 		if (onTrap) //ha csapdan van, ne menjen sehova, takarítsa csak fel.
 			return;
 		
-		Coord trap = engine.getClosestTrap(position); 
-
+		Coord trap = engine.getClosestTrap(position);
+		double trapDist = 0;
+		trapDist = Coord.distance(position, trap);
 		if(trap==null) //ha nincs csapda nem kell semmit sem tennie
 			return;
+		Map map = engine.getMap(); //elkeri a mapet
 		
-		if (Coord.distance(getPosition(), trap) <= 20) setPosition(trap); //ha 20nal kozelebb van a traphez simán csak ráugrik
+		//ha a trap kozelebb van mar, mintha ugrana meg egy midpointnyit, akkor ugorjon a trapre
+		if (trapDist <= Coord.distance(map.getNextMidpoint(map.getClosesMidpoint(position),
+														   map.getMoveDir(position, trap)), position)) 
+			setPosition(trap); 
 		else {
-			//hasonlo haromszogekkel egyszeruen kiszamolja
-			//merre kell ugralnia
-			//az egyik haromszog a MiniRobot es a Trap pozicioja kozott feszülo helyvektor
-			//a masik az a vektor ami a MiniRobot ugrasanak vegpontjaba mutat, szinten helyvektorkent
-			
-			double d = Coord.distance(getPosition(), trap); //a MiniRobot es a csapda pozicioja kozotti tavolsag
-			
-			double ratio = 20.0 / d; //az ugras hossza leosztva a tavolsaggal, igy meg van az arany a haromszogek kozott
-			
-			double x = trap.getX()-getPosition().getX(); //helyvektort csinalunk
-			double y = trap.getY()-getPosition().getY();
-			
-			x = x * ratio; //majd leroviditjuk annyira a ket koordinatajat amennyire a MiniRobotnak mozdulnia kell
-			y = y * ratio;
-			
-			setPosition(new Coord ((int)(x + position.getX()),(int)(y + position.getY()))); //megadjuk az uj poziciot, ami a regi eltolva xy-al
+			if (Coord.distance(position, map.getClosesMidpoint(position)) > 5) { // ha tul tavol van egy midpointtol
+				position = map.getClosesMidpoint(position); //akkor raugrik es ez volt a lepese
+				return;
+			}
+			position = map.getClosesMidpoint(position); //ha eleg kozel van akkor pedig mar a kovetkezore ugrik,
+														//hogy ne tunjon ugy mintha egyhelyben allna
+			position = map.getNextMidpoint(position, map.getMoveDir(position, trap));	 
 		}
 	}
 	

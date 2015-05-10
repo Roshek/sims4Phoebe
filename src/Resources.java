@@ -24,7 +24,7 @@ public abstract class Resources {
 			map=ImageIO.read(new File("map.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Failed to load images");
+			System.out.println(e + "Failed to load images");
 		}
 	}
 

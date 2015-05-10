@@ -10,7 +10,7 @@ public class GraphicArrow implements Drawable{
 	}
 	
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+		g.drawLine(arrow.getStartPoint().getX(), arrow.getStartPoint().getY(), arrow.getEndPoint().getX(), arrow.getEndPoint().getY());
 		
 	}
 

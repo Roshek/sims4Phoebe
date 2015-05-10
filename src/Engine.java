@@ -1,4 +1,3 @@
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,6 +12,9 @@ public class Engine {
 	public ArrayList<MiniRobot> miniRobots;
 	
 	public Map map;
+	
+
+
 	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
@@ -142,7 +144,7 @@ public class Engine {
 		
 		//System.out.println("->[:Engine].moveRobots()");
 		
-		int numberOfRobotsAtStartOfCycle=alivePlayers.size();
+		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
 		for(Robot tmp: alivePlayers){
 			tmp.calculateCoords();
@@ -423,7 +425,7 @@ public class Engine {
 			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
 		}
 		
-		winner=winningPlayer;
+		setWinner(winningPlayer);
 	}
 
 	public int getPlayer_num() {					//KeSZ
@@ -504,6 +506,17 @@ public class Engine {
 		this.map=map;
 	}
 	
+	public Map getMap() {
+		return map;
+	}
+
+	public Robot getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Robot winner) {
+		this.winner = winner;
+	}
 	
 	
 
