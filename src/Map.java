@@ -1,10 +1,7 @@
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
@@ -33,6 +30,12 @@ public class Map {
 //	}
 	
 	public Map(){
+	    try {
+	    	field = ImageIO.read(new File("map.png"));
+	    } 
+	    catch (IOException e) {
+	     
+	    }
 		calculateMidline();
 	}
 	
@@ -209,8 +212,6 @@ private void calculateMidline(){
 			System.out.println("aaaaaaa: " + a);	
 		}
 		
-		
-		
 		Coord ls = allmidline.get(0);
 		midline.add(ls);
 		for (Coord c : allmidline) {
@@ -219,6 +220,47 @@ private void calculateMidline(){
 				ls = c;
 			}
 		}
+	}
+
+	public Coord getClosesMidpoint(Coord c){
+		int i = 0;
+		double d = 1000;
+		for (Coord cr : midline) {
+			if (Coord.distance(cr, c) < d){
+				i = midline.indexOf(cr); 	
+				d = Coord.distance(cr, c);
+			}
+		}
+		return midline.get(i);
+	}
+	
+	public Coord getSpawntPoint(int all, int nth){
+		return midline.get((midline.size() / all) * nth);
+	}
+	
+	public boolean getMoveDir(Coord robot, Coord trapPos){
+		int robotPos = midline.indexOf(robot);
+		int mSize = midline.size();
+		
+		int nextPos = robotPos + 1;
+		if (nextPos == mSize) nextPos = 0;
+		
+		int prevPos = robotPos - 1;
+		if (prevPos == -1) prevPos = mSize - 1;
+		
+		if (Coord.distance(midline.get(nextPos), trapPos) < Coord.distance(midline.get(prevPos), trapPos)) return true;
+		else return false;
+	}
+	
+	public Coord getNextMidpoint(Coord c, boolean dir) {
+		int nextPos = 0;
+		if (dir) nextPos = midline.indexOf(c) + 1;
+		if (nextPos == midline.size()) nextPos = 0;
+		if (!dir) nextPos = midline.indexOf(c) - 1;
+		if (nextPos == -1) nextPos = midline.size() - 1;
+		
+		return midline.get(nextPos);
+		
 	}
 
 	public ArrayList<Coord> getMidline() {
