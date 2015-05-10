@@ -32,7 +32,8 @@ public abstract class Resources {
 		//a kulonbozo jatekosok robotjai kulonbozo szinuek
 		//robot=ImageIO.read(new File("robot"+(r.getID()-1)+".png"));
 		//return robot;
-		return robot[r.getID()-1];
+		//return robot[r.getID()-1];
+		return robot[r.getID()];
 	}
 
 	public static BufferedImage getMiniRobot() {
