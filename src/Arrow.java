@@ -1,8 +1,8 @@
 public class Arrow {
-	private Coord modifier;
-	private Coord startPoint;
-	private Coord endPoint;
-	private int len = 40;
+	private Coord modifier;				// 
+	private Coord startPoint;			// A nyil kezdeti pontja
+	private Coord endPoint;				// A nyil végpontja (len tavolsagagra az aktiv robottol
+	private int len = 40;				// A nyil hossza
 
 	public Arrow(){
 		setModifier(new Coord(0,0));	
@@ -17,20 +17,22 @@ public class Arrow {
 	}
 	
 	public void calculateEndPoint(int x, int y){
-		double d = Coord.distance(startPoint, endPoint); 
+		double d = Coord.distance(startPoint, new Coord(x,y)); 		// A d tarolja a robot es a kattintas helye kozotti tavolsagot
 		
-		double ratio = len / d; 
+		double ratio = len / d; 								// Tavolas aranya
 		
-		double xx = x-startPoint.getX(); 
-		double yy = y-startPoint.getY();
+		double xx = x-startPoint.getX(); 						// Az xx tarolja a nyil kezdetenek es az uj helyenek kulonbseget
+		double yy = y-startPoint.getY();						// Az elozo y koordinatara
 		
-		xx = (xx * ratio) + startPoint.getX(); 
-		yy = (yy * ratio) + startPoint.getY();
+		xx = (xx * ratio) + startPoint.getX(); 					// Koordinata geometria magic
+		yy = (yy * ratio) + startPoint.getY();					// Annyira nem magic, a tavolsagokat aranyositjuk es hozzavesszuk a nyil kezdopontjahoz
+
 		
-		endPoint.setX((int)xx);
+		
+		endPoint.setX((int)xx);									// Vegpontok beallitasa
 		endPoint.setY((int)yy);
 		
-		modifier.setX(endPoint.getX()-startPoint.getX());
+		modifier.setX(endPoint.getX()-startPoint.getX());		// Modosito ertekek beallitasa
 		modifier.setY(endPoint.getY()-startPoint.getY());
 		
 	};
