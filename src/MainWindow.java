@@ -1,19 +1,41 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 public class MainWindow extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
 	private Engine engine=null;
 	private Controller controller=null;
 	private GamePanel gamePanel;
+
+	JPanel gameplace=null;
+	JPanel others=null;
+	JPanel up=null;
+	JPanel center=null;
+	JPanel down=null;
+	
+	JLabel title=null;
+	JLabel putatrap=null;
+	JButton putoil=null;
+	JButton putslime=null;
+	JLabel nextplayer=null;
+	JButton end=null;
+	JLabel inthebag=null;
+	JLabel roundsleft=null;
+	
 	
 	public MainWindow(int jszam) {
 		
@@ -21,15 +43,39 @@ public class MainWindow extends JFrame {
 		this.engine=engine;
 		engine.init(jszam);
 		engine.setWindow(this);
-		
 		this.controller=engine.getController();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		
-		getContentPane().setLayout(null);
+		setTitle("Phoebe");
+		setSize(1324, 768);
+		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		
-		gamePanel = new GamePanel(engine.view);
-		gamePanel.addMouseListener(new MouseAdapter() {
+		
+		init();
+		setVisible(true);
+	}
+	
+	private void init() {
+		
+		//PANELEK
+		gameplace = new GamePanel(engine.view);
+		//gameplace = new JPanel();
+		gameplace.setBackground(Color.BLACK);
+		gameplace.setPreferredSize(new Dimension(1024, 768));
+
+		others = new JPanel();
+		others.setBackground(Color.RED);
+		others.setPreferredSize(new Dimension(300, 768));
+		
+		this.setLayout(new BorderLayout());
+		add(gameplace, BorderLayout.WEST);
+		add(others, BorderLayout.EAST);
+		
+		//JATEKTER
+		gameplace.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(controller==null)
@@ -37,52 +83,67 @@ public class MainWindow extends JFrame {
 				controller.setArrow(arg0.getX(), arg0.getY());
 			}
 		});
-		gamePanel.setBounds(0, 0, 806, 498);
-		getContentPane().add(gamePanel);
 		
-		JLabel lblNewLabel = new JLabel("X.kor (30-X van hatra))");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(807, 11, 162, 31);
-		getContentPane().add(lblNewLabel);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(817, 40, 152, 129);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		//FELSO PANEL
+		title = new JLabel("Kezelõfelület");
+		title.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		others.add(title);
 		
-		JLabel lblElsJtkos = new JLabel("Aktiv jatekos");
-		lblElsJtkos.setBounds(10, 11, 71, 14);
-		panel.add(lblElsJtkos);
+		//KOZEPSO PANEL
+		putatrap = new JLabel("Csapda elhelyezése:");
+		putatrap.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		others.add(putatrap);
 		
-		JButton btnNewButton = new JButton("Olaj lerak");
-		btnNewButton.addActionListener(new ActionListener() {
+		putoil = new JButton("Olaj lerakása");
+		putoil.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		putoil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.putOil();
 			}
 		});
-		btnNewButton.setBounds(10, 25, 132, 23);
-		panel.add(btnNewButton);
 		
-		JButton btnRagacsLerak = new JButton("Ragacs lerak");
-		btnRagacsLerak.addActionListener(new ActionListener() {
+		others.add(putoil);
+		
+		putslime = new JButton("Ragacs lerakása");
+		putslime.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		putslime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.putSlime();
 			}
 		});
-		btnRagacsLerak.setBounds(10, 59, 132, 23);
-		panel.add(btnRagacsLerak);
 		
-		JButton btnKrVge = new JButton("Kor vege");
-		btnKrVge.addActionListener(new ActionListener() {
+		others.add(putslime);
+		
+		nextplayer = new JLabel("Következõ játékos:");
+		nextplayer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		others.add(nextplayer);
+		
+		end = new JButton("Kör vége");
+		end.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		end.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.turnPassed();
 			}
 		});
-		btnKrVge.setBounds(10, 93, 132, 23);
-		panel.add(btnKrVge);
-	}
+		 
+		others.add(end);
+		
+		//ALSO PANEL
+		inthebag = new JLabel("Még " + "X" +" olajod és " + "Y" + " ragacsod van.");
+		inthebag.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		others.add(inthebag);
+		
+		roundsleft = new JLabel("Hátralévõ körök száma: Z");
+		roundsleft.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		others.add(roundsleft);
+		
+		
+	}//init vege
 	
-	public void setController(Controller x){
+	
+	
+	 public void setController(Controller x){
 		controller=x;
 	}
 	
@@ -98,4 +159,19 @@ public class MainWindow extends JFrame {
 		this.engine=engine;
 		this.controller=engine.getController();
 	}
+	 
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
