@@ -84,7 +84,7 @@ public class Map {
 		//System.out.println("->[:Map].putPlayers(numberOfPlayers)");
 		ArrayList<Coord> tmp=new ArrayList<Coord>();
 		for(int i=0;i<numberOfPlayers;i++){
-			tmp.add(new Coord());
+			tmp.add(getSpawntPoint(numberOfPlayers, i));
 		}
 		return tmp;
 	}
@@ -234,7 +234,7 @@ private void calculateMidline(){
 		return midline.get(i);
 	}
 	
-	public Coord getSpawntPoint(int all, int nth){
+	private Coord getSpawntPoint(int all, int nth){
 		return midline.get((midline.size() / all) * nth);
 	}
 	
