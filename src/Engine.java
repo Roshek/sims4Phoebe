@@ -251,6 +251,10 @@ public class Engine {
 		for(Trap i:traps){
 			i.timePassed();
 		}
+		
+		
+		releaseMiniRobots();
+		
 		round_num--;
 		
 		if(alivePlayers.size()==0)
@@ -259,6 +263,22 @@ public class Engine {
 		//System.out.println("<-[:Engine].roundOver()");
 	}
 	
+	private void releaseMiniRobots() {
+		if(round_num%5==0 /*&& round_num!=30*/){
+			//TODO
+			for(int i=0;i<3;i++){
+				MiniRobot tmp = new MiniRobot(this);
+				miniRobots.add(tmp);
+				switch(i){
+				case 0: tmp.setPosition(new Coord(100,100)); break;
+				case 1: tmp.setPosition(new Coord(600,600)); break;
+				case 2: tmp.setPosition(new Coord(600,200)); break;
+				}
+			}
+		}
+		
+	}
+
 	//PUBLIC, TERVEZETT FuGGVeNYEK
 	
 	/**\brief Engine konstruktor
@@ -305,7 +325,6 @@ public class Engine {
 				try {
 					wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					System.out.println("Engine.play() Wait error ._.");
 				}
 			}
@@ -354,7 +373,7 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid am�g nincs putPlayers
+			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amig nincs putPlayers
 		}
 		activePlayer=alivePlayers.get(0);
 		arrow.setStartPoint(activePlayer.getPosition());

@@ -29,14 +29,15 @@ public class MiniRobot extends Robot {
 	 * */
 	
 	public void move(){
-		if (onTrap) //ha csapdan van, ne menjen sehova, takarítsa csak fel.
+		if (onTrap) //ha csapdan van, ne menjen sehova, takarisa csak fel.
 			return;
 		
 		Coord trap = engine.getClosestTrap(position);
 		double trapDist = 0;
-		trapDist = Coord.distance(position, trap);
+		
 		if(trap==null) //ha nincs csapda nem kell semmit sem tennie
 			return;
+		trapDist = Coord.distance(position, trap);
 		Map map = engine.getMap(); //elkeri a mapet
 		
 		//ha a trap kozelebb van mar, mintha ugrana meg egy midpointnyit, akkor ugorjon a trapre
