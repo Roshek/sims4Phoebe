@@ -15,7 +15,7 @@ public class GraphicMiniRobot implements Drawable{
 	}
 	
 	public void draw(Graphics g) {
-		if(miniRobot.isAlive() && miniRobot != null){	// Ellenorzes, ki kell-e meg rajzolni
+		if(miniRobot != null && miniRobot.isAlive()){	// Ellenorzes, ki kell-e meg rajzolni
 			//pozicio kinyerese
 			int x = miniRobot.getPosition().getX();
 			int y = miniRobot.getPosition().getY();
