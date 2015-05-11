@@ -3,7 +3,11 @@ public class MiniRobot extends Robot {
 	private boolean onTrap=false;
 	private GraphicMiniRobot gMiniRobot;
 	
-	
+	/** miniRobot konstruktora
+	 * a robot konstruktorat hivja,
+	 * plusz beallitja a sugarat 10-re
+	 * @param engine
+	 */
 	public MiniRobot(Engine engine) {
 		super(engine);
 		setRadius(10);
