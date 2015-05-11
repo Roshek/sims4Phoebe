@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 
 public class Engine {
 
+	
+	// Valtozok inicializalasa
 	private static final int EXIT_ON_CLOSE = 0;
 	StartUpMenu sm;
 	private int player_num;
@@ -22,45 +24,64 @@ public class Engine {
 	public ArrayList<MiniRobot> miniRobots;
 	
 	public Map map;
-	
-
 
 	public Robot activePlayer;
 	private Robot winner;
 	
 	private MainWindow window;
 	private Arrow arrow;
+
+	private int RobotID=1;
 	
+	public View view;
+
 	
+	/** Window getter
+	 * 
+	 * @return
+	 */
 	public MainWindow getWindow() {
 		return window;
 	}
 
+	/** Window setter
+	 * 
+	 * @param window
+	 */
 	public void setWindow(MainWindow window) {
 		this.window = window;
 		view.setWindow(window);
 	}
 
+	/** Arrow getter
+	 * 
+	 * @return
+	 */
 	public Arrow getArrow(){
 		return arrow;
 	}
 	
+	/** activePlayer getter
+	 * 
+	 * @return
+	 */
 	public Robot getActivePlayer(){
 		return activePlayer;
 	}
 	
-
+	/** Controller getter
+	 * 
+	 * @return
+	 */
 	public Controller getController(){
 		return view.getController();
 	}
 	
-	
-	private int RobotID=1;
-	
-	public View view;
-	
-	
-	private void moveminiRobots(){				//DONE
+	/** Minirobotok mozgatasa
+	 * Vegigmegy a minirobotok listajan,
+	 * Ellenorzi hogy az uj poziciojukban leestek-e
+	 */
+	private void moveminiRobots(){				
 		for(MiniRobot x : miniRobots){
 			x.move();
 			Coord place=x.getPosition();
@@ -71,17 +92,24 @@ public class Engine {
 		}
 	}
 	
-	public Coord getClosestTrap(Coord pos){		//DONE
-		if(!traps.isEmpty()){
+	/** Legkozelebbi csapda megadasa
+	 *  A parameterkent kapott poziciohoz legkozelebbi
+	 *  csapda koordinatajat adja vissza
+	 * 
+	 * @param pos
+	 * @return
+	 */
+	public Coord getClosestTrap(Coord pos){		
+		if(!traps.isEmpty()){																// Ha van csapda a palyan
 			Trap tmp=traps.get(0);
-			for(Trap x: traps){
-				if(Coord.distance(pos,tmp.getPos()) > Coord.distance(pos, x.getPos())){
+			for(Trap x: traps){																// vegigmegy a csapdakon,
+				if(Coord.distance(pos,tmp.getPos()) > Coord.distance(pos, x.getPos())){		// majd kivalasztja a legkozelebbit
 					tmp=x;
 				}
 			}
-			return tmp.getPos();
+			return tmp.getPos();															// es visszaadja.
 		}
-		return null;
+		return null;																		// Ha nincs csapda a palyan, null-al ter vissza
 	}
 	
 	private void testMiniRobotForTraps(){
