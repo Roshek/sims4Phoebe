@@ -273,6 +273,8 @@ public class Engine {
 		// TODO Auto-generated method stub
 		System.out.println("Ide jon egy parbeszedablak :P");
 		//kell bele egy feltetel ellnorzes: if(winner==null), es e szerint kell kiirni valamit
+		
+		quit();
 	}
 
 	private void releaseMiniRobots() {
