@@ -190,7 +190,7 @@ public class Main {
 		        	if(be_5.equals("L")){
 		        		engine.allPlayersDead();
 		        	}else if(be_5.equals("E")){
-		        		engine.whoWins();
+		        		//engine.whoWins();
 		        		engine.quit();
 		        	}else if(be_5.equals("K")){
 		        		engine.quit();
