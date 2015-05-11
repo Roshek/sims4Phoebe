@@ -183,6 +183,7 @@ public class MainWindow extends JFrame {
 	public void updateLabels(){
 		activeplayer.setText(engine.activePlayer.ID + ". Jatekos");
 		inthebag.setText("Meg " + engine.activePlayer.getOil_num() +" olajod es " + engine.activePlayer.getSlime_num() + " ragacsod van.");
+		roundsleft.setText("Hatralevo korok szama: " + engine.getRound_num());
 	}
 	 
 	
