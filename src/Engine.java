@@ -72,7 +72,7 @@ public class Engine {
 		if(!traps.isEmpty()){
 			Trap tmp=traps.get(0);
 			for(Trap x: traps){
-				if(Coord.distance(pos,tmp.getPos())<Coord.distance(pos, x.getPos())){
+				if(Coord.distance(pos,tmp.getPos()) > Coord.distance(pos, x.getPos())){
 					tmp=x;
 				}
 			}
