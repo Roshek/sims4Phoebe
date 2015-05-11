@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,9 +12,10 @@ import javax.swing.JPanel;
 public class Engine {
 
 	private static final int EXIT_ON_CLOSE = 0;
+	StartUpMenu sm;
 	private int player_num;
 	private int round_num;
-	public ArrayList<Robot> alivePlayers;			//innentol priv lenne
+	public ArrayList<Robot> alivePlayers;
 	public ArrayList<Robot> deadPlayers;
 	public ArrayList<Trap> traps;
 	
@@ -23,10 +25,8 @@ public class Engine {
 	
 
 
-	public Robot activePlayer;						//eddig
+	public Robot activePlayer;
 	private Robot winner;
-	
-	//PETI M�DOS�T�SAI 2015.05.08.
 	
 	private MainWindow window;
 	private Arrow arrow;
@@ -54,11 +54,6 @@ public class Engine {
 		return view.getController();
 	}
 	
-	
-	//PETI V�GE
-
-	
-	//2015.04.20.
 	
 	private int RobotID=1;
 	
@@ -120,7 +115,6 @@ public class Engine {
 	 */
 	
 	public void allPlayersDead(){
-		//System.out.println("->[:Engine].allPlayersDead()");
 		
 		System.out.println("\nMinenki leesett, nincs gyoztes.\n");
 		endGame();
@@ -134,8 +128,6 @@ public class Engine {
 	 */
 	
 	public void quit(){
-		//System.out.println("->[:Engine].quit()");
-		
 		System.exit(0);
 	}
 	
@@ -149,9 +141,7 @@ public class Engine {
 	 * robotok koze.
 	 */
 	
-	private void moveRobots(){					//KeSZ				///VALoSZ�N�LEG HIBaS
-		
-		//System.out.println("->[:Engine].moveRobots()");
+	private void moveRobots(){					//KeSZ
 		
 		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
@@ -180,8 +170,6 @@ public class Engine {
 	
 	private void trapRobots(){					//KeSZ				//MoDOSULT
 		
-		//System.out.println("->[:Engine].trapRobots()");
-		
 		for(Robot robot: alivePlayers){
 			Coord pos=robot.getPosition();
 			
@@ -206,7 +194,7 @@ public class Engine {
 				}
 			}
 		}
-		//System.out.println("<-[:Engine].trapRobots()");
+		
 	}
 	
 	/**\brief Kor vege
@@ -219,8 +207,6 @@ public class Engine {
 	 */
 	
 	public void roundOver(){					//KeSZ		//csak a szkeletonhoz public
-		
-		//System.out.println("->[:Engine]roundOver()");
 		
 		trapRobots();
 		moveRobots();
@@ -274,7 +260,6 @@ public class Engine {
 		if(alivePlayers.size()==0)
 			endGame();
 		
-		//System.out.println("<-[:Engine].roundOver()");
 	}
 	
 	private void endGame() {
@@ -282,13 +267,14 @@ public class Engine {
 		JFrame endframe = new JFrame();
 		endframe.setTitle("Jatek vege");
 		endframe.setSize(300, 100);
+		endframe.setBackground(Color.RED);
 		endframe.setResizable(false);
 		endframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		endframe.setLocationRelativeTo(null);
 		
 		JPanel endpanel = new JPanel();
-		JLabel endlabel = new JLabel("A leghoszabb utat a "+winner.getID()+". robot tette meg.");
-		JButton endbutton = new JButton("Kilep");
+		JLabel endlabel = new JLabel("A leghoszabb utat a(z) "+winner.getID()+". robot tette meg.");
+		JButton endbutton = new JButton("Folytatas");
 		
 		endframe.add(endpanel);
 		endpanel.add(endlabel);
@@ -297,7 +283,9 @@ public class Engine {
 				new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						quit();
+						sm = new StartUpMenu();
+						window.dispose();
+						endframe.dispose();
 						
 					}});
 		endpanel.add(endbutton);	
@@ -328,8 +316,6 @@ public class Engine {
 	
 	public Engine(){							//KeSZ
 		
-		//System.out.println("->[:Engine]Engine()");
-		
 		alivePlayers=new ArrayList<Robot>();
 		deadPlayers=new ArrayList<Robot>();
 		miniRobots=new ArrayList<MiniRobot>();
@@ -355,8 +341,6 @@ public class Engine {
 	 */
 	
 	public void play() {						//PARTIALLY READY
-		
-		//System.out.println("->[:Engine].play()");
 		
 		while(round_num>0){
 			for(Robot tmp: alivePlayers){
@@ -386,8 +370,6 @@ public class Engine {
 	 * @param numberOfPlayers
 	 */
 	public void init(int numberOfPlayers) {			//KeSZ
-		
-		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
 		Resources.load();
 		arrow=new Arrow();
@@ -431,7 +413,6 @@ public class Engine {
 	 */
 	public void turnPassed() {		//TO BE REVIEWED				//MODIFIED
 		
-		//System.out.println("->[:Engine].turnPassed(modifier)");
 		for(Robot r : alivePlayers)
 			System.out.println("valtas elott"+r.getModifier().getX()+","+r.getModifier().getY());
 		activePlayer.setModifier(arrow.getModifier());		//A kort atado jatekos megkapja a beallitott nyil modifieret
@@ -471,9 +452,6 @@ public class Engine {
 	 * @param x
 	 */
 	public void addTrap(Trap x) {					//KeSZ
-				
-		//System.out.println("->[:Engine].addTrap(x)");
-		
 		traps.add(x);
 	}
 
@@ -485,9 +463,7 @@ public class Engine {
 	 * 
 	 * @param r
 	 */
-	public void dieRobot(Robot r) {					//KeSZ					//csak a szkeletonban public
-		
-		//System.out.println("->[:Engine].dieRobot(r)");
+	public void dieRobot(Robot r) {					//KeSZ
 		r.setAlive(false);
 	}
 
@@ -499,10 +475,8 @@ public class Engine {
 	 *  
 	 */
 	
-	private void whoWins() {							//KeSZ					//csak a szkeletonban public
+	private void whoWins() {							//KeSZ
 		//TODO
-		//System.out.println("->[:Engine].whoWins()");
-		
 		Robot winningPlayer;
 		if(!alivePlayers.isEmpty())
 			winningPlayer=alivePlayers.get(0);
@@ -517,82 +491,34 @@ public class Engine {
 	}
 
 	public int getPlayer_num() {					//KeSZ
-		//System.out.println("->[:Engine].getPlayer_num()");
-		
 		return this.player_num;
 	}
 
-	/**
-	 * 
-	 * @param player_num
-	 */
+
 	public void setPlayer_num(int player_num) {		//KeSZ
-		
-		//System.out.println("->[:Engine].setPlayer_num(player_num)");
-		
 		this.player_num = player_num;
 	}
 
 	public int getRound_num() {						//KeSZ
-		
-		//System.out.println("->[:Engine].getRound_num()");
-		
 		return this.round_num;
 	}
 
-	/**
-	 * 
-	 * @param round_num
-	 */
+	
 	public void setRound_num(int round_num) {		//KeSZ
-		
-		//System.out.println("->[:Engine].setRound_num(numberOfRounds)");
-		
 		this.round_num = round_num;
 	}
-
-//	public ArrayList<Robot> getPlayers() {			//Ez szerintem nem fog kelleni
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	/**
-//	 * 
-//	 * @param players
-//	 */
-//	public void setPlayers(ArrayList<Robot> players) {
-//		throw new UnsupportedOperationException();
-//	}
-	
 	
 	
 
 	public ArrayList<Trap> getTraps() {				//KeSZ
-		
-		//System.out.println("->[:Engine].getTraps()");
-		
 		return this.traps;
 	}
 
-	/**
-	 * 
-	 * @param traps
-	 */
+	
 	public void setTraps(ArrayList<Trap> traps) {	//KeSZ
-		
-		//System.out.println("->[:Engine].setTraps(traps)");
-		
 		this.traps = traps;
 	}
 	
-	public void setActivePlayer(Robot robot){		//Csak a szkeletonhoz kell
-		activePlayer=robot;
-	}
-	public void addAlivePlayer(Robot robot){		//csak a szkeletonhoz kell
-		alivePlayers.add(robot);
-	}
-	public void setMap(Map map){					//csak a szkeletonhoz kell
-		this.map=map;
-	}
 	
 	public Map getMap() {
 		return map;
@@ -607,5 +533,14 @@ public class Engine {
 	}
 	
 	
+	public void setActivePlayer(Robot robot){
+		activePlayer=robot;
+	}
+	public void addAlivePlayer(Robot robot){
+		alivePlayers.add(robot);
+	}
+	public void setMap(Map map){
+		this.map=map;
+	}
 
 }
