@@ -92,6 +92,10 @@ public class Arrow {
 		setModifier(new Coord(len,0));	
 	}
 
+	/* ===== GETTER-SETTER METODUSOK =====
+	 * 
+	 */
+	
 	public Coord getEndPoint() {
 		return endPoint;
 	}
