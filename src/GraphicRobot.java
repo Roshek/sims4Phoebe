@@ -19,8 +19,10 @@ public class GraphicRobot implements Drawable{
 				int x = robot.getPosition().getX();
 				int y = robot.getPosition().getY();
 				// eltolni kell, mert a drawimage a bal sarokhoz igazitja a kepet, nekunk meg a kozeppont van meg
-				if ((x-30)>0) x=x-30; 
+				if ((x-30)>0) x=x-30;
+				else x=0;
 				if ((y-30)>0) y=y-30;
+				else y=0;
 				//kirajzolas
 				image = Resources.getRobot(robot);
 				g.drawImage(image, x, y,null);
