@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 public class Engine {
 
+	private static final int EXIT_ON_CLOSE = 0;
 	private int player_num;
 	private int round_num;
 	public ArrayList<Robot> alivePlayers;			//innentol priv lenne
