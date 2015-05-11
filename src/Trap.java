@@ -5,7 +5,7 @@ public abstract class Trap {
 	private int r;
 	private Robot owner;
 	private int untilCleaned=2;
-	private int untilExpiration=4;
+	private int untilExpiration=40;
 	private boolean expired;
 
 	public abstract void spring(Robot r) ;

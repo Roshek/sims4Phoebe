@@ -256,14 +256,14 @@ private void calculateMidline(){
 		int prevPos = robotPos - 1;
 		if (prevPos == -1) prevPos = mSize - 1;
 		
-		/*System.out.println("");
+		System.out.println("");
 		System.out.println("_______-----------");
 		
 		System.out.println("MiniRobotPos: " + robot.getX() + " : " + robot.getY()  + "   robotPos: " + robotPos + "   mSize: " + mSize + "   nextPos: " + nextPos + "   prevPos: " + prevPos);
 		
 		System.out.println("");
 		System.out.println("");
-		*/if (Coord.distance(midline.get(nextPos), trapPos) < Coord.distance(midline.get(prevPos), trapPos)) return true;
+		if (Coord.distance(midline.get(nextPos), trapPos) < Coord.distance(midline.get(prevPos), trapPos)) return true;
 		else return false;
 	}
 	
