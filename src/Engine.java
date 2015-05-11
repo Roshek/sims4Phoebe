@@ -1,5 +1,12 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Engine {
 
@@ -270,7 +277,7 @@ public class Engine {
 	}
 	
 	private void endGame() {
-		whoWins(); //beallitjuk hogy ki nyert
+				whoWins(); //beallitjuk hogy ki nyert
 		JFrame endframe = new JFrame();
 		endframe.setTitle("Jatek vege");
 		endframe.setSize(300, 70);
@@ -287,8 +294,10 @@ public class Engine {
 		
 		endbutton.addActionListener(
 				new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						quit();
+						
 					}});
 		endpanel.add(endbutton);	
 		endframe.setVisible(true);
