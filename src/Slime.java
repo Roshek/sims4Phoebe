@@ -3,6 +3,9 @@ public class Slime extends Trap {
 	
 	private GraphicSlime gSlime;
 	
+	/** Slime konstruktora
+	 * letrehozza a grafikus parjat.
+	 */
 	public Slime(){
 		
 		gSlime = new GraphicSlime(this);
@@ -17,7 +20,6 @@ public class Slime extends Trap {
 	 * @param r
 	 */
 	
-	//kesz
 	public void spring(Robot r) {
 		
 		int x=r.getModifier().getX()/2;
@@ -31,10 +33,17 @@ public class Slime extends Trap {
 			this.setExpired(true);
 	}
 	
+	/** Ido mulasa
+	 * A ragacsra nincs hatassal az ido mulasa
+	 */
 	public void timePassed(){
 	
 	}
-
+	
+	/** grafikus par gettere
+	 * 
+	 * @return
+	 */
 	public GraphicSlime getGSlime() {
 		
 		return gSlime;
