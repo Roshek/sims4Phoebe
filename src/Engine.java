@@ -273,7 +273,7 @@ public class Engine {
 		endframe.setLocationRelativeTo(null);
 		
 		JPanel endpanel = new JPanel();
-		JLabel endlabel = new JLabel("A leghoszabb utat a(z) "+winner.getID()+". robot tette meg.");
+		JLabel endlabel = new JLabel("A leghoszabb utat a(z) "+winner.getID()+". robot tette meg az eletben maradtak kozul.");
 		JButton endbutton = new JButton("Folytatas");
 		
 		endframe.add(endpanel);
@@ -484,9 +484,9 @@ public class Engine {
 		for(Robot tmp: alivePlayers){
 			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
 		}
-		for(Robot tmp: deadPlayers){
+		/*for(Robot tmp: deadPlayers){
 			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
-		}
+		}*/
 		setWinner(winningPlayer);
 	}
 
