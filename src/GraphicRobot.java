@@ -19,13 +19,20 @@ public class GraphicRobot implements Drawable{
 				int x = robot.getPosition().getX();
 				int y = robot.getPosition().getY();
 				// eltolni kell, mert a drawimage a bal sarokhoz igazitja a kepet, nekunk meg a kozeppont van meg
+				BufferedImage tmp=image;
 				if ((x-30)>0) x=x-30;
-				else x=0;
+				else{ 
+					//x=0;
+					tmp=tmp.getSubimage(30-x, 0, tmp.getWidth()-30+x, tmp.getHeight());
+				}
 				if ((y-30)>0) y=y-30;
-				else y=0;
+				else{ 
+					//y=0;
+					tmp=tmp.getSubimage(0, 30-y, tmp.getWidth(), tmp.getHeight()-30+y);
+				}
 				//kirajzolas
 				image = Resources.getRobot(robot);
-				g.drawImage(image, x, y,null);
+				g.drawImage(tmp, x, y,null);
 		}
 		else{
 			//robot=null;	// Itt nem toroljuk a referenciat, tovabbfejleszthetosegi lehetosegek miatt.
