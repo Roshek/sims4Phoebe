@@ -22,13 +22,15 @@ public class GraphicRobot implements Drawable{
 				BufferedImage tmp=image;
 				if ((x-30)>0) x=x-30;
 				else{ 
-					//x=0;
+					
 					tmp=tmp.getSubimage(30-x, 0, tmp.getWidth()-30+x, tmp.getHeight());
+					x=0;
 				}
 				if ((y-30)>0) y=y-30;
 				else{ 
-					//y=0;
+										
 					tmp=tmp.getSubimage(0, 30-y, tmp.getWidth(), tmp.getHeight()-30+y);
+					y=0;
 				}
 				//kirajzolas
 				image = Resources.getRobot(robot);
