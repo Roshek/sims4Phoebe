@@ -174,7 +174,7 @@ public class Engine {
 			Coord pos=robot.getPosition();
 			
 			for(Trap trap: traps){
-				if(trap.collide(pos)){
+				if(trap.getOwner() != robot && trap.collide(pos)){
 					trap.spring(robot);
 				}
 			}
@@ -264,7 +264,7 @@ public class Engine {
 	
 	private void endGame() {
 				whoWins(); //beallitjuk hogy ki nyert
-		JFrame endframe = new JFrame();
+		final JFrame endframe = new JFrame();
 		endframe.setTitle("Jatek vege");
 		endframe.setSize(300, 100);
 		endframe.setBackground(Color.RED);
