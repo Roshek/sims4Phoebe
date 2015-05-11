@@ -5,10 +5,7 @@ import javax.swing.JPanel;
 
 
 public class GamePanel extends JPanel {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	View view;
 	BufferedImage background;
@@ -18,6 +15,11 @@ public class GamePanel extends JPanel {
 		background=Resources.getMap();
 	}
 	
+	/**\Brief paintComponent feluldefinialva
+	 * 
+	 * Ujrarajzolasnal kirajzolja a jatekpalyat, majd meghivja a view.drawAll()-t
+	 * 
+	 */
     protected void paintComponent(Graphics g){
     	super.paintComponent(g);
     	
