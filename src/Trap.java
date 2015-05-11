@@ -5,7 +5,7 @@ public abstract class Trap {
 	private int r;
 	private Robot owner;
 	private int untilCleaned=2;
-	private int untilExpiration=40;
+	private int untilExpiration=10;
 	private boolean expired;
 
 	public abstract void spring(Robot r) ;
@@ -27,6 +27,7 @@ public abstract class Trap {
 	{
 		x.setOnTrap(true);
 		this.beingCleaned();
+		if (untilCleaned == 0) x.setOnTrap(false);
 	}
 	
 	

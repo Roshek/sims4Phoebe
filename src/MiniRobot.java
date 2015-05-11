@@ -41,8 +41,7 @@ public class MiniRobot extends Robot {
 		Map map = engine.getMap(); //elkeri a mapet
 		
 		//ha a trap kozelebb van mar, mintha ugrana meg egy midpointnyit, akkor ugorjon a trapre
-		if (trapDist <= Coord.distance(map.getNextMidpoint(map.getClosesMidpoint(position),
-														   map.getMoveDir(map.getClosesMidpoint(position), trap)), position)) {
+		if (trapDist <= 70) {
 			setPosition(trap);
 		//System.out.println("MiniRobot:  Pos: " + position);
 		}
