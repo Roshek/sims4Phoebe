@@ -58,8 +58,7 @@ public class Robot {
 	
 	public void calculateCoords() {					//KeSZ
 
-		//impulse=Coord.add(impulse, modifier);
-		impulse=modifier;							//DEBUGOLÁSHOZ TO BE REROLLED
+		impulse=Coord.add(impulse, modifier);
 		Coord oldpos= position;
 		
 		if(impulse.getX()==0 && impulse.getY()==0)
