@@ -1,63 +1,87 @@
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 public class Engine {
 
+	
+	// Valtozok inicializalasa
+	private static final int EXIT_ON_CLOSE = 0;
+	StartUpMenu sm;
 	private int player_num;
 	private int round_num;
-	public ArrayList<Robot> alivePlayers;			//innentol priv lenne
+	public ArrayList<Robot> alivePlayers;
 	public ArrayList<Robot> deadPlayers;
 	public ArrayList<Trap> traps;
 	
 	public ArrayList<MiniRobot> miniRobots;
 	
 	public Map map;
-	
 
-
-	public Robot activePlayer;						//eddig
+	public Robot activePlayer;
 	private Robot winner;
-	
-	//PETI Mï¿½DOSï¿½Tï¿½SAI 2015.05.08.
 	
 	private MainWindow window;
 	private Arrow arrow;
+
+	private int RobotID=1;
 	
+	public View view;
+
 	
+	/** Window getter
+	 * 
+	 * @return
+	 */
 	public MainWindow getWindow() {
 		return window;
 	}
 
+	/** Window setter
+	 * 
+	 * @param window
+	 */
 	public void setWindow(MainWindow window) {
 		this.window = window;
 		view.setWindow(window);
 	}
 
+	/** Arrow getter
+	 * 
+	 * @return
+	 */
 	public Arrow getArrow(){
 		return arrow;
 	}
 	
+	/** activePlayer getter
+	 * 
+	 * @return
+	 */
 	public Robot getActivePlayer(){
 		return activePlayer;
 	}
 	
-
+	/** Controller getter
+	 * 
+	 * @return
+	 */
 	public Controller getController(){
 		return view.getController();
 	}
 	
-	
-	//PETI VÉGE
-
-	
-	//2015.04.20.
-	
-	private int RobotID=1;
-	
-	public View view;
-	
-	
-	private void moveminiRobots(){				//DONE
+	/** Minirobotok mozgatasa
+	 * Vegigmegy a minirobotok listajan,
+	 * Ellenorzi hogy az uj poziciojukban leestek-e
+	 */
+	private void moveminiRobots(){				
 		for(MiniRobot x : miniRobots){
 			x.move();
 			Coord place=x.getPosition();
@@ -68,34 +92,46 @@ public class Engine {
 		}
 	}
 	
-	public Coord getClosestTrap(Coord pos){		//DONE
-		if(!traps.isEmpty()){
+	/** Legkozelebbi csapda megadasa
+	 *  A parameterkent kapott poziciohoz legkozelebbi
+	 *  csapda koordinatajat adja vissza
+	 * 
+	 * @param pos
+	 * @return
+	 */
+	public Coord getClosestTrap(Coord pos){		
+		if(!traps.isEmpty()){																// Ha van csapda a palyan
 			Trap tmp=traps.get(0);
-			for(Trap x: traps){
-				if(Coord.distance(pos,tmp.getPos())<Coord.distance(pos, x.getPos())){
+			for(Trap x: traps){																// vegigmegy a csapdakon,
+				if(Coord.distance(pos,tmp.getPos()) > Coord.distance(pos, x.getPos())){		// majd kivalasztja a legkozelebbit
 					tmp=x;
 				}
 			}
-			return tmp.getPos();
+			return tmp.getPos();															// es visszaadja.
 		}
-		return null;
+		return null;																		// Ha nincs csapda a palyan, null-al ter vissza
 	}
 	
+	/** Minirobotok tesztelese a palyan
+	 * Tesztek, hogy a minirobotok utkoztek-e
+	 * valamivel a palyan
+	 * 
+	 */
 	private void testMiniRobotForTraps(){
-		for(MiniRobot x: miniRobots){
-			Coord place=x.getPosition();
+		for(MiniRobot x: miniRobots){							// Vegig kell menni minden miniRoboton,
+			Coord place=x.getPosition();						// elmenteni az aktualis poziciot
 			
-			for(Trap i: traps){
-				if(i.collide(place)){
+			for(Trap i: traps){									// Teszt az osszes csapdara, hogy ralepett-e
+				if(i.collide(place)){							// az aktualisan vizsgalt miniRobot
 					i.steppedOnByMiniRobot(x);
 				}
 			}
-			for(Robot i: alivePlayers){
+			for(Robot i: alivePlayers){							// Hasonloan az elozohoz, nagy robotra tesztelve
 				if(i.collide(place))
 					i.steppedOnByMiniRobot(x);
 			}
 			for(MiniRobot i: miniRobots){
-				if(i.collide(place) && (i.getID()!=x.getID()))  //vegigmegy egy minirobot az osszes miniroboton, ezert ki kell zarni, hogy magat is vizsgalja
+				if(i.collide(place) && (i.getID()!=x.getID()))  // Vegigmegy egy minirobot az osszes miniroboton, ezert ki kell zarni, hogy magat is vizsgalja
 					i.steppedOnByMinirobot(x);
 			}
 		}
@@ -109,12 +145,11 @@ public class Engine {
 	 * kijelzi a kepernyore es 
 	 * kilep a jatekbol.
 	 * 
-	 */
-	
+	 */	
 	public void allPlayersDead(){
-		//System.out.println("->[:Engine].allPlayersDead()");
 		
 		System.out.println("\nMinenki leesett, nincs gyoztes.\n");
+		endGame();
 		}
 	
 	
@@ -123,32 +158,26 @@ public class Engine {
 	 * Bezarja a programot.
 	 * 
 	 */
-	
 	public void quit(){
-		//System.out.println("->[:Engine].quit()");
-		
 		System.exit(0);
 	}
 	
 	
 	/**\brief Robotok mozgatasa
 	 * 
-	 * Minden meg elo robotra meghï¿½vja a
+	 * Minden meg elo robotra meghivja a
 	 * calCulateCoords() fuggvenyt, es 
 	 * ellenorzi, hogy leesett-e valamelyik.
 	 * Ha igen, akkor azt atteszi a halott 
 	 * robotok koze.
 	 */
-	
-	private void moveRobots(){					//KeSZ				///VALoSZï¿½Nï¿½LEG HIBaS
-		
-		//System.out.println("->[:Engine].moveRobots()");
-		
-		//int numberOfRobotsAtStartOfCycle=alivePlayers.size();
+	private void moveRobots(){					
 		
 		for(Robot tmp: alivePlayers){
+			System.out.print(tmp.getPosition().getX() + " " + tmp.getPosition().getY() + " ugras elotti koord, ugras utani: ");
 			tmp.calculateCoords();
 			Coord newpos=tmp.getPosition();
+			System.out.println(newpos.getX() + " " + newpos.getY() + " x, y koordja a mozgatott robotnak, id: " + tmp.getID());
 			if(map.fall(newpos)){
 				System.out.println("I fell off fuck me!");
 				tmp.setAlive(false);
@@ -162,20 +191,17 @@ public class Engine {
 	 * a helyuket, es ellenorizteti az
 	 * osszes csapdaval, hogy belelepett-e.
 	 * Ha igen, akkor atadja a csapdanak
-	 * a robotot, hogy az beallï¿½tsa a 
-	 * neki megfelelo modosï¿½tasokat.
+	 * a robotot, hogy az beallitsa a 
+	 * neki megfelelo modositasokat.
 	 * 
 	 */
-	
-	private void trapRobots(){					//KeSZ				//MoDOSULT
-		
-		//System.out.println("->[:Engine].trapRobots()");
+	private void trapRobots(){					
 		
 		for(Robot robot: alivePlayers){
 			Coord pos=robot.getPosition();
 			
 			for(Trap trap: traps){
-				if(trap.collide(pos)){
+				if(trap.getOwner() != robot && trap.collide(pos)){
 					trap.spring(robot);
 				}
 			}
@@ -195,21 +221,19 @@ public class Engine {
 				}
 			}
 		}
-		//System.out.println("<-[:Engine].trapRobots()");
+		
 	}
 	
 	/**\brief Kor vege
 	 * 
 	 * Amikor az utolso jatekos is elpasszolta
-	 * a koret, akkor hï¿½vodik meg. Meghï¿½vja a
+	 * a koret, akkor hivodik meg. Meghivja a
 	 * az engine trapRobots() es moveRobots()
 	 * fuggvenyeit ilyen sorrendben.
 	 * 
 	 */
 	
-	public void roundOver(){					//KeSZ		//csak a szkeletonhoz public
-		
-		//System.out.println("->[:Engine]roundOver()");
+	private void roundOver(){					
 		
 		trapRobots();
 		moveRobots();
@@ -217,11 +241,19 @@ public class Engine {
 		moveminiRobots();
 		testMiniRobotForTraps();
 			
-		Iterator<Robot> it=alivePlayers.iterator();				//TAKARITAS
+		/* ===== TAKARITAS BEGINS =====
+		 * 		Vegigmegy a palya elemeinek listain,
+		 * 		ha talal mar elevult elemet, torli azt.
+		 * 		Listak sorrendben: 	alivePlayers
+		 * 							traps
+		 * 							miniRobots
+		 */
+		
+		Iterator<Robot> it=alivePlayers.iterator();				
 		while(it.hasNext()){
 			Robot x=it.next();
 			if(!x.isAlive()){
-				System.out.println("I SHAMELESSLY RAPED A FELLOW ROBOT :(" + x.getPosition().getX() + " " + x.getPosition().getY());
+				System.out.println("I SHAMELESSLY RAPED A FELLOW ROBOT :( ITT: (" + x.getPosition().getX() + "," + x.getPosition().getY()+")");
 				System.out.println(x.isAlive());
 				deadPlayers.add(x);
 				it.remove();
@@ -240,30 +272,99 @@ public class Engine {
 			MiniRobot x=it3.next();
 			if(!x.isAlive()){
 				System.out.println("I BRUTALLY MURDERED A DEFENSELESS MINIBOT :(");
-				System.out.println(x.getPosition().getX() + " " + x.getPosition().getY());
+				System.out.println("Koordinata: ("+x.getPosition().getX() + "," + x.getPosition().getY()+")");
 				it3.remove();
 			}
 		}
+		/*
+		 * ===== TAKARITAS ENDS =====
+		 */
 		
-		for(Trap i:traps){
+		
+		for(Trap i:traps){																			// Csapdak oregitese
 			i.timePassed();
 		}
-		round_num--;
 		
-		//System.out.println("<-[:Engine].roundOver()");
+		
+		releaseMiniRobots();
+		
+		round_num--;																				// Hatralevo korok szamanak csokkentese
+		
+		if(alivePlayers.size()==1 || round_num==0){													// Ellenorzes nyertesekre
+			whoWins();
+			endGame();
+		}
+		
+		
+		if(alivePlayers.size()==0)																	// Jatek vege, ha mindenki meghalt
+			endGame();
+		
 	}
 	
+	/** A postgame megvalositasa
+	 *  A jetek vegeztevel ablak kozli az eredmenyt
+	 */
+	private void endGame() {
+				whoWins(); 																			// Beallitjuk hogy ki nyert a winner valtozoba
+				
+		/*
+		 * Felugro ablak beallitasai
+		 */
+		final JFrame endframe = new JFrame();
+		endframe.setTitle("Jatek vege");
+		endframe.setSize(500, 100);
+		endframe.setBackground(Color.RED);
+		endframe.setResizable(false);
+		endframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		endframe.setLocationRelativeTo(null);
+		
+		JPanel endpanel = new JPanel();
+		JLabel endlabel = new JLabel("A leghoszabb utat a(z) "+winner.getID()+". robot tette meg az eletben maradtak kozul.");
+		JButton endbutton = new JButton("Folytatas");
+		
+		endframe.add(endpanel);
+		endpanel.add(endlabel);
+		
+		// Az ablak gombjanak esemenye
+		endbutton.addActionListener(
+				new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						sm = new StartUpMenu();														// A folytatasra kattintva a kezdomenube kerulunk.
+						window.dispose();
+						endframe.dispose();
+						
+					}});
+		endpanel.add(endbutton);	
+		endframe.setVisible(true);
+	}
+
+	/** miniRobotok palyara rakasa
+	 * Ot koronkent minirobotok elednek a palya egyes pontjain
+	 */
+	private void releaseMiniRobots() {
+		if(miniRobots.size()<=1 && round_num!=30){
+			
+			ArrayList<Coord> spawnPoses = map.putPlayers(3 - miniRobots.size(), 15); 
+			for(int i=0;i< 3 - miniRobots.size();i++){
+				MiniRobot tmp = new MiniRobot(this);
+				miniRobots.add(tmp);
+				tmp.setPosition(spawnPoses.get(i));
+				
+			}
+		}
+		
+	}
+
 	//PUBLIC, TERVEZETT FuGGVeNYEK
 	
 	/**\brief Engine konstruktor
 	 * 
 	 * Inicializalja az ArrayList-eket es
-	 * beallï¿½tja a max korok szamat. 
+	 * beallitja a max korok szamat. 
 	 */
 	
-	public Engine(){							//KeSZ
-		
-		//System.out.println("->[:Engine]Engine()");
+	public Engine(){							
 		
 		alivePlayers=new ArrayList<Robot>();
 		deadPlayers=new ArrayList<Robot>();
@@ -272,7 +373,7 @@ public class Engine {
 		map=new Map();
 		
 		player_num=0;
-		round_num=30;
+		round_num=30;										// Korok szama: 30
 		
 
 		
@@ -291,15 +392,12 @@ public class Engine {
 	
 	public void play() {						//PARTIALLY READY
 		
-		//System.out.println("->[:Engine].play()");
-		
 		while(round_num>0){
 			for(Robot tmp: alivePlayers){
 				activePlayer=tmp;
 				try {
 					wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					System.out.println("Engine.play() Wait error ._.");
 				}
 			}
@@ -321,9 +419,7 @@ public class Engine {
 	 * 
 	 * @param numberOfPlayers
 	 */
-	public void init(int numberOfPlayers) {			//KeSZ
-		
-		//System.out.println("->[:Engine].init(numberOfPlayers)");
+	public void init(int numberOfPlayers) {			
 		
 		Resources.load();
 		arrow=new Arrow();
@@ -333,11 +429,12 @@ public class Engine {
 		view = new View(this);
 		view.setWindow(window);
 		
-		//nyil es annak grafikus parjanak peldanyositasa
+		// Nyil es annak grafikus parjanak peldanyositasa
 		arrow=new Arrow();
 		GraphicArrow gArrow = new GraphicArrow(arrow);
 		view.setGArrow(gArrow);
 		
+		// A beallitott szamu jatekosok letrehozasa es beallitasa
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
 			alivePlayers.add(tmp);
@@ -345,18 +442,21 @@ public class Engine {
 			RobotID++;
 		}
 		
-		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
+		// tmp lista tarolja, hogy hova kell lerakni a robotokat
+		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers,0);
 		
+		// Robotok elhelyezese a palyan
 		for(int i=0;i<numberOfPlayers;i++){
-			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amï¿½g nincs putPlayers
+			alivePlayers.get(i).setPosition(tmp.get(i));		
 		}
-		activePlayer=alivePlayers.get(0);
+		activePlayer=alivePlayers.get(0);					// Aktiv jatekos eloszor a legelso
+		arrow.setStartPoint(activePlayer.getPosition());	// Nyil beallitasa az aktiv jatekoshoz
 	}
 
 	/**\brief Kor passzolasa
 	 * 
 	 * A kezelofelulettol kapott vektort
-	 * atadja az epp aktï¿½v robotnak az
+	 * atadja az epp aktiv robotnak az
 	 * uj modifierekent, es felebreszti az
 	 * Engine.play()-ben varakozo foszalat,
 	 * hogy tovabblepjen a jatek a kovetkezo
@@ -364,20 +464,22 @@ public class Engine {
 	 * 
 	 * @param modifier
 	 */
-	public void turnPassed() {		//TO BE REVIEWED				//MODIFIED
+	public void turnPassed() {	
 		
-		//System.out.println("->[:Engine].turnPassed(modifier)");
-		
-		activePlayer.setModifier(arrow.getModifier());
-		
-		//notifyAll();			//Szkeletonhoz nem kell
-		
-//		int index=alivePlayers.indexOf(activePlayer);
-//		Robot newActivePlayer=alivePlayers.get((index+1)%alivePlayers.size());		//O.o
-//		
-//		activePlayer=newActivePlayer;
-//		
-//		//activePlayer=alivePlayers.get((alivePlayers.indexOf(activePlayer)+1)%alivePlayers.size());
+		activePlayer.setModifier(arrow.getModifier());			//A kort atado jatekos megkapja a beallitott nyil modifieret
+
+		int index=alivePlayers.indexOf(activePlayer);			// Az aktualis aktivPlayer listabeli helyenek lekerese
+
+		if(index==alivePlayers.size()-1){
+			roundOver();										// Ha az utolso jatekos is atadta a lepeset, a kornek vege
+			if(alivePlayers.size()==0)return;					// Ha mindenki halott, rogton visszater
+			activePlayer=alivePlayers.get(0);					// Az aktivPlayer visszaal a legelso robotra
+			arrow.setStartPoint(activePlayer.getPosition());	// A nyil is igazodik
+			return;
+		}
+		index++;												// Kovetkezo jatekosra valtas a listabol
+		activePlayer=alivePlayers.get(index);
+		arrow.setStartPoint(activePlayer.getPosition());
 	}
 
 	/**\brief uj csapda hozzaadasa
@@ -388,9 +490,6 @@ public class Engine {
 	 * @param x
 	 */
 	public void addTrap(Trap x) {					//KeSZ
-				
-		//System.out.println("->[:Engine].addTrap(x)");
-		
 		traps.add(x);
 	}
 
@@ -402,9 +501,7 @@ public class Engine {
 	 * 
 	 * @param r
 	 */
-	public void dieRobot(Robot r) {					//KeSZ					//csak a szkeletonban public
-		
-		//System.out.println("->[:Engine].dieRobot(r)");
+	public void dieRobot(Robot r) {					
 		r.setAlive(false);
 	}
 
@@ -412,99 +509,57 @@ public class Engine {
 	 * 
 	 * Vegignezi a robotok road attributumat
 	 * es kivalasztja a legnagyobbat.
-	 * Ezt eltarolja a winner attributumban.
+	 * Ezt beallitja a winner attributumban.
 	 *  
 	 */
 	
-	public void whoWins() {							//KeSZ					//csak a szkeletonban public
-		
-		//System.out.println("->[:Engine].whoWins()");
-		
-		Robot winningPlayer=new Robot(this);
+	private void whoWins() {							
+		Robot winningPlayer;
+		if(!alivePlayers.isEmpty())
+			winningPlayer=alivePlayers.get(0);
+		else winningPlayer=deadPlayers.get(0);
 		for(Robot tmp: alivePlayers){
 			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
 		}
-		
+		/*for(Robot tmp: deadPlayers){
+			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
+		}*/
 		setWinner(winningPlayer);
 	}
 
-	public int getPlayer_num() {					//KeSZ
-		//System.out.println("->[:Engine].getPlayer_num()");
-		
+	/* ===== Getter-setter metodusok =====
+	 * 
+	 */
+	
+	public int getPlayer_num() {					
 		return this.player_num;
 	}
 
-	/**
-	 * 
-	 * @param player_num
-	 */
+
 	public void setPlayer_num(int player_num) {		//KeSZ
-		
-		//System.out.println("->[:Engine].setPlayer_num(player_num)");
-		
 		this.player_num = player_num;
 	}
 
 	public int getRound_num() {						//KeSZ
-		
-		//System.out.println("->[:Engine].getRound_num()");
-		
 		return this.round_num;
 	}
 
-	/**
-	 * 
-	 * @param round_num
-	 */
+	
 	public void setRound_num(int round_num) {		//KeSZ
-		
-		//System.out.println("->[:Engine].setRound_num(numberOfRounds)");
-		
 		this.round_num = round_num;
 	}
-
-//	public ArrayList<Robot> getPlayers() {			//Ez szerintem nem fog kelleni
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	/**
-//	 * 
-//	 * @param players
-//	 */
-//	public void setPlayers(ArrayList<Robot> players) {
-//		throw new UnsupportedOperationException();
-//	}
-	
 	
 	
 
 	public ArrayList<Trap> getTraps() {				//KeSZ
-		
-		//System.out.println("->[:Engine].getTraps()");
-		
 		return this.traps;
 	}
 
-	/**
-	 * 
-	 * @param traps
-	 */
+	
 	public void setTraps(ArrayList<Trap> traps) {	//KeSZ
-		
-		//System.out.println("->[:Engine].setTraps(traps)");
-		
 		this.traps = traps;
 	}
 	
-	public void setActivePlayer(Robot robot){		//Csak a szkeletonhoz kell
-		activePlayer=robot;
-	}
-	public void addAlivePlayer(Robot robot){		//csak a szkeletonhoz kell
-		alivePlayers.add(robot);
-	}
-	public void setMap(Map map){					//csak a szkeletonhoz kell
-		this.map=map;
-	}
 	
 	public Map getMap() {
 		return map;
@@ -519,5 +574,14 @@ public class Engine {
 	}
 	
 	
+	public void setActivePlayer(Robot robot){
+		activePlayer=robot;
+	}
+	public void addAlivePlayer(Robot robot){
+		alivePlayers.add(robot);
+	}
+	public void setMap(Map map){
+		this.map=map;
+	}
 
 }

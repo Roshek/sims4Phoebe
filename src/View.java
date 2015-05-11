@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class View {
 
+	// Attributumok inicializalasa
 	private Engine engine;
 	private Controller controller;
 	private MainWindow window;
-	//protected Jpanel panel;
 	
 	private ArrayList<GraphicMiniRobot> gMiniRobotList;
 	private ArrayList<GraphicRobot> gRobotList;
@@ -126,12 +126,10 @@ public class View {
 		gSlimeList.add(gSlime);
 	}
 	
-	/** Nyil beallitasa
-	 * ??? TODO
+	/* ============ GETTER SETTER METODUSOK =========
+	 * 
 	 */
-	public void setArrow(){
-		
-	}
+	
 	public Controller getController() {
 		return controller;
 	}

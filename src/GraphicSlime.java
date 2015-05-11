@@ -14,7 +14,7 @@ public class GraphicSlime implements Drawable{
 	}
 	
 	public void draw(Graphics g) {
-		if(!slime.getExpired() && slime != null){ //vizsgalat, hogy a ragacs a palyan kell, hogy legyen-e.
+		if(slime != null && !slime.getExpired()){ //vizsgalat, hogy a ragacs a palyan kell, hogy legyen-e.
 			//pozicio kinyerese
 			int x = slime.getPos().getX();
 			int y = slime.getPos().getY();

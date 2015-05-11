@@ -19,15 +19,6 @@ public class Map {
 	 * @param s
 	 */
 
-//	public void load(String s) {					
-//		//System.out.println("->[:Map].load()");
-//	
-//		try {
-//			field=ImageIO.read(new File(s));
-//		} catch (IOException e) {
-//			System.out.println("No file with that name exists");
-//		}
-//	}
 	
 	public Map(){
 	    try {
@@ -56,41 +47,38 @@ public class Map {
 	 */
 	public Boolean fall(Coord c) {						//FIXED
 		
-		/*if(c.getX()<=100 || c.getY()<=100)
+		if(c.getX()>field.getWidth() || c.getY()>field.getHeight() || c.getX() < 0 || c.getY() < 0)
 			return true;
-		return false;*/
 		
-		/*System.out.println("->[:Map].fall(c)");
+		System.out.println("(3,3) pont színe: " + field.getRGB(3, 3) + " robot helyének színe: " + field.getRGB(c.getX(), c.getY()));
 		
-		/*if(field==null)									//TESZT
-			return false;	
-		*/
-
 		if(field.getRGB(c.getX(), c.getY()) == field.getRGB(0, 0)){
+			System.out.println("Fentmaradt");
+			return false;
+		}else{
+			System.out.println("Leesett");
 			return true;
-		}else
-			return false;		
+		}
 	}
 
 	/**\brief Megadja a jatekosok kezdohelyeit
 	 * 
-	 * Leteszi a megfelelo szamu jatekost,
-	 *  es visszaadja a koordinataikat 
-	 *  tartalmazo listat.
+	 * A jatekosok szamatol fuggoen
+	 * visszaad egy egyenlo tavolsagra levo pontokbol
+	 * allo listat
 	 * 
 	 * @param numberOfPlayers
 	 */
-	public ArrayList<Coord> putPlayers(int numberOfPlayers) {		
-		//System.out.println("->[:Map].putPlayers(numberOfPlayers)");
+	public ArrayList<Coord> putPlayers(int numberOfPlayers, int offset) {		
+		
 		ArrayList<Coord> tmp=new ArrayList<Coord>();
 		for(int i=0;i<numberOfPlayers;i++){
-			tmp.add(getSpawntPoint(numberOfPlayers, i));
+			tmp.add(getSpawntPoint(numberOfPlayers, i, offset));
 		}
 		return tmp;
 	}
 
 	public BufferedImage getField() {					
-		//System.out.println("->[:Map].getField()");
 		
 		return field;
 	}
@@ -106,16 +94,30 @@ public class Map {
 		this.field=field;
 	}
 
+	
+	/**\Brief Kiszamolja a palya kozepvonalat, amin a minirobotok haladnak, illetve amik kozul kikerulnek a spawnpointok.
+	 * Az algoritmus kiszamolja (~nagyjabol) a palya kozepvonalat, 
+	 * amit ~20 tavolsagra levo pontok halmazaval reprezental
+	 * 
+	 * Az algoritmus lenyege, hogy a palya szelen egy pontbol kiindulva a szemkozti oldal fele
+	 * behuz egy rakat egyenest par fok kulonbseggel, majd ha mar eleg sok indul ki ugyanabbol a pontbol
+	 * akkor a masik oldalrol is huz egy rakat egyenest az elsore
+	 * es igy oda-vissza korbemegy az egesz palyan
+	 * Az igy letrejott vonalaknak aztan veszi a kozeppontjat, kicsit emgritkitja hogy ne legyen tul sok
+	 * es maris kaptunk egy kozelitest a palya kozepvonalara
+	 * 
+	 * BEWARE: Heavy math incoming
+	 * 
+	 */
 
-private void calculateMidline(){
-		
+	private void calculateMidline(){
 		int voidColor = field.getRGB(field.getMinX()+1, field.getMinY());
 		ArrayList<Coord> sideline = new ArrayList<Coord>();
 		ArrayList<Coord> allmidline = new ArrayList<Coord>();
 		ArrayList<Coord> cornerstones = new ArrayList<Coord>();
 		
 		/*MAGIC NUMBERS*/
-		
+		//ne kerdezd
 		double dA = 4; 
 		double dRB = 50;
 		double dR = 5;
@@ -154,7 +156,6 @@ private void calculateMidline(){
 				if (k%2==0) a-=dA;
 				else a+=dA;
 				
-				//System.out.println("bX: " + bX + "   bY: " + bY + "   tX: " + tX + "   tY " + tY);
 				
 				double d = Coord.distance(new Coord((int)tX,(int)tY), B);
 				
@@ -190,15 +191,13 @@ private void calculateMidline(){
 					sideline.add(new Coord(tst));
 					allmidline.add(new Coord(  ((B.getX()-tst.getX())/2 + tst.getX()), ((B.getY()-tst.getY())/2 + tst.getY())) );
 				}
-				/*if (i<=1 && (Coord.distance(prev, tst) > dSP)){
-					break;
-				}*/
+				
 				
 				prev = new Coord(tst);
 				
 				i++;
 			}while (i != maxSP);
-				//();
+
 			
 			A = new Coord(B);
 			B = new Coord(prev);
@@ -209,7 +208,7 @@ private void calculateMidline(){
 			if (k%2==0)a += invertA;
 			else a -= invertA;
 			
-			//System.out.println("aaaaaaa: " + a);	
+
 		}
 		
 		Coord ls = allmidline.get(0);
@@ -221,7 +220,13 @@ private void calculateMidline(){
 			}
 		}
 	}
+	
 
+	/** Visszaadja a legkozelebbi kozepvonalon levo pontot
+	 * 
+	 * @param c - Amihez viszonyitunk
+	 * @return A pont ami a legkozelebb van
+	 */
 	public Coord getClosesMidpoint(Coord c){
 		int i = 0;
 		double d = 1000;
@@ -233,11 +238,26 @@ private void calculateMidline(){
 		}
 		return midline.get(i);
 	}
+
+	/** Megad egy spawnpointot
+	 * 
+	 * @param all - Ennyi spawnpoint van osszesen
+	 * @param nth - Ennyiedik spawnpoint kell nekünk
+	 * @param offset - El lehet tolni hogy ne ugyanott spawnoljon a Robot es a minirobot
+	 * @return - A Spawnpoint helye
+	 */
 	
-	private Coord getSpawntPoint(int all, int nth){
-		return midline.get((midline.size() / all) * nth);
+	private Coord getSpawntPoint(int all, int nth, int offset){
+		return midline.get((midline.size() / all) * nth + offset);
 	}
 	
+	
+	/** Minirobot mozgasahoz donti el hogy a midpointokon milyen iranyba induljon el
+	 * 
+	 * @param robot - A miniribot
+	 * @param trapPos - A csapda ami fele a minirobot akar menni
+	 * @return - True ha a midpointokon az indexeket novelve kell haladnia, false ha csokkentve
+	 */
 	public boolean getMoveDir(Coord robot, Coord trapPos){
 		int robotPos = midline.indexOf(robot);
 		int mSize = midline.size();
@@ -248,10 +268,24 @@ private void calculateMidline(){
 		int prevPos = robotPos - 1;
 		if (prevPos == -1) prevPos = mSize - 1;
 		
+		System.out.println("");
+		System.out.println("_______-----------");
+		
+		System.out.println("MiniRobotPos: " + robot.getX() + " : " + robot.getY()  + "   robotPos: " + robotPos + "   mSize: " + mSize + "   nextPos: " + nextPos + "   prevPos: " + prevPos);
+		
+		System.out.println("");
+		System.out.println("");
 		if (Coord.distance(midline.get(nextPos), trapPos) < Coord.distance(midline.get(prevPos), trapPos)) return true;
 		else return false;
 	}
 	
+	
+	/**
+	 * A haladasi iranynak megfelelo kovetkezo midpointot adja vissza
+	 * @param c - Az aktualis hely ahol vagyunk, ami szinten egy midpoint
+	 * @param dir - Az irany
+	 * @return - A kovetkezpo midpoint
+	 */
 	public Coord getNextMidpoint(Coord c, boolean dir) {
 		int nextPos = 0;
 		if (dir) nextPos = midline.indexOf(c) + 1;

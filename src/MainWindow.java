@@ -92,10 +92,11 @@ public class MainWindow extends JFrame {
 		//JATEKTER
 		gameplace.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mousePressed(MouseEvent arg0) {
 				if(controller==null)
 					System.out.println("Controller null ptr");
 				controller.setArrow(arg0.getX(), arg0.getY());
+				System.out.println("Mouse clicked on gamepanel");
 			}
 		});
 		
@@ -119,6 +120,7 @@ public class MainWindow extends JFrame {
 		putoil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.putOil();
+				updateLabels();
 			}
 		});
 		center.add(putoil);
@@ -128,6 +130,7 @@ public class MainWindow extends JFrame {
 		putslime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.putSlime();
+				updateLabels();
 			}
 		});
 		center.add(putslime);
@@ -141,6 +144,7 @@ public class MainWindow extends JFrame {
 		end.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.turnPassed();
+				updateLabels();
 			}
 		});
 		center.add(end);
@@ -174,6 +178,12 @@ public class MainWindow extends JFrame {
 	public void init(Engine engine){
 		this.engine=engine;
 		this.controller=engine.getController();
+	}
+	
+	public void updateLabels(){
+		activeplayer.setText(engine.activePlayer.ID + ". Jatekos");
+		inthebag.setText("Meg " + engine.activePlayer.getOil_num() +" olajod es " + engine.activePlayer.getSlime_num() + " ragacsod van.");
+		roundsleft.setText("Hatralevo korok szama: " + engine.getRound_num());
 	}
 	 
 	

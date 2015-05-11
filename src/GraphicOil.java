@@ -13,7 +13,7 @@ public class GraphicOil implements Drawable{
 	}
 	
 	public void draw(Graphics g) {
-		if(!oil.getExpired() && oil != null){			//vizsgalat, hogy az olaj a palyan kell, hogy legyen-e.
+		if(oil != null && !oil.getExpired()){			//vizsgalat, hogy az olaj a palyan kell, hogy legyen-e.
 			//pozicio kinyerese
 			int x = oil.getPos().getX();
 			int y = oil.getPos().getY();

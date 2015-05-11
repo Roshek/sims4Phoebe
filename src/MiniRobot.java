@@ -3,7 +3,11 @@ public class MiniRobot extends Robot {
 	private boolean onTrap=false;
 	private GraphicMiniRobot gMiniRobot;
 	
-	
+	/** miniRobot konstruktora
+	 * a robot konstruktorat hivja,
+	 * plusz beallitja a sugarat 10-re
+	 * @param engine
+	 */
 	public MiniRobot(Engine engine) {
 		super(engine);
 		setRadius(10);
@@ -29,20 +33,22 @@ public class MiniRobot extends Robot {
 	 * */
 	
 	public void move(){
-		if (onTrap) //ha csapdan van, ne menjen sehova, takarítsa csak fel.
+		if (onTrap) //ha csapdan van, ne menjen sehova, takarisa csak fel.
 			return;
 		
 		Coord trap = engine.getClosestTrap(position);
 		double trapDist = 0;
-		trapDist = Coord.distance(position, trap);
+		
 		if(trap==null) //ha nincs csapda nem kell semmit sem tennie
 			return;
+		trapDist = Coord.distance(position, trap);
 		Map map = engine.getMap(); //elkeri a mapet
 		
 		//ha a trap kozelebb van mar, mintha ugrana meg egy midpointnyit, akkor ugorjon a trapre
-		if (trapDist <= Coord.distance(map.getNextMidpoint(map.getClosesMidpoint(position),
-														   map.getMoveDir(position, trap)), position)) 
-			setPosition(trap); 
+		if (trapDist <= 70) {
+			setPosition(trap);
+		//System.out.println("MiniRobot:  Pos: " + position);
+		}
 		else {
 			if (Coord.distance(position, map.getClosesMidpoint(position)) > 5) { // ha tul tavol van egy midpointtol
 				position = map.getClosesMidpoint(position); //akkor raugrik es ez volt a lepese
