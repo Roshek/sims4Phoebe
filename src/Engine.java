@@ -257,15 +257,27 @@ public class Engine {
 		
 		round_num--;
 		
+		if(alivePlayers.size()==1 || round_num==0){
+			whoWins();
+			endGame();
+		}
+		
+		
 		if(alivePlayers.size()==0)
-			allPlayersDead();
+			endGame();
 		
 		//System.out.println("<-[:Engine].roundOver()");
 	}
 	
+	private void endGame() {
+		// TODO Auto-generated method stub
+		System.out.println("Ide jon egy parbeszedablak :P");
+		//kell bele egy feltetel ellnorzes: if(winner==null), es e szerint kell kiirni valamit
+	}
+
 	private void releaseMiniRobots() {
 		if(miniRobots.size()<=1 /*&& round_num!=30*/){
-			//TODO
+			
 			ArrayList<Coord> spawnPoses = map.putPlayers(3 - miniRobots.size(), 15); 
 			for(int i=0;i< 3 - miniRobots.size();i++){
 				MiniRobot tmp = new MiniRobot(this);
@@ -458,15 +470,20 @@ public class Engine {
 	 *  
 	 */
 	
-	public void whoWins() {							//KeSZ					//csak a szkeletonban public
-		
+	private void whoWins() {							//KeSZ					//csak a szkeletonban public
+		//TODO
 		//System.out.println("->[:Engine].whoWins()");
 		
-		Robot winningPlayer=new Robot(this);
+		Robot winningPlayer;
+		if(!alivePlayers.isEmpty())
+			winningPlayer=alivePlayers.get(0);
+		else winningPlayer=deadPlayers.get(0);
 		for(Robot tmp: alivePlayers){
 			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
 		}
-		
+		for(Robot tmp: deadPlayers){
+			if(tmp.getRoad()>winningPlayer.getRoad()){ winningPlayer=tmp;}
+		}
 		setWinner(winningPlayer);
 	}
 
