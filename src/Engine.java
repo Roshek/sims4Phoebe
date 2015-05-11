@@ -312,7 +312,7 @@ public class Engine {
 		 */
 		final JFrame endframe = new JFrame();
 		endframe.setTitle("Jatek vege");
-		endframe.setSize(300, 100);
+		endframe.setSize(500, 100);
 		endframe.setBackground(Color.RED);
 		endframe.setResizable(false);
 		endframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -472,6 +472,7 @@ public class Engine {
 
 		if(index==alivePlayers.size()-1){
 			roundOver();										// Ha az utolso jatekos is atadta a lepeset, a kornek vege
+			if(alivePlayers.size()==0)return;					// Ha mindenki halott, rogton visszater
 			activePlayer=alivePlayers.get(0);					// Az aktivPlayer visszaal a legelso robotra
 			arrow.setStartPoint(activePlayer.getPosition());	// A nyil is igazodik
 			return;
