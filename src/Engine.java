@@ -264,16 +264,14 @@ public class Engine {
 	}
 	
 	private void releaseMiniRobots() {
-		if(round_num%5==0 /*&& round_num!=30*/){
+		if(miniRobots.size()<=1 /*&& round_num!=30*/){
 			//TODO
-			for(int i=0;i<3;i++){
+			ArrayList<Coord> spawnPoses = map.putPlayers(3 - miniRobots.size(), 15); 
+			for(int i=0;i< 3 - miniRobots.size();i++){
 				MiniRobot tmp = new MiniRobot(this);
 				miniRobots.add(tmp);
-				switch(i){
-				case 0: tmp.setPosition(new Coord(100,100)); break;
-				case 1: tmp.setPosition(new Coord(600,600)); break;
-				case 2: tmp.setPosition(new Coord(600,200)); break;
-				}
+				tmp.setPosition(spawnPoses.get(i));
+				
 			}
 		}
 		
@@ -370,7 +368,7 @@ public class Engine {
 			RobotID++;
 		}
 		
-		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
+		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers,0);
 		
 		for(int i=0;i<numberOfPlayers;i++){
 			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amig nincs putPlayers

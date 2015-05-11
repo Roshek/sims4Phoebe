@@ -88,11 +88,11 @@ public class Map {
 	 * 
 	 * @param numberOfPlayers
 	 */
-	public ArrayList<Coord> putPlayers(int numberOfPlayers) {		
+	public ArrayList<Coord> putPlayers(int numberOfPlayers, int offset) {		
 		//System.out.println("->[:Map].putPlayers(numberOfPlayers)");
 		ArrayList<Coord> tmp=new ArrayList<Coord>();
 		for(int i=0;i<numberOfPlayers;i++){
-			tmp.add(getSpawntPoint(numberOfPlayers, i));
+			tmp.add(getSpawntPoint(numberOfPlayers, i, offset));
 		}
 		return tmp;
 	}
@@ -242,8 +242,8 @@ private void calculateMidline(){
 		return midline.get(i);
 	}
 	
-	private Coord getSpawntPoint(int all, int nth){
-		return midline.get((midline.size() / all) * nth);
+	private Coord getSpawntPoint(int all, int nth, int offset){
+		return midline.get((midline.size() / all) * nth + offset);
 	}
 	
 	public boolean getMoveDir(Coord robot, Coord trapPos){
