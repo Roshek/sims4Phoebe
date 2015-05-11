@@ -115,7 +115,7 @@ public class Engine {
 		//System.out.println("->[:Engine].allPlayersDead()");
 		
 		System.out.println("\nMinenki leesett, nincs gyoztes.\n");
-		quit();
+		endGame();
 		}
 	
 	
@@ -270,11 +270,28 @@ public class Engine {
 	}
 	
 	private void endGame() {
-		// TODO Auto-generated method stub
-		System.out.println("Ide jon egy parbeszedablak :P");
-		//kell bele egy feltetel ellnorzes: if(winner==null), es e szerint kell kiirni valamit
+		whoWins(); //beallitjuk hogy ki nyert
+		JFrame endframe = new JFrame();
+		endframe.setTitle("Jatek vege");
+		endframe.setSize(300, 70);
+		endframe.setResizable(false);
+		endframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		endframe.setLocationRelativeTo(null);
 		
-		quit();
+		JPanel endpanel = new JPanel();
+		JLabel endlabel = new JLabel("A leghoszabb utat a "+winner.getID()+". robot tette meg.");
+		JButton endbutton = new JButton("Kilep");
+		
+		endframe.add(endpanel);
+		endpanel.add(endlabel);
+		
+		endbutton.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						quit();
+					}});
+		endpanel.add(endbutton);	
+		endframe.setVisible(true);
 	}
 
 	private void releaseMiniRobots() {
