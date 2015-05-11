@@ -281,7 +281,7 @@ public class Engine {
 				whoWins(); //beallitjuk hogy ki nyert
 		JFrame endframe = new JFrame();
 		endframe.setTitle("Jatek vege");
-		endframe.setSize(300, 70);
+		endframe.setSize(300, 100);
 		endframe.setResizable(false);
 		endframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		endframe.setLocationRelativeTo(null);
