@@ -61,15 +61,15 @@ public class Robot {
 		impulse=Coord.add(impulse, modifier);
 		Coord oldpos= position;
 		
-		if(impulse.getX()==0 && impulse.getY()==0)
-			System.out.println("Nulla a változás O.o");
+		/*if(impulse.getX()==0 && impulse.getY()==0)
+			System.out.println("Nulla a változás O.o");*/
 		
 		position=Coord.add(position, impulse);
 		road+=Coord.distance(oldpos, position);
 		modifier.setX(0);
 		modifier.setY(0);
 		
-		System.out.println("\nÚj koords: " + position.getX() + " " + position.getY() + " régi koords: " + oldpos.getX() + " " + oldpos.getY());
+		//System.out.println("\nÚj koords: " + position.getX() + " " + position.getY() + " régi koords: " + oldpos.getX() + " " + oldpos.getY());
 	}
 
 	public boolean isAlive() {							//KeSZ	
